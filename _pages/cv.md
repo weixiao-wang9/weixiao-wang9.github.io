@@ -11,49 +11,45 @@ redirect_from:
 
 Education
 ======
-* B.S. in University of California, Santa Barbara, 2023
-* B.A. in University of California, Santa Barbara, 2023
-* 
+* B.S. in Applied Mathematics at University of California, Santa Barbara, 2023
+* B.A. in Statistics and Data Science at University of California, Santa Barbara, 2023
 
 Work experience
 ======
-* Summer 2015: Research Assistant
-  * Github University
-  * Duties included: Tagging issues
-  * Supervisor: Professor Git
+* Fall 2023: Research Assistant in experiment on Blockchain and property rights
+  * UCSB (Faculty Reaserch Asistance Program)
+  * Duties included: 
+   * Data cleaning
+   * Developed python program which detects sandwich attacks from crypto transactions.
+   * Delivering research presentations.
+   * Conducting data mining and cleaning for crypto transactions.
+   * Distilling and synthesizing complex research papers into concise, easy-to-understand presentations.
+   * Collaborated with research assistants to organize data and ensure its accuracy for use in data analysis and modeling.
 
-* Fall 2015: Research Assistant
-  * Github University
-  * Duties included: Merging pull requests
-  * Supervisor: Professor Hub
+
   
 Skills
 ======
-* Skill 1
-* Skill 2
-  * Sub-skill 2.1
-  * Sub-skill 2.2
-  * Sub-skill 2.3
-* Skill 3
+* SQL
+* Python
+  * Pandas
+  * Numpy
+  * Matplotlib
+* R
+ * R Markdown
+* Microsoft office
+* Latex
+* Mathematica
+* Matlab
+* Java
 
-Publications
-======
-  <ul>{% for post in site.publications %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
   
-Talks
-======
-  <ul>{% for post in site.talks %}
-    {% include archive-single-talk-cv.html %}
-  {% endfor %}</ul>
   
-Teaching
+Project
 ======
-  <ul>{% for post in site.teaching %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
-  
+  * Developed a Python program to detect Sandwich Attacks in crypto trading by analyzing transactions.
+  * Utilized the UCSB API to create a CourseSpace notifier, which alerts users of new course announcements and updates.
+
 Service and leadership
 ======
-* Currently signed in to 43 different slack teams
+* Special Project Officer in Global Gaucho Commision (Associate Students at UCSB)
