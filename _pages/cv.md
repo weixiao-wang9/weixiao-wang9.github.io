@@ -17,7 +17,7 @@ Education
 Work experience
 ======
 * Fall 2023: Research Assistant in experiment on Blockchain and property rights
-  * UCSB (Faculty Reaserch Asistance Program)
+  * UCSB (Faculty Research Asistance Program)
   * Duties included: 
    * Data cleaning
    * Developed python program which detects sandwich attacks from crypto transactions.
