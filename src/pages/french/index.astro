@@ -1,0 +1,97 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const allNotes = await getCollection('french');
+
+// 1. 等级顺序
+const levelsOrder = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+
+// 2. 数据处理逻辑：按 Level -> Module 分组
+const curriculum = {};
+
+// 初始化
+levelsOrder.forEach(level => curriculum[level] = {});
+
+allNotes.forEach(note => {
+    // 过滤：只看 Grammar (或者你可以把 Phonetics 也加进来)
+    const type = (note.data.subtype || '').toLowerCase();
+    if (type !== 'grammar' && type !== 'phonetics') return;
+
+    const level = note.data.level || 'Other';
+    
+    // 获取 module (如果没写，就叫 "General Concepts")
+    // 比如：你的笔记里是 "Determiners (限定词/修饰词)"
+    // 我们只取括号前的英文部分，让标题更干净 (可选)
+    let moduleName = note.data.module || 'General';
+    // 简单的正则：如果包含中文括号，只取前面的部分
+    moduleName = moduleName.split('（')[0].split('(')[0].trim();
+
+    if (!curriculum[level]) curriculum[level] = {};
+    if (!curriculum[level][moduleName]) curriculum[level][moduleName] = [];
+    
+    curriculum[level][moduleName].push(note);
+});
+---
+
+<Layout title="Programme de Français">
+	<main class="max-w-4xl mx-auto px-6 py-24">
+        
+        <header class="mb-24 text-center">
+            <span class="text-xs font-bold text-terracotta uppercase tracking-widest border border-terracotta px-3 py-1 rounded-full mb-4 inline-block">
+                Syllabus
+            </span>
+            <h1 class="font-serif text-6xl text-charcoal mb-6">Grammaire</h1>
+            <p class="font-sans text-xl text-stone-500 max-w-2xl mx-auto">
+                Systematic breakdown of French grammar structure.
+            </p>
+        </header>
+
+        <div class="space-y-24">
+            
+            {levelsOrder.map((level) => {
+                const modules = curriculum[level];
+                // 如果这个等级下没有任何模块，就不显示
+                if (Object.keys(modules).length === 0) return null;
+
+                return (
+                    <section>
+                        <div class="flex items-baseline gap-4 mb-12 border-b-2 border-terracotta pb-4">
+                            <h2 class="font-serif text-8xl text-terracotta font-bold leading-none">
+                                {level}
+                            </h2>
+                            <span class="font-serif text-2xl text-stone-400 italic">
+                                Level Overview
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
+                            {Object.keys(modules).sort().map((moduleName) => (
+                                <div class="break-inside-avoid">
+                                    
+                                    <h3 class="font-sans text-xs font-bold text-charcoal uppercase tracking-widest mb-4 flex items-center gap-2">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-stone-300"></span>
+                                        {moduleName}
+                                    </h3>
+
+                                    <ul class="border-l border-stone-200 pl-4 space-y-3">
+                                        {modules[moduleName].map(note => (
+                                            <li>
+                                                <a href={`/french/${note.slug}`} class="group block">
+                                                    <span class="font-serif text-lg text-charcoal group-hover:text-terracotta transition-colors border-b border-transparent group-hover:border-terracotta/30">
+                                                        {note.data.title}
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                );
+            })}
+
+        </div>
+	</main>
+</Layout>

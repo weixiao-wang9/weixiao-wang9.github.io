@@ -1,16 +1,291 @@
 ---
+import Layout from '../layouts/Layout.astro';
 
+// =========================================
+// 1. 个人信息配置
+// =========================================
+
+const personalInfo = {
+  name: "Weixiao", 
+  tagline: "Exploring the geometry of deep learning.",
+  intro: "Applying algebraic topology and rigorous mathematics to understand the frontiers of computer science.",
+  github: "https://github.com/weixiao-wang9", 
+  cv: "/cv.pdf", 
+  linkedin: "https://www.linkedin.com/in/weixiao-wang-09a07626a/"
+};
+
+// =========================================
+// 2. 教育背景 (Education)
+// =========================================
+const education = [
+  {
+    school: "University of Pennsylvania",
+    degree: "MSE in Data Science",
+    year: "2024 - Present",
+    desc: "Focus on Computer Systems & Big Data."
+  },
+  {
+    school: "Georgia Institute of Technology",
+    degree: "M.S. in Computer Science",
+    year: "2024 - 2026",
+    desc: "Specialization in Artificial Intelligence."
+  },
+  {
+    school: "Western University (UWO)",
+    degree: "M.Sc. in Applied Mathematics",
+    year: "2025 - Present",
+    desc: "Research: Topological Data Analysis & ML."
+  },
+  {
+    school: "University of California, Santa Barbara",
+    degree: "B.S. Applied Math & B.A. Stats",
+    year: "2021 - 2023",
+    desc: "Inter-campus coursework: UCLA, UCB, UCI & UCSC."
+  }
+];
+
+// =========================================
+// 3. 研究成果 (Research)
+// =========================================
+const research = [
+  {
+    title: "Homotopy Type Theory",
+    summary: "A comprehensive review of univalent foundations and their application in formal verification.",
+    link: "#"
+  },
+  {
+    title: "Neural Manifolds",
+    summary: "Visualizing high-dimensional loss landscapes using persistent homology.",
+    link: "#"
+  }
+];
+
+// =========================================
+// 4. 项目经历 (Projects)
+// =========================================
+const projects = [
+  {
+    title: "TDA-Lib",
+    desc: "A Python library for computing persistent homology on large datasets using C++ bindings.",
+    tech: ["Python", "C++"],
+    link: "https://github.com"
+  },
+  {
+    title: "Manifold Viz",
+    desc: "Interactive WebGL tool to visualize high-dimensional data.",
+    tech: ["Three.js", "React"],
+    link: "https://github.com"
+  }
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title={personalInfo.name}>
+	<main class="max-w-6xl mx-auto px-6 pb-24">
+		
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-12 py-20 items-center border-b border-stone-300">
+            
+            <div class="space-y-8">
+                <h2 class="font-serif text-5xl md:text-7xl font-medium leading-[1.1] tracking-tight text-charcoal">
+                    Exploring the <span class="underline decoration-1 underline-offset-4 decoration-terracotta">geometry</span> of deep learning.
+                </h2>
+                
+                <p class="font-sans text-xl text-stone-text leading-relaxed max-w-lg">
+                    {personalInfo.intro}
+                </p>
+
+                <div class="flex gap-4 pt-2">
+                    <a href={personalInfo.cv} target="_blank" class="px-5 py-2 bg-charcoal text-cream rounded-md font-sans text-sm hover:bg-terracotta transition-colors">CV</a>
+                    <a href={personalInfo.github} target="_blank" class="px-5 py-2 border border-stone-300 rounded-md font-sans text-sm hover:border-terracotta hover:text-terracotta transition-colors">GitHub</a>
+                    <a href={personalInfo.linkedin} target="_blank" class="px-5 py-2 border border-stone-300 rounded-md font-sans text-sm hover:border-terracotta hover:text-terracotta transition-colors">LinkedIn</a>
+                </div>
+            </div>
+            
+            <div class="flex justify-center md:justify-end h-[400px] md:h-[500px] relative">
+                
+                <canvas class="manifold-canvas cursor-move block w-full h-full"></canvas>
+                
+                <script>
+                    import Zdog from 'zdog';
+                    const colors = {
+                        terracotta: '#D97757',
+                        cream: '#F3F1E7',
+                        text: '#1C1C1C'
+                    };
+
+                    let illo = new Zdog.Illustration({
+                        element: '.manifold-canvas',
+                        dragRotate: true,
+                        resize: true,
+                        zoom: 2.2,
+                        onResize: function( width, height ) {
+                            this.zoom = width < 768 ? 1.5 : 2.2;
+                        }
+                    });
+
+                    let manifoldGroup = new Zdog.Group({
+                        addTo: illo,
+                        rotate: { x: -Zdog.TAU/8, y: -Zdog.TAU/8 },
+                    });
+
+
+                    new Zdog.Ellipse({
+                        addTo: manifoldGroup,
+                        width: 240,
+                        height: 240,
+                        stroke: 2,
+                        color: colors.terracotta,
+                        closed: true,
+                    });
+
+                    // 内环
+                    new Zdog.Ellipse({
+                        addTo: manifoldGroup,
+                        width: 100,
+                        height: 100,
+                        stroke: 2,
+                        color: colors.terracotta,
+                        closed: true,
+                    });
+
+                    // 经线环 1
+                    new Zdog.Ellipse({
+                        addTo: manifoldGroup,
+                        diameter: 70,
+                        translate: { x: 85 },
+                        rotate: { y: Zdog.TAU/4 },
+                        stroke: 1,
+                        color: colors.terracotta + '80',
+                    });
+
+                    // 经线环 2
+                    new Zdog.Ellipse({
+                        addTo: manifoldGroup,
+                        diameter: 70,
+                        translate: { x: -85 },
+                        rotate: { y: Zdog.TAU/4 },
+                        stroke: 1,
+                        color: colors.terracotta + '80',
+                    });
+
+                    // 路径
+                    new Zdog.Shape({
+                        addTo: manifoldGroup,
+                        path: [
+                            { x:  0, y: -120, z: 0 },
+                            { x:  85, y: 0, z: 35 },
+                            { x:  0, y:  50, z: 0 },
+                            { x: -85, y: 0, z: -35 },
+                            { x:  0, y: -120, z: 0 },
+                        ],
+                        closed: false,
+                        stroke: 3,
+                        color: colors.terracotta,
+                    });
+
+                    // 数据点
+                    const points = [
+                        { x: 85, y: 0, z: 35 },
+                        { x: -85, y: 0, z: -35 },
+                        { x: 0, y: -120, z: 0 }
+                    ];
+
+                    points.forEach(pt => {
+                        new Zdog.Shape({
+                            addTo: manifoldGroup,
+                            stroke: 10,
+                            color: colors.terracotta,
+                            translate: pt,
+                        });
+                    });
+
+                    let mouseX = 0;
+                    let mouseY = 0;
+                    
+                    document.addEventListener('mousemove', (e) => {
+                        mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+                        mouseY = (e.clientY / window.innerHeight) * 2 - 1;
+                    });
+
+                    function animate() {
+                        manifoldGroup.rotate.y += 0.003;
+                        let targetRotateX = mouseY * 0.3;
+                        let targetRotateZ = mouseX * 0.3;
+                        illo.rotate.x =  targetRotateX;
+                        illo.rotate.z =  targetRotateZ;
+                        illo.updateRenderGraph();
+                        requestAnimationFrame(animate);
+                    }
+
+                    animate();
+                </script>
+            </div>
+        </section>
+
+        <section class="py-16 border-b border-stone-300">
+            <h3 class="font-serif text-3xl mb-12 text-charcoal">Education</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
+                {education.map(edu => (
+                    <div class="group">
+                        <div class="font-sans font-bold text-lg text-charcoal">{edu.school}</div>
+                        <div class="font-sans text-xs font-medium text-terracotta mt-1 tracking-wide uppercase opacity-80">
+                            {edu.year}
+                        </div>
+                        <div class="font-serif text-xl text-charcoal mt-2 group-hover:text-terracotta transition-colors">
+                            {edu.degree}
+                        </div>
+                        <p class="font-sans text-stone-600 mt-2 text-sm leading-relaxed">
+                            {edu.desc}
+                        </p>
+                    </div>
+                ))}
+            </div>
+        </section>
+
+        <section class="bg-cream-dark rounded-xl p-8 md:p-12 mt-16">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div class="md:col-span-1">
+                    <h2 class="font-serif text-4xl mb-4">Research</h2>
+                    <p class="font-sans text-stone-text">
+                        Selected publications & working papers.
+                    </p>
+                </div>
+                <div class="md:col-span-2 space-y-8">
+                    {research.map(item => (
+                        <a href={item.link} class="group block border-t border-stone-400 pt-6">
+                            <div class="flex justify-between items-baseline">
+                                <h3 class="font-serif text-2xl group-hover:text-terracotta transition-colors">{item.title}</h3>
+                                <span class="text-xl group-hover:translate-x-1 transition-transform">→</span>
+                            </div>
+                            <p class="font-sans text-stone-text mt-2">{item.summary}</p>
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 mt-8">
+            <h2 class="font-serif text-4xl mb-12">Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {projects.map((project) => (
+                    <a href={project.link} class="group block bg-white border border-stone-200 p-8 rounded-lg hover:border-terracotta transition-colors duration-300">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="font-serif text-2xl group-hover:text-terracotta transition-colors">{project.title}</h3>
+                            <span class="text-stone-300 group-hover:text-terracotta">↗</span>
+                        </div>
+                        <p class="font-sans text-stone-600 mb-6 leading-relaxed text-sm">
+                            {project.desc}
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            {project.tech.map((t) => (
+                                <span class="font-sans text-xs font-medium text-stone-500 px-2 py-1 border border-stone-200 rounded bg-stone-50">
+                                    {t}
+                                </span>
+                            ))}
+                        </div>
+                    </a>
+                ))}
+            </div>
+        </section>
+
+	</main>
+</Layout>

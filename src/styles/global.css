@@ -1,0 +1,23 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@theme {
+  /* 定义 Anthropic 风格的字体 */
+  --font-serif: "Newsreader", serif;
+  --font-sans: "Inter", sans-serif;
+
+  /* 定义颜色变量 - v4 会自动生成 bg-cream, text-terracotta 等类名 */
+  --color-cream: #F3F1E7;
+  --color-cream-dark: #E6E4D9;
+  --color-charcoal: #1C1C1C;
+  --color-stone-text: #5A5A5A;
+  --color-terracotta: #D97757;
+}
+
+/* 引入 Google Fonts */
+@layer base {
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
+  
+  body {
+    @apply bg-cream text-charcoal antialiased;
+  }
+}

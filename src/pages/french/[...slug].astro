@@ -1,0 +1,67 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('french');
+	return posts.map((post) => ({
+		params: { slug: post.slug },
+		props: post,
+	}));
+}
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={post.data.title}>
+	<main class="max-w-3xl mx-auto px-6 py-20"> 
+		
+        <a href="/french" class="inline-flex items-center gap-2 mb-10 text-xs font-bold text-stone-400 uppercase tracking-widest hover:text-terracotta transition-colors">
+            <span class="text-lg">←</span> Index
+        </a>
+
+        <article class="bg-white px-10 py-12 md:px-16 md:py-16 shadow-sm border border-stone-100 rounded-xl">
+            
+            <div class="flex items-center gap-3 mb-8">
+                {post.data.level && (
+                    <span class="px-2 py-1 border border-terracotta text-terracotta text-[10px] font-bold rounded uppercase tracking-widest">
+                        {post.data.level}
+                    </span>
+                )}
+                {post.data.subtype && (
+                    <span class="px-2 py-1 bg-stone-100 text-stone-500 text-[10px] font-bold rounded uppercase tracking-widest">
+                        {post.data.subtype}
+                    </span>
+                )}
+            </div>
+
+            <h1 class="font-serif text-5xl md:text-6xl text-charcoal mb-12 leading-[1.1]">
+                {post.data.title}
+            </h1>
+
+            <hr class="border-stone-100 mb-12" />
+
+            <div class="prose prose-stone prose-lg max-w-none 
+                
+                prose-headings:font-sans prose-headings:text-sm prose-headings:font-bold prose-headings:uppercase prose-headings:tracking-widest prose-headings:text-stone-400 prose-headings:mt-10 prose-headings:mb-4
+                
+                prose-p:text-charcoal prose-p:font-serif prose-p:leading-loose prose-p:text-xl
+                
+                prose-table:text-base prose-table:font-sans
+                prose-th:font-normal prose-th:text-stone-400 prose-th:uppercase prose-th:tracking-wider prose-th:text-xs prose-th:py-4
+                prose-td:py-4 prose-td:border-b prose-td:border-stone-100 prose-tr:border-b-0
+                prose-thead:border-b prose-thead:border-stone-200">
+                <Content />
+            </div>
+
+            {post.data.tags && (
+                <div class="mt-16 pt-8 border-t border-stone-100 flex flex-wrap gap-2">
+                    {post.data.tags.map(tag => (
+                        <span class="text-xs font-mono text-stone-400">#{tag}</span>
+                    ))}
+                </div>
+            )}
+        </article>
+	</main>
+</Layout>
