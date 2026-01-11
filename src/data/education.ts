@@ -21,6 +21,6 @@ export const education = [
     school: "University of California, Santa Barbara",
     degree: "B.S. Applied Math & B.A. Stats",
     year: "2021 - 2023",
-    desc: "Inter-campus coursework: UCLA, UCB, UCI & UCSC."
+    desc: "Completed in 2 years with inter-campus coursework: UCLA, UCB, UCI & UCSC."
   }
 ];
