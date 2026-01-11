@@ -1,0 +1,22 @@
+---
+import { education } from '../data/education';
+---
+<section class="py-16 border-b border-stone-300">
+    <h3 class="font-serif text-3xl mb-12 text-charcoal">Education</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
+        {education.map(edu => (
+            <div class="group">
+                <div class="font-sans font-bold text-lg text-charcoal">{edu.school}</div>
+                <div class="font-sans text-xs font-medium text-terracotta mt-1 tracking-wide uppercase opacity-80">
+                    {edu.year}
+                </div>
+                <div class="font-serif text-xl text-charcoal mt-2 group-hover:text-terracotta transition-colors">
+                    {edu.degree}
+                </div>
+                <p class="font-sans text-stone-600 mt-2 text-sm leading-relaxed">
+                    {edu.desc}
+                </p>
+            </div>
+        ))}
+    </div>
+</section>

@@ -1,0 +1,84 @@
+<div class="flex justify-center md:justify-end h-[400px] md:h-[500px] relative">
+    <canvas class="manifold-canvas cursor-move block w-full h-full"></canvas>
+    
+    <script>
+        import Zdog from 'zdog';
+        const colors = {
+            terracotta: '#D97757',
+            cream: '#F3F1E7',
+            text: '#1C1C1C'
+        };
+
+        let illo = new Zdog.Illustration({
+            element: '.manifold-canvas',
+            dragRotate: true,
+            resize: true,
+            zoom: 2.2,
+            onResize: function( width, height ) {
+                this.zoom = width < 768 ? 1.5 : 2.2;
+            }
+        });
+
+        let manifoldGroup = new Zdog.Group({
+            addTo: illo,
+            rotate: { x: -Zdog.TAU/8, y: -Zdog.TAU/8 },
+        });
+
+        new Zdog.Ellipse({
+            addTo: manifoldGroup,
+            width: 240, height: 240, stroke: 2, color: colors.terracotta, closed: true,
+        });
+
+        new Zdog.Ellipse({
+            addTo: manifoldGroup,
+            width: 100, height: 100, stroke: 2, color: colors.terracotta, closed: true,
+        });
+
+        new Zdog.Ellipse({
+            addTo: manifoldGroup, diameter: 70, translate: { x: 85 }, rotate: { y: Zdog.TAU/4 }, stroke: 1, color: colors.terracotta + '80',
+        });
+
+        new Zdog.Ellipse({
+            addTo: manifoldGroup, diameter: 70, translate: { x: -85 }, rotate: { y: Zdog.TAU/4 }, stroke: 1, color: colors.terracotta + '80',
+        });
+
+        new Zdog.Shape({
+            addTo: manifoldGroup,
+            path: [
+                { x:  0, y: -120, z: 0 }, { x:  85, y: 0, z: 35 },
+                { x:  0, y:  50, z: 0 }, { x: -85, y: 0, z: -35 },
+                { x:  0, y: -120, z: 0 },
+            ],
+            closed: false, stroke: 3, color: colors.terracotta,
+        });
+
+        const points = [
+            { x: 85, y: 0, z: 35 }, { x: -85, y: 0, z: -35 }, { x: 0, y: -120, z: 0 }
+        ];
+
+        points.forEach(pt => {
+            new Zdog.Shape({
+                addTo: manifoldGroup, stroke: 10, color: colors.terracotta, translate: pt,
+            });
+        });
+
+        let mouseX = 0;
+        let mouseY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+            mouseY = (e.clientY / window.innerHeight) * 2 - 1;
+        });
+
+        function animate() {
+            manifoldGroup.rotate.y += 0.003;
+            let targetRotateX = mouseY * 0.3;
+            let targetRotateZ = mouseX * 0.3;
+            illo.rotate.x =  targetRotateX;
+            illo.rotate.z =  targetRotateZ;
+            illo.updateRenderGraph();
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</div>

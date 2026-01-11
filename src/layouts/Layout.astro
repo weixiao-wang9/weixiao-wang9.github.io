@@ -2,6 +2,9 @@
 // 引入全局 CSS
 import '../styles/global.css';
 
+// 👇 1. 引入你的个人数据 (这样名字就不用写死在布局里了)
+import { personalInfo } from '../data/profile';
+
 interface Props {
 	title: string;
 }
@@ -20,7 +23,10 @@ const { title } = Astro.props;
 	</head>
 	<body>
 		<nav class="max-w-6xl mx-auto px-6 py-8 flex justify-between items-center">
-            <div class="font-sans font-bold tracking-tight text-lg">WEIXIAO</div>
+            <a href="/" class="font-sans font-bold tracking-tight text-lg uppercase hover:text-terracotta transition-colors">
+                {personalInfo.name}
+            </a>
+            
             <div class="flex gap-8 text-sm font-sans text-stone-text">
                 <a href="/research" class="hover:text-charcoal transition-colors">Research</a>
                 <a href="/project" class="hover:text-charcoal transition-colors">Project</a>
@@ -33,10 +39,10 @@ const { title } = Astro.props;
         <slot />
 
         <footer class="max-w-6xl mx-auto px-6 py-12 mt-20 border-t border-stone-300 flex justify-between text-sm text-stone-text font-sans">
-            <div>&copy; 2026 WEIXIAO.</div>
+            <div>&copy; 2026 {personalInfo.name.toUpperCase()}.</div>
             <div class="flex gap-4">
-                <a href="https://github.com/weixiao-wang9" target="_blank" class="hover:text-charcoal">GitHub</a>
-                <a href="https://www.linkedin.com/in/weixiao-wang-09a07626a/" target="_blank" class="hover:text-charcoal">LinkedIn</a>
+                <a href={personalInfo.github} target="_blank" class="hover:text-charcoal">GitHub</a>
+                <a href={personalInfo.linkedin} target="_blank" class="hover:text-charcoal">LinkedIn</a>
             </div>
         </footer>
 	</body>

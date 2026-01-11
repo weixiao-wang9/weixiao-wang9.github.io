@@ -1,0 +1,54 @@
+---
+import { teachingExperience } from '../data/teaching';
+---
+<section class="mb-24 mt-16">
+    <div class="flex items-baseline gap-4 mb-12 border-b border-stone-200 pb-4">
+        <h2 class="font-serif text-4xl text-charcoal">Teaching</h2>
+        <span class="font-sans text-sm text-stone-400 uppercase tracking-widest">Experience</span>
+    </div>
+
+    <div class="space-y-12">
+        {teachingExperience.map((job) => (
+            <div class="group grid grid-cols-1 md:grid-cols-12 gap-6 transition-all">
+                <div class="md:col-span-3">
+                    <div class="font-sans text-xs font-bold text-terracotta uppercase tracking-widest mb-1">
+                        {job.period}
+                    </div>
+                    <div class="text-sm text-stone-400 font-serif italic">
+                        {job.location}
+                    </div>
+                </div>
+
+                <div class="md:col-span-9">
+                    <h3 class="font-serif text-2xl text-charcoal mb-1 group-hover:text-terracotta transition-colors">
+                        {job.role}
+                    </h3>
+                    <div class="text-stone-500 font-sans text-sm mb-6">
+                        {job.department}, <span class="font-bold text-stone-600">{job.institution}</span>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="font-sans text-xs font-bold text-stone-400 uppercase tracking-widest mb-3">Courses Taught</h4>
+                        <ul class="grid grid-cols-1 gap-3">
+                            {job.courses.map(course => {
+                                const [code, name] = course.split(':');
+                                return (
+                                    <li class="flex items-baseline gap-3">
+                                        <span class="w-2 h-2 rounded-full bg-terracotta shrink-0 self-center"></span>
+                                        <div class="font-sans text-charcoal">
+                                            <span class="font-bold mr-2">{code}</span>
+                                            <span class="text-stone-500">{name}</span>
+                                        </div>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </div>
+                    <p class="text-stone-600 leading-relaxed max-w-2xl font-serif text-lg">
+                        {job.description}
+                    </p>
+                </div>
+            </div>
+        ))}
+    </div>
+</section>
