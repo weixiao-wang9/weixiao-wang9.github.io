@@ -77,6 +77,21 @@ const projects = [
     link: "https://github.com"
   }
 ];
+// TA Experience
+const teachingExperience = [
+  {
+    role: "Teaching Assistant",
+    department: "Department of Mathematics",
+    institution: "Western University",
+    location: "London, Ontario",
+    period: "Sep 2025 – Present",
+    courses: [
+      "Math 1228: Methods of Finite Mathematics",
+      "Math 2155F: Mathematical Structures"
+    ],
+    description: "Leading tutorials and office hours to reinforce core topics in logic, proofs, combinatorics, and applied problem solving. Responsible for grading assignments and exams with consistent feedback."
+  }
+];
 ---
 
 <Layout title={personalInfo.name}>
@@ -240,6 +255,49 @@ const projects = [
                 ))}
             </div>
         </section>
+        <section class="mb-24">
+    <div class="flex items-baseline gap-4 mb-12 border-b border-stone-200 pb-4">
+        <h2 class="font-serif text-4xl text-charcoal">Teaching</h2>
+        <span class="font-sans text-sm text-stone-400 uppercase tracking-widest">Experience</span>
+    </div>
+
+    <div class="space-y-12">
+        {teachingExperience.map((job) => (
+            <div class="group grid grid-cols-1 md:grid-cols-12 gap-6 transition-all">
+                
+                <div class="md:col-span-3">
+                    <div class="font-sans text-xs font-bold text-terracotta uppercase tracking-widest mb-1">
+                        {job.period}
+                    </div>
+                    <div class="text-sm text-stone-400 font-serif italic">
+                        {job.location}
+                    </div>
+                </div>
+
+                <div class="md:col-span-9">
+                    <h3 class="font-serif text-2xl text-charcoal mb-1 group-hover:text-terracotta transition-colors">
+                        {job.role}
+                    </h3>
+                    <div class="text-stone-500 font-sans text-sm mb-4">
+                        {job.department}, <span class="font-bold text-stone-600">{job.institution}</span>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        {job.courses.map(course => (
+                            <span class="px-2 py-1 bg-stone-100 text-stone-600 text-xs font-mono rounded border border-stone-200">
+                                {course}
+                            </span>
+                        ))}
+                    </div>
+
+                    <p class="text-stone-600 leading-relaxed max-w-2xl font-serif">
+                        {job.description}
+                    </p>
+                </div>
+            </div>
+        ))}
+    </div>
+</section>
 
         <section class="bg-cream-dark rounded-xl p-8 md:p-12 mt-16">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
