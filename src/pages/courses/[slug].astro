@@ -1,0 +1,72 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const courses = await getCollection('courses');
+  return courses.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry: course } = Astro.props;
+const allNotes = await getCollection('notes');
+
+const cleanTitle = (note) => {
+    if (note.data.title) return note.data.title;
+    const filename = note.slug.split('/').pop(); 
+    const cleanRaw = filename.replace(/source-|concept-|atom-|lecture-/g, "");
+    return cleanRaw.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+};
+
+const cleanName = (str) => str?.replace(/\[\[|\]\]|"/g, "").trim() || "";
+
+const lectures = allNotes.filter(note => {
+    const noteCourse = cleanName(note.data.course);
+    return (noteCourse === course.data.title || noteCourse === course.data.code) && note.data.type === 'source';
+});
+
+// 按日期排序
+const sortedLectures = lectures.sort((a, b) => new Date(b.data.created || 0).getTime() - new Date(a.data.created || 0).getTime());
+---
+
+<Layout title={`${course.data.code} Notes`}>
+  <main class="max-w-4xl mx-auto px-6 py-20">
+    
+    <nav class="mb-12">
+      <a href="/notes" class="group text-xs font-mono text-stone-400 hover:text-terracotta transition-colors flex items-center gap-2">
+        <span class="group-hover:-translate-x-1 transition-transform">←</span> Back to Library
+      </a>
+    </nav>
+
+    <header class="mb-20">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-2 py-0.5 border border-stone-200 text-[10px] font-mono text-stone-400 rounded">COURSE</span>
+          <span class="text-xs font-mono text-stone-300">{course.data.code}</span>
+        </div>
+        <h1 class="font-serif text-5xl text-stone-900 mb-6 leading-tight">{course.data.title}</h1>
+        <p class="text-sm text-stone-400 font-mono tracking-widest uppercase">{sortedLectures.length} Total Lectures</p>
+    </header>
+
+    <section>
+        <div class="space-y-1">
+            {sortedLectures.map(note => (
+                <a href={`/notes/${note.slug}`} class="flex justify-between items-baseline group py-4 border-b border-stone-100 hover:border-stone-300 transition-all">
+                    <h3 class="font-serif text-2xl text-stone-800 group-hover:text-terracotta transition-colors">
+                        {cleanTitle(note)}
+                    </h3>
+                    <span class="text-xs text-stone-300 font-mono group-hover:text-stone-500 transition-colors">
+                        {note.data.created ? new Date(note.data.created).toLocaleDateString(undefined, {month:'short', day:'numeric'}) : ''}
+                    </span>
+                </a>
+            ))}
+        </div>
+        
+        {sortedLectures.length === 0 && (
+            <p class="text-stone-400 italic font-serif">The garden is still growing. No lectures recorded yet.</p>
+        )}
+    </section>
+    
+  </main>
+</Layout>

@@ -1,0 +1,65 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const allNotes = await getCollection('notes');
+const allCourses = await getCollection('courses');
+
+// 统计每门课有多少笔记
+const courseStats = new Map();
+const cleanName = (str) => str?.replace(/\[\[|\]\]|"/g, "").trim() || "";
+
+allCourses.forEach(c => courseStats.set(c.data.title, 0));
+
+allNotes.forEach(note => {
+    const cName = cleanName(note.data.course);
+    if (courseStats.has(cName)) {
+        courseStats.set(cName, courseStats.get(cName) + 1);
+    }
+});
+---
+
+<Layout title="Library">
+  <main class="max-w-6xl mx-auto px-6 py-20">
+
+    <header class="mb-20 text-center">
+      <h1 class="font-serif text-6xl text-stone-900 mb-4">Library</h1>
+      {/* 👇 删掉了那行 Access restricted，改成了更正常的副标题 */}
+      <p class="text-stone-500 font-serif italic">My Knowledge Base & Course Notes</p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {allCourses.map(course => (
+            // 👇 关键：这里的链接指向 /courses/[slug]
+            // 确保你下一步创建的文件是在 src/pages/courses/ 目录下
+            <a href={`/courses/${course.slug}`} class="group block bg-stone-50 p-8 rounded-xl hover:bg-white hover:shadow-xl hover:shadow-stone-200/50 hover:-translate-y-1 transition-all duration-300 border border-transparent hover:border-stone-100">
+                <div class="flex justify-between items-start mb-8">
+                    <span class="font-mono text-xs text-stone-400 border border-stone-200 px-2 py-1 rounded">
+                        {course.data.code}
+                    </span>
+                    <span class="font-mono text-xs text-terracotta opacity-0 group-hover:opacity-100 transition-opacity">
+                        OPEN &rarr;
+                    </span>
+                </div>
+                
+                <h3 class="font-serif text-2xl text-stone-900 mb-2 group-hover:text-terracotta transition-colors">
+                    {course.data.title}
+                </h3>
+                
+                {course.data.instructor && (
+                    <p class="text-xs text-stone-400 uppercase tracking-wider mb-6">
+                        {course.data.instructor}
+                    </p>
+                )}
+
+                <div class="border-t border-stone-200 pt-4 flex justify-between items-center">
+                    <span class="text-xs text-stone-500 font-mono">
+                        {courseStats.get(course.data.title) || 0} Files
+                    </span>
+                </div>
+            </a>
+        ))}
+    </div>
+
+  </main>
+</Layout>

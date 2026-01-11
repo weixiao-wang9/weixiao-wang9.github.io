@@ -21,3 +21,42 @@
     @apply bg-cream text-charcoal antialiased;
   }
 }
+/* Obsidian Callout 风格模拟 */
+blockquote {
+    border-radius: 0 8px 8px 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* 让列表稍微宽松一点，更像笔记 */
+li {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+/* 图片自动居中且带圆角 */
+img {
+    border-radius: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+/* 1. 默认状态：链接呈现为深灰色，融入正文，但保留虚线下划线提示 */
+.prose a[href^="/notes/"], 
+.prose a[href^="/courses/"],
+.prose a.new {
+  color: #44403c !important; /* Stone 800，看起来像普通文字但稍深 */
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px dashed #d6d3d1; /* 淡淡的虚线暗示这是个链接 */
+  transition: all 0.2s ease-in-out;
+}
+
+/* 2. 悬停状态：瞬间变成橙色并实线下划线 */
+.prose a[href^="/notes/"]:hover, 
+.prose a[href^="/courses/"]:hover,
+.prose a.new:hover {
+  color: #D97757 !important; /* 你的品牌陶土色 */
+  border-bottom: 1px solid #D97757;
+  background-color: rgba(217, 119, 87, 0.05); /* 淡淡的橙色背景提示 */
+}
