@@ -7,6 +7,7 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
 export default defineConfig({
+  site: 'https://weixiao-wang9.github.io',
   vite: {
     plugins: [tailwindcss()],
   },
