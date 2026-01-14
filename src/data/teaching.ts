@@ -10,6 +10,7 @@ export const teachingExperience = [
     courses: [
       "Math 1228: Methods of Finite Mathematics",
       "Math 2155F: Mathematical Structures",
+      "AM 2814G: Numerical Analysis"
     ],
     description: "Leading tutorials/labs and office hours to reinforce core topics in logic, proofs, combinatorics, and applied problem solving. Responsible for grading assignments and exams with consistent feedback."
   },
