@@ -12,7 +12,7 @@ created: 2026-01-17
 
 ## 1. The Fundamental Unit: The Qubit
 
-In classical systems, information is stored as bits (0 or 1). Quantum systems use the **qubit** (quantum bit)2222.
+In classical systems, information is stored as bits (0 or 1). Quantum systems use the **qubit** (quantum bit).
 
 ### Mathematical Representation
 

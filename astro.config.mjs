@@ -6,38 +6,49 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
 export default defineConfig({
-  // ... 其他配置 (site, vite 等)
   site: 'https://weixiao-wang9.github.io',
+  
   vite: {
-    plugins: [tailwindcss()], // 确保样式依然生效
+    plugins: [
+      tailwindcss(), // 确保你的陶土橙主题和极简排版生效
+    ],
   },
 
   markdown: {
+    // 禁用 Astro 默认图片处理，防止与自定义内容层级冲突
+    image: {
+      service: "astro/assets/services/noop",
+    },
+    
     remarkPlugins: [
+
       remarkMath,
       [wikiLinkPlugin, {
         aliasDivider: '|',
         hrefTemplate: (permalink) => {
-          // 1. 标准化处理：转小写，空格变横杠
+          // 1. 标准化处理：转小写，将所有空格、下划线、连续横杠统一为单横杠
+          // 这能完美匹配你之前批量重命名后的文件格式
           const slug = permalink.toLowerCase()
             .trim()
             .replace(/[\s_-]+/g, '-'); 
 
-          // 2. 智能文件夹匹配
+          // 2. 动态路由映射
           
-          // 情况 A: 这是一个 Concept (Atom)
+          // 情况 A: 这是一个 Concept (原子笔记)
+          // 假设它们统一存放在 src/content/notes/concepts/ 下
           if (slug.startsWith('concept')) {
              return `/notes/concepts/${slug}`;
           }
           
-          // 情况 B: 这是一个 Source (Lecture Note)
-          // ⚠️ 这里是修复重点：确保它指向正确的课程子文件夹
+          // 情况 B: 这是一个 Source (课程大课笔记)
+          // 为了解决不可扩展问题，我们不再硬编码文件夹名
+          // 而是生成一个虚拟路径 "/notes/find/source-xxx"
+          // 我们将在 src/pages/notes/[...slug].astro 中捕获并处理这个路径
           if (slug.startsWith('source')) {
-             // 只有加上文件夹前缀，链接才能生效
-             return `/notes/computer-networks-cs-6250/${slug}`;
+             return `/notes/find/${slug}`;
           }
 
-          // 情况 C: 兜底路径
+          // 情况 C: 兜底路径（针对普通笔记或其他分类）
           return `/notes/${slug}`;
         }
       }],

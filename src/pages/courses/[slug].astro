@@ -13,6 +13,7 @@ export async function getStaticPaths() {
 const { entry: course } = Astro.props;
 const allNotes = await getCollection('notes');
 
+// 1. 标题清理逻辑
 const cleanTitle = (note) => {
     if (note.data.title) return note.data.title;
     const filename = note.slug.split('/').pop(); 
@@ -22,13 +23,20 @@ const cleanTitle = (note) => {
 
 const cleanName = (str) => str?.replace(/\[\[|\]\]|"/g, "").trim() || "";
 
+// 2. 笔记过滤逻辑：确保匹配当前课程且类型为 source
 const lectures = allNotes.filter(note => {
     const noteCourse = cleanName(note.data.course);
     return (noteCourse === course.data.title || noteCourse === course.data.code) && note.data.type === 'source';
 });
 
-// 按日期排序
+// 3. 排序逻辑：按创建日期从新到旧排列
 const sortedLectures = lectures.sort((a, b) => new Date(b.data.created || 0).getTime() - new Date(a.data.created || 0).getTime());
+
+// 4. 定义资源数据 (你可以后续改为从 content collection 自动获取)
+const resources = [
+  { title: "Course Syllabus Spring 2026", url: "/assets/courses/syllabus.pdf", type: "PDF" },
+  { title: "Network Security Project Manual", url: "/assets/courses/project-guide.pdf", type: "DOC" }
+];
 ---
 
 <Layout title={`${course.data.code} Notes`}>
@@ -49,11 +57,18 @@ const sortedLectures = lectures.sort((a, b) => new Date(b.data.created || 0).get
         <p class="text-sm text-stone-400 font-mono tracking-widest uppercase">{sortedLectures.length} Total Lectures</p>
     </header>
 
-    <section>
+    {/* Section 1: Lectures 列表 */}
+    <section class="mb-24">
+        <h2 class="text-[10px] font-mono text-stone-300 uppercase tracking-[0.2em] mb-10">Lecture Notes</h2>
         <div class="space-y-1">
             {sortedLectures.map(note => (
                 <a href={`/notes/${note.slug}`} class="flex justify-between items-baseline group py-4 border-b border-stone-100 hover:border-stone-300 transition-all">
-                    <h3 class="font-serif text-2xl text-stone-800 group-hover:text-terracotta transition-colors">
+                    <h3 class="font-serif text-2xl text-stone-800 group-hover:text-terracotta transition-colors flex items-center gap-3">
+                        {/* 嵌入你的 Torus 图标 */}
+                        <svg viewBox="0 0 100 100" class="w-4 h-4 fill-none stroke-terracotta opacity-0 group-hover:opacity-100 transition-opacity">
+                            <ellipse cx="50" cy="50" rx="40" ry="25" stroke-width="4" />
+                            <ellipse cx="50" cy="50" rx="18" ry="10" stroke-width="2" stroke-opacity="0.6" />
+                        </svg>
                         {cleanTitle(note)}
                     </h3>
                     <span class="text-xs text-stone-300 font-mono group-hover:text-stone-500 transition-colors">
@@ -62,11 +77,11 @@ const sortedLectures = lectures.sort((a, b) => new Date(b.data.created || 0).get
                 </a>
             ))}
         </div>
-        
         {sortedLectures.length === 0 && (
             <p class="text-stone-400 italic font-serif">The garden is still growing. No lectures recorded yet.</p>
         )}
     </section>
+
     
   </main>
 </Layout>
