@@ -2,7 +2,7 @@ export const education = [
   {
     school: "University of Pennsylvania",
     degree: "MSE in Data Science",
-    year: "2024 - Present",
+    year: "2024 - Onleave",
     desc: "Focus on Computer Systems & Big Data."
   },
   {
@@ -14,7 +14,7 @@ export const education = [
   {
     school: "Western University (UWO)",
     degree: "M.Sc. in Applied Mathematics",
-    year: "2025 - Present",
+    year: "2025 - 2026",
     desc: "Research: Topological Data Analysis & ML."
   },
   {

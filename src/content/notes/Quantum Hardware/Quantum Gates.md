@@ -4,7 +4,7 @@ type: source
 subtype: lecture_note
 course: Quantum Hardware
 module:
-title: Quantum Hardware
+title: Quantum Gates
 status: Finished
 tags: []
 created: 2026-01-17

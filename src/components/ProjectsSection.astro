@@ -1,25 +1,38 @@
 ---
-import { projects } from '../data/project'; 
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => new Date(b.data.created || 0).getTime() - new Date(a.data.created || 0).getTime()
+);
 ---
 <section class="py-24 mt-8">
-    <h2 class="font-serif text-4xl mb-12">Projects</h2>
+    <div class="flex items-end justify-between mb-12">
+        <h2 class="font-serif text-4xl">Projects</h2>
+        <a href="/project" class="text-xs font-mono text-stone-400 hover:text-terracotta transition-colors uppercase tracking-widest">
+            View All →
+        </a>
+    </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         {projects.map((project) => (
-            <a href={project.link} class="group block bg-white border border-stone-200 p-8 rounded-lg hover:border-terracotta transition-colors duration-300">
+            <a href="/project" class="group block bg-white border border-stone-200 p-8 rounded-lg hover:border-terracotta transition-colors duration-300">
                 <div class="flex justify-between items-start mb-4">
-                    <h3 class="font-serif text-2xl group-hover:text-terracotta transition-colors">{project.title}</h3>
+                    <h3 class="font-serif text-2xl group-hover:text-terracotta transition-colors">{project.data.title}</h3>
                     <span class="text-stone-300 group-hover:text-terracotta">↗</span>
                 </div>
-                <p class="font-sans text-stone-600 mb-6 leading-relaxed text-sm">
-                    {project.desc}
-                </p>
-                <div class="flex flex-wrap gap-2">
-                    {project.tech.map((t) => (
-                        <span class="font-sans text-xs font-medium text-stone-500 px-2 py-1 border border-stone-200 rounded bg-stone-50">
-                            {t}
-                        </span>
-                    ))}
-                </div>
+                {project.data.description && (
+                    <p class="font-sans text-stone-600 mb-6 leading-relaxed text-sm">
+                        {project.data.description}
+                    </p>
+                )}
+                {project.data.tags && project.data.tags.length > 0 && (
+                    <div class="flex flex-wrap gap-2">
+                        {project.data.tags.map((t) => (
+                            <span class="font-sans text-xs font-medium text-stone-500 px-2 py-1 border border-stone-200 rounded bg-stone-50">
+                                {t}
+                            </span>
+                        ))}
+                    </div>
+                )}
             </a>
         ))}
     </div>

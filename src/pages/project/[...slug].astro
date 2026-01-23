@@ -1,0 +1,60 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+// 1. 必须导出 getStaticPaths
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+// 2. 获取数据
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+if (entry.data.github) {
+  return Astro.redirect(entry.data.github);
+}
+---
+
+<Layout title={entry.data.title}>
+  <main class="max-w-4xl mx-auto px-6 py-20">
+    <nav class="mb-12">
+      <a href="/project" class="text-xs font-mono text-stone-400 hover:text-terracotta transition-colors uppercase tracking-widest">
+        ← Back to Projects
+      </a>
+    </nav>
+
+    <header class="mb-20">
+      <h1 class="font-serif text-5xl text-stone-900 mb-6 leading-tight">
+        {entry.data.title}
+      </h1>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 my-8 border-y border-stone-100 py-6">
+        <div>
+          <p class="text-[10px] font-mono text-stone-400 uppercase tracking-tighter">Backend</p>
+          <p class="font-serif text-lg text-stone-800">FastAPI / PyTorch</p>
+        </div>
+        <div>
+          <p class="text-[10px] font-mono text-stone-400 uppercase tracking-tighter">Frontend</p>
+          <p class="font-serif text-lg text-stone-800">Three.js / Next.js</p>
+        </div>
+        <div>
+          <p class="text-[10px] font-mono text-stone-400 uppercase tracking-tighter">Analysis</p>
+          <p class="font-serif text-lg text-stone-800">TDA / Ripser</p>
+        </div>
+        <div>
+          <p class="text-[10px] font-mono text-stone-400 uppercase tracking-tighter">Status</p>
+          <p class="font-serif text-lg text-stone-800">Core Prototype</p>
+        </div>
+      </div>
+    </header>
+
+    <article class="prose prose-stone prose-lg max-w-none">
+      <Content />
+    </article>
+  </main>
+</Layout>

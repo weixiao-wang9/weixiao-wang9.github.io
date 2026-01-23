@@ -1,36 +1,69 @@
 import { defineCollection, z } from 'astro:content';
 
-// 1. 你原来的 Notes 集合 (保持不变)
+// 1. Notes 集合
 const notes = defineCollection({
-    // ... 你原来的代码 ...
+    type: 'content',
+    schema: z.object({
+        title: z.string().optional(),
+        course: z.string().optional(),
+        type: z.string().optional(),
+        created: z.coerce.date().optional(),
+    }),
 });
 
-// 2. 新增：Blog 集合
+// 2. Blog 集合
 const blog = defineCollection({
-	type: 'content',
-	schema: z.object({
-		title: z.string(),
-		description: z.string(),
-		// 强制要求日期，方便排序
-		date: z.coerce.date(), 
-	}),
-});
-const french = defineCollection({
-	type: 'content',
-	schema: z.object({
-		title: z.string(),
-        // 对应 Obsidian 的 "created" (有些是 date 类型，有些是 string，这里用 coerce 强制转)
-		created: z.coerce.date().optional(), 
-        
-        // 核心属性
-        level: z.string().optional(),   // e.g. "A1"
-        type: z.string().optional(),    // e.g. "atom"
-        subtype: z.string().optional(), // e.g. "grammar"
-        
-        // 标签 (Obsidian 的 tags 是数组)
-        tags: z.array(z.string()).optional(), 
-	}),
+    type: 'content',
+    schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        date: z.coerce.date(), 
+    }),
 });
 
-// 3. 导出所有集合
-export const collections = { notes, blog };
+// 3. French 集合
+const french = defineCollection({
+    type: 'content',
+    schema: z.object({
+        title: z.string(),
+        created: z.coerce.date().optional(), 
+        level: z.string().optional(),
+        type: z.string().optional(),
+        subtype: z.string().optional(),
+        tags: z.array(z.string()).optional(), 
+    }),
+});
+
+// 4. 新增并修复：Projects 集合 (解决 404 的关键)
+const projects = defineCollection({
+    type: 'content',
+    schema: z.object({
+        title: z.string(),
+        description: z.string().optional(),
+        github: z.string().url(),
+        type: z.string().optional(),
+        course: z.string().optional(),
+        created: z.coerce.date().optional(),
+        tags: z.array(z.string()).optional(),
+    }),
+});
+
+// 5. Courses 集合
+const courses = defineCollection({
+    type: 'content',
+    schema: z.object({
+        title: z.string(),
+        code: z.string().optional(),
+        instructor: z.string().optional(),
+        description: z.string().optional(),
+    }),
+});
+
+// 6. 导出所有集合 (必须包含 projects 和 french)
+export const collections = { 
+    'notes': notes, 
+    'blog': blog, 
+    'french': french, 
+    'projects': projects,
+    'courses': courses,
+};

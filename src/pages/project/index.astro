@@ -1,0 +1,60 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => new Date(b.data.created || 0).getTime() - new Date(a.data.created || 0).getTime()
+);
+---
+
+<Layout title="Projects">
+  <main class="max-w-4xl mx-auto px-6 py-20">
+    <nav class="mb-12">
+      <a href="/" class="text-xs font-mono text-stone-400 hover:text-terracotta transition-colors uppercase tracking-widest">
+        ← Back to Home
+      </a>
+    </nav>
+
+    <header class="mb-16">
+      <h1 class="font-serif text-5xl text-stone-900 mb-4 leading-tight">Projects</h1>
+      <p class="text-sm text-stone-400 font-mono tracking-widest uppercase">{projects.length} Total</p>
+    </header>
+
+    <section class="space-y-4">
+      {projects.length === 0 ? (
+        <p class="text-stone-400 font-serif italic">
+          No projects found. Make sure files are under src/content/projects and include a github field.
+        </p>
+      ) : (
+        projects.map((project) => (
+          <a href={`/project/${project.slug}`} class="group block border border-stone-200 rounded-lg p-6 hover:border-terracotta transition-colors">
+            <div class="flex items-baseline justify-between gap-4">
+              <h2 class="font-serif text-2xl text-stone-800 group-hover:text-terracotta transition-colors">
+                {project.data.title}
+              </h2>
+              {project.data.created && (
+                <span class="text-xs text-stone-300 font-mono">
+                  {new Date(project.data.created).toLocaleDateString(undefined, { month: 'short', year: 'numeric' })}
+                </span>
+              )}
+            </div>
+            {project.data.description && (
+              <p class="mt-3 text-sm text-stone-600 font-sans leading-relaxed">
+                {project.data.description}
+              </p>
+            )}
+            {project.data.tags && project.data.tags.length > 0 && (
+              <div class="mt-4 flex flex-wrap gap-2">
+                {project.data.tags.map((t) => (
+                  <span class="font-sans text-xs font-medium text-stone-500 px-2 py-1 border border-stone-200 rounded bg-stone-50">
+                    {t}
+                  </span>
+                ))}
+              </div>
+            )}
+          </a>
+        ))
+      )}
+    </section>
+  </main>
+</Layout>

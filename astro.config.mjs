@@ -15,7 +15,7 @@ export default defineConfig({
   },
 
   markdown: {
-    // 禁用 Astro 默认图片处理，防止与自定义内容层级冲突
+
     image: {
       service: "astro/assets/services/noop",
     },

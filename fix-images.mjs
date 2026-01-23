@@ -1,9 +1,16 @@
 import fs from 'fs';
 import path from 'path';
-import { globby } from 'globby'; // 如果没有请执行 npm install globby
+import { globby } from 'globby'; 
+
+// node fix-images.mjs
 
 // 1. 设置笔记所在的文件夹路径
-const NOTES_DIR = './src/content/notes';
+const NOTES_DIR = [
+  './src/content/notes',
+  './src/content/blog',
+];
+
+
 
 async function fixImagePaths() {
   // 查找所有 markdown 文件
@@ -11,21 +18,31 @@ async function fixImagePaths() {
 
   paths.forEach(filePath => {
     let content = fs.readFileSync(filePath, 'utf8');
-    
-    // 正则表达式逻辑：
-    // 匹配 ![](/images/...) 这种格式，但排除掉已经加了 < > 的
-    // 并自动将其转换为 ![](</images/...>)
-    const fixedContent = content.replace(/!\[(.*?)\]\((?!\s*<)(\/images\/.*?)\)/g, (match, alt, imgPath) => {
-      // 只有当路径包含空格时才处理，或者全部加括号以保安全
-      if (imgPath.includes(' ')) {
+    let hasChanged = false;
+
+    // 逻辑 A: 处理 Obsidian 风格 ![[Screenshot xxx.png]] 
+    // 转换为 Astro 兼容的 ![](</images/Screenshot xxx.png>)
+    const wikiLinkRegex = /!\[\[(.*?)\]\]/g;
+    const contentAfterWiki = content.replace(wikiLinkRegex, (match, fileName) => {
+      hasChanged = true;
+      // 这里的 /images/ 路径应根据你 public 下的实际存放位置调整
+      return `![](</images/${fileName.trim()}>)`;
+    });
+
+    // 逻辑 B: 修复标准 Markdown ![]( /images/xxx.png ) 
+    // 自动添加 < > 并清理路径首尾多余空格
+    const standardRegex = /!\[(.*?)\]\((?!\s*<)(\/images\/.*?)\)/g;
+    const finalContent = contentAfterWiki.replace(standardRegex, (match, alt, imgPath) => {
+      if (imgPath.includes(' ') || imgPath.trim() !== imgPath) {
+        hasChanged = true;
         return `![${alt}](<${imgPath.trim()}>)`;
       }
       return match;
     });
 
-    if (content !== fixedContent) {
-      fs.writeFileSync(filePath, fixedContent, 'utf8');
-      console.log(`✅ Fixed: ${filePath}`);
+    if (hasChanged) {
+      fs.writeFileSync(filePath, finalContent, 'utf8');
+      console.log(`✅ Refactored: ${filePath}`);
     }
   });
 }

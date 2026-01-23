@@ -1,7 +1,7 @@
 export const research = [
   {
-    title: "Homotopy Type Theory",
-    summary: "A comprehensive review of univalent foundations and their application in formal verification.",
+    title: "Bayesian Rips Active Learning (BRAL)",
+    summary: "Topology-aware active learning for rare lineage discovery.",
     link: "#"
   },
   {
