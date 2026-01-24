@@ -27,10 +27,12 @@ const projects = (await getCollection('projects')).sort(
         </p>
       ) : (
         projects.map((project) => (
-          <a href={`/project/${project.slug}`} class="group block border border-stone-200 rounded-lg p-6 hover:border-terracotta transition-colors">
+          <article class="group border border-stone-200 rounded-lg p-6 hover:border-terracotta transition-colors">
             <div class="flex items-baseline justify-between gap-4">
               <h2 class="font-serif text-2xl text-stone-800 group-hover:text-terracotta transition-colors">
-                {project.data.title}
+                <a href={`/project/${project.slug}`} class="hover:text-terracotta transition-colors">
+                  {project.data.title}
+                </a>
               </h2>
               {project.data.created && (
                 <span class="text-xs text-stone-300 font-mono">
@@ -43,6 +45,26 @@ const projects = (await getCollection('projects')).sort(
                 {project.data.description}
               </p>
             )}
+            <div class="mt-4 flex flex-wrap gap-3">
+              <a
+                href={project.data.github}
+                target="_blank"
+                rel="noreferrer"
+                class="text-xs font-mono text-stone-600 border border-stone-200 px-3 py-1 rounded hover:text-terracotta hover:border-terracotta transition-colors uppercase tracking-widest"
+              >
+                GitHub
+              </a>
+              {project.data.demo && (
+                <a
+                  href={project.data.demo}
+                  target="_blank"
+                  rel="noreferrer"
+                  class="text-xs font-mono text-stone-600 border border-stone-200 px-3 py-1 rounded hover:text-terracotta hover:border-terracotta transition-colors uppercase tracking-widest"
+                >
+                  Demo
+                </a>
+              )}
+            </div>
             {project.data.tags && project.data.tags.length > 0 && (
               <div class="mt-4 flex flex-wrap gap-2">
                 {project.data.tags.map((t) => (
@@ -52,7 +74,7 @@ const projects = (await getCollection('projects')).sort(
                 ))}
               </div>
             )}
-          </a>
+          </article>
         ))
       )}
     </section>

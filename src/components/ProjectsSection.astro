@@ -1,9 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
-
-const projects = (await getCollection('projects')).sort(
-  (a, b) => new Date(b.data.created || 0).getTime() - new Date(a.data.created || 0).getTime()
-);
+import { projects } from '../data/project';
 ---
 <section class="py-24 mt-8">
     <div class="flex items-end justify-between mb-12">
@@ -14,26 +10,50 @@ const projects = (await getCollection('projects')).sort(
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         {projects.map((project) => (
-            <a href="/project" class="group block bg-white border border-stone-200 p-8 rounded-lg hover:border-terracotta transition-colors duration-300">
+            <article class="group bg-white border border-stone-200 p-8 rounded-lg hover:border-terracotta transition-colors duration-300">
                 <div class="flex justify-between items-start mb-4">
-                    <h3 class="font-serif text-2xl group-hover:text-terracotta transition-colors">{project.data.title}</h3>
+                    <h3 class="font-serif text-2xl group-hover:text-terracotta transition-colors">
+                        <a href={project.link} class="hover:text-terracotta transition-colors" target="_blank" rel="noreferrer">
+                            {project.title}
+                        </a>
+                    </h3>
                     <span class="text-stone-300 group-hover:text-terracotta">↗</span>
                 </div>
-                {project.data.description && (
+                {project.desc && (
                     <p class="font-sans text-stone-600 mb-6 leading-relaxed text-sm">
-                        {project.data.description}
+                        {project.desc}
                     </p>
                 )}
-                {project.data.tags && project.data.tags.length > 0 && (
-                    <div class="flex flex-wrap gap-2">
-                        {project.data.tags.map((t) => (
+                <div class="mt-4 flex flex-wrap gap-3">
+                    <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        class="text-xs font-mono text-stone-600 border border-stone-200 px-3 py-1 rounded hover:text-terracotta hover:border-terracotta transition-colors uppercase tracking-widest"
+                    >
+                        GitHub
+                    </a>
+                    {project.demo && (
+                        <a
+                            href={project.demo}
+                            target="_blank"
+                            rel="noreferrer"
+                            class="text-xs font-mono text-stone-600 border border-stone-200 px-3 py-1 rounded hover:text-terracotta hover:border-terracotta transition-colors uppercase tracking-widest"
+                        >
+                            Demo
+                        </a>
+                    )}
+                </div>
+                {project.tech && project.tech.length > 0 && (
+                    <div class="mt-6 flex flex-wrap gap-2">
+                        {project.tech.map((t) => (
                             <span class="font-sans text-xs font-medium text-stone-500 px-2 py-1 border border-stone-200 rounded bg-stone-50">
                                 {t}
                             </span>
                         ))}
                     </div>
                 )}
-            </a>
+            </article>
         ))}
     </div>
 </section>
