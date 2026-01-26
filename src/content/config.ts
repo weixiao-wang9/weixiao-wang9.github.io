@@ -30,6 +30,8 @@ const french = defineCollection({
         level: z.string().optional(),
         type: z.string().optional(),
         subtype: z.string().optional(),
+        module: z.string().optional(),
+        status: z.string().optional(),
         tags: z.array(z.string()).optional(), 
     }),
 });

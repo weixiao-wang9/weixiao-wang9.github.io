@@ -4,6 +4,13 @@ import Layout from '../../layouts/Layout.astro';
 
 const allNotes = await getCollection('french');
 
+const isCompleted = (note) => (note.data.status || '').toLowerCase() === 'finished';
+const isLesson = (note) => {
+    const subtype = (note.data.subtype || '').toLowerCase();
+    const type = (note.data.type || '').toLowerCase();
+    return subtype === 'lesson' || subtype === 'lessons' || type === 'lesson';
+};
+
 // 1. 等级顺序
 const levelsOrder = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
 
@@ -32,6 +39,23 @@ allNotes.forEach(note => {
     
     curriculum[level][moduleName].push(note);
 });
+
+const completedLessons = allNotes
+    .filter(note => isLesson(note) && isCompleted(note))
+    .sort((a, b) => {
+        const aDate = a.data.created ? new Date(a.data.created).getTime() : 0;
+        const bDate = b.data.created ? new Date(b.data.created).getTime() : 0;
+        return bDate - aDate;
+    });
+
+const formatDate = (date) => {
+    if (!date) return '';
+    return new Intl.DateTimeFormat('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: '2-digit',
+    }).format(date);
+};
 ---
 
 <Layout title="Programme de Français">
@@ -93,5 +117,38 @@ allNotes.forEach(note => {
             })}
 
         </div>
+
+        {completedLessons.length > 0 && (
+            <section class="mt-24">
+                <div class="flex items-baseline gap-4 mb-12 border-b-2 border-terracotta pb-4">
+                    <h2 class="font-serif text-6xl text-terracotta font-bold leading-none">
+                        Lessons
+                    </h2>
+                    <span class="font-serif text-2xl text-stone-400 italic">
+                        Study log
+                    </span>
+                </div>
+
+                <ul class="space-y-4">
+                    {completedLessons.map(note => (
+                        <li class="flex items-start justify-between gap-6 border-l border-stone-200 pl-4">
+                            <a href={`/french/${note.slug}`} class="group block">
+                                <span class="font-serif text-lg text-charcoal group-hover:text-terracotta transition-colors border-b border-transparent group-hover:border-terracotta/30">
+                                    {note.data.title}
+                                </span>
+                            </a>
+                            <div class="text-right text-xs uppercase tracking-widest text-stone-400">
+                                {note.data.level && <span>{note.data.level}</span>}
+                                {note.data.created && (
+                                    <span class={note.data.level ? 'ml-3' : ''}>
+                                        {formatDate(note.data.created)}
+                                    </span>
+                                )}
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            </section>
+        )}
 	</main>
 </Layout>
