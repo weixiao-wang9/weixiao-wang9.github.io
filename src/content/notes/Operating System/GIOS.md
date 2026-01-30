@@ -180,7 +180,7 @@ All of this together forms the ***the state of the process***
 The operating system gives each process its own ***Address space*** - a continuous range of virtual memory addresses from $V_{0} \quad V_{max}$
 This isolates processes from one another
 Inside this space, different sections are laid out in different regions.
-![[Screenshot 2025-10-03 at 2.34.15 PM.png]]
+![](</images/Screenshot 2025-10-03 at 2.34.15 PM.png>)
 From the diagram:
 - **Text (Code)** at the bottom: compiled instructions of the program.
 - **Data** above it: static/global variables initialized at load time.
@@ -248,7 +248,7 @@ indirect cost: Even though the OS can switch processes quickly by saving/restori
 
 
 #### Process Life Cycle: States
-![[Screenshot 2025-10-04 at 12.52.07 AM.png]]
+![](</images/Screenshot 2025-10-04 at 12.52.07 AM.png>)
 1. New: When a process is first created, it is in the new state. The OS does admission control (allocates a PCB and initialize resources). The process is not yet ready to run. 
 2. Ready: Once initialized, the process moves to the ready state. It is prepared to run but is waiting for the CPU to become available.
 3. Running: When the scheduler picks a process from the ready queue, it goes into the **running** state. The process instructions are now being executed on the CPU. ( the active state of execution)
@@ -297,7 +297,7 @@ If the timeslice is **too long**:
     Efficiency is high, but responsiveness is poor (other processes wait too long).
 
 > Design: What are appropriate timeslice value/what criteria is used to decide which process is the next to run.
-![[Screenshot 2025-10-04 at 1.51.38 AM.png]]
+![](</images/Screenshot 2025-10-04 at 1.51.38 AM.png>)
 For ***I/O*** request, send back to ready queue
 
 ### Inter Process Communication

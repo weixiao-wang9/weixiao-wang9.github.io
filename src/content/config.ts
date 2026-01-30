@@ -51,7 +51,21 @@ const projects = defineCollection({
     }),
 });
 
-// 5. Courses 集合
+// 5. Research 集合
+const research = defineCollection({
+    type: 'content',
+    schema: z.object({
+        title: z.string(),
+        description: z.string().optional(),
+        date: z.coerce.date().optional(),
+        status: z.string().optional(),
+        github: z.string().url().optional(),
+        demo: z.string().url().optional(),
+        tags: z.array(z.string()).optional(),
+    }),
+});
+
+// 6. Courses 集合
 const courses = defineCollection({
     type: 'content',
     schema: z.object({
@@ -62,11 +76,12 @@ const courses = defineCollection({
     }),
 });
 
-// 6. 导出所有集合 (必须包含 projects 和 french)
-export const collections = { 
-    'notes': notes, 
-    'blog': blog, 
-    'french': french, 
+// 7. 导出所有集合
+export const collections = {
+    'notes': notes,
+    'blog': blog,
+    'french': french,
     'projects': projects,
+    'research': research,
     'courses': courses,
 };

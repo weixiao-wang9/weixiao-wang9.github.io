@@ -74,16 +74,16 @@ Quantum operations are represented by **unitary matrices** that rotate the state
 ### Two Qubit Gates
 
 - **CNOT (Controlled NOT)**: Flips the second qubit only if the first qubit is $\mid1\rangle$. This is the primary tool for creating **entanglement**.
-![[Screenshot 2026-01-17 at 10.52.11 PM.png]]
+![](</images/Screenshot 2026-01-17 at 10.52.11 PM.png>)
 > $CNOT = \begin{bmatrix} 1& 0 & 0 & 0\\0&1&0&0\\0&0&0&1\\0&0&1&0\end{bmatrix}$
 - **SWAP Gate**: Exchanges the states of two qubits, often implemented using three CNOT gates. It used to move qubits under ***restricted connectivity***.
-![[Screenshot 2026-01-17 at 10.56.13 PM.png]]
+![](</images/Screenshot 2026-01-17 at 10.56.13 PM.png>)
 >$SWAP = \begin{bmatrix} 1& 0 & 0 & 0\\0&0&1&0\\0&1&0&0\\0&0&0&1\end{bmatrix}$
 - **Toffoli (CCNOT)**: A three-qubit gate where the third qubit flips only if the first two are both $\mid1\rangle$.
-![[Screenshot 2026-01-17 at 10.58.00 PM.png]]
+![](</images/Screenshot 2026-01-17 at 10.58.00 PM.png>)
     
 - **Fredkin (CSWAP)**: Swaps the second and the thrid bit iff the control bit is $\mid1\rangle$
- ![[Screenshot 2026-01-17 at 10.58.27 PM.png]]   
+ ![](</images/Screenshot 2026-01-17 at 10.58.27 PM.png>)   
 
 ---
 

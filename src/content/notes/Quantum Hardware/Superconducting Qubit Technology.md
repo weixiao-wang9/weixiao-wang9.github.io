@@ -23,7 +23,7 @@ In qubits, which only use states $|0\rangle$ and $|1\rangle$, many physical syst
 - **Degenerate:** Multiple distinct quantum states exist at the exact same energy level.
     
 - **Chaotic:** Complex systems where levels follow specific mathematical relationships.
-![[Screenshot 2026-01-18 at 2.57.00 PM.png]]
+![](</images/Screenshot 2026-01-18 at 2.57.00 PM.png>)
 
 ---
 

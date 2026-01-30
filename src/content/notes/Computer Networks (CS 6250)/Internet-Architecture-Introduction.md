@@ -9,7 +9,7 @@ The International Organization for Standardization (ISO) proposed the seven-laye
 The application layer/presentation layer/session layer are combined into a single layer called ***Application layer*** in the Internet architecture model.
 
 The interface between the application layer and the transport layer are the sockets
-![[Screenshot 2025-08-21 at 6.57.19 AM.png]]
+![](</images/Screenshot 2025-08-21 at 6.57.19 AM.png>)
 
 Some of the ***disadvantages*** include:
 1. Some layers functionality depends on the information from other layers, which can violate the goal of layer separation.
@@ -27,7 +27,7 @@ Includes multiple protocols like:
 At the application layer, we refer to the <mark style="background: #FFB8EBA6;">packet of information as a message</mark>.
 
 Every OSI layer can be explained by three words
-![[Screenshot 2025-08-21 at 7.15.49 AM.png]]**Service** → What the layer provides to the layer above.
+![](</images/Screenshot 2025-08-21 at 7.15.49 AM.png>)**Service** → What the layer provides to the layer above.
 For the Application Layer, the service is: “Let apps communicate across the network.” Example: Gmail sending an email.
 
 **Interface** → How the layer above accesses this service.
@@ -38,10 +38,10 @@ Example: HTTP, FTP, DNS protocols — define the _how_.
 
 #### The Presentation Layer:
 Plays the intermediate role of formatting the information(translating)
-![[Screenshot 2025-08-22 at 2.14.31 AM.png]]
+![](</images/Screenshot 2025-08-22 at 2.14.31 AM.png>)
 
 #### The Session Layer
-Is responsible for the mechanism that manages the different transport steams that belong to the same session between end-user application(human interacts directly with the program) process.![[Screenshot 2025-08-22 at 2.21.37 AM.png]]
+Is responsible for the mechanism that manages the different transport steams that belong to the same session between end-user application(human interacts directly with the program) process.![](</images/Screenshot 2025-08-22 at 2.21.37 AM.png>)
 
 #### Transport Layer
 Is responsible for the end-to-end communication between end hosts. Two important protocols ***TCP*** and ***UDP***
@@ -52,7 +52,7 @@ Is responsible for the end-to-end communication between end hosts. Two important
 ***UDP***: provides a connectionless best-effort service to the applications that are running in the layer above, without reliability, flow or congestion control.
 
 At the transport layer, we refer to the <mark style="background: #FFB8EBA6;">packet of information as a segment.</mark>
-![[Screenshot 2025-08-22 at 3.42.20 AM.png]]
+![](</images/Screenshot 2025-08-22 at 3.42.20 AM.png>)
 #### Network Layer
 
  **Role of the Network Layer**
@@ -74,7 +74,7 @@ Determine the routes that the datagrams can take between sources and destination
 
 
 At this layer, we refer to the <mark style="background: #FFB8EBA6;">packet of information as a datagram</mark>
-![[Screenshot 2025-08-22 at 3.42.04 AM.png]]
+![](</images/Screenshot 2025-08-22 at 3.42.04 AM.png>)
 
 #### Data Link Layer
 The data link layer is responsible to move the frames from one node (host or router) to the next node.
@@ -94,11 +94,11 @@ Service: Reliable delivery, that covers the transmission of the data from one tr
 > it is different from the TCP which offers reliability from the source host to the destination end host.
 
 At this layer, we refer to the the<mark style="background: #FFB8EBA6;"> packet of information as frames.</mark>
-![[Screenshot 2025-08-22 at 3.41.45 AM.png]]
+![](</images/Screenshot 2025-08-22 at 3.41.45 AM.png>)
 #### The Physical Layer.
 to transfer bits within a frame between two nodes that are connected through a physical link.
 
-Protocols depend on the link and on the actual transmission medium of the link![[Screenshot 2025-08-22 at 3.41.32 AM.png]]
+Protocols depend on the link and on the actual transmission medium of the link![](</images/Screenshot 2025-08-22 at 3.41.32 AM.png>)
 
 
 #### Layers Encapsulation
@@ -141,7 +141,7 @@ The e2e principle suggests that specific application-level functions usually can
 
 The network core should be<mark style="background: #FFB8EBA6;"> simple and minimal</mark>, while the <mark style="background: #FFB8EBA6;">end systems should carry the intelligence
 </mark>
-![[Screenshot 2025-08-22 at 3.51.58 AM.png]]
+![](</images/Screenshot 2025-08-22 at 3.51.58 AM.png>)
 
 > **What were the designers' original goals that led to the e2e principle?** 
 
@@ -150,7 +150,7 @@ The network core should be<mark style="background: #FFB8EBA6;"> simple and minim
 ***Violation of E2E***
 1. Fire violation
 2. NAT boxes
-![[Screenshot 2025-08-22 at 3.58.33 AM.png]]
+![](</images/Screenshot 2025-08-22 at 3.58.33 AM.png>)
 NAT works like a translator: 
 Outgoing traffic: rewrites the source IP/Port of private devices into the router's public IP/port.
 
@@ -158,7 +158,7 @@ Incoming traffic:  rewrites the **destination IP/port** from the public-facing I
 
 #### Hourglass Shape of Internet Architecture
 
-![[Screenshot 2025-08-22 at 4.20.53 AM.png]]
+![](</images/Screenshot 2025-08-22 at 4.20.53 AM.png>)
 **Evolutionary Architecture** model
 ***Step up***
 - **Layers (L)**: Just like the OSI/TCP stack, EvoArch has layers. Each layer is a stage where protocols “live.”
@@ -215,7 +215,7 @@ For each round it has three phases:
 - Keep iterating until the stack has the desired total number of protocols
 
 Run EvoArch for a stack with 10 layers over many rounds, you'll get ***hourglass*** shape
-- Broad at bottom → narrow in middle → broad at top.![[Screenshot 2025-08-22 at 9.59.06 AM.png]]
+- Broad at bottom → narrow in middle → broad at top.![](</images/Screenshot 2025-08-22 at 9.59.06 AM.png>)
 - **Inward edges (arrows pointing into a node from below)**
     → Those are the **substrates** S(u).
     → They represent the protocols that node u _depends on_.
@@ -270,7 +270,7 @@ Why IPV4, TCP and UDP hard to replace?
 A bridge is a device with multiple inputs/outputs. A bridge transfers frames from an input to one (or multiple) outputs.
 
 ***Learning bridges***
-A learnings bridge learns, populates and maintains, a forwarding table. The bridge consults that table so that it only forwards frames on specific ports, rather than over all ports.![[Screenshot 2025-08-22 at 10.34.16 AM.png]]
+A learnings bridge learns, populates and maintains, a forwarding table. The bridge consults that table so that it only forwards frames on specific ports, rather than over all ports.![](</images/Screenshot 2025-08-22 at 10.34.16 AM.png>)
 ***Setup***
 the bridge has **two collision domains** (Port 1’s LAN, Port 2’s LAN).
 ***Bridge Behavior***

@@ -11,7 +11,7 @@ An **autoencoder** is a neural network designed to learn a compressed, informati
   
   
 
-![[autoencoder_arc.png]]
+![](</images/autoencoder_arc.png>)
 
   
   
@@ -79,7 +79,7 @@ Applications include: 1. dimensionality reduction; 2. Feature extraction; 3. Ima
 
   
 
-![[Screenshot 2025-08-18 at 11.41.18 AM.png]]
+![](</images/Screenshot 2025-08-18 at 11.41.18 AM.png>)
 
   
 
@@ -325,7 +325,7 @@ We train the autoencoder from a ***corrupted copy*** of the input.
 
   
 
-![[Screenshot 2025-08-18 at 1.17.03 PM.png]]
+![](</images/Screenshot 2025-08-18 at 1.17.03 PM.png>)
 
   
 
@@ -439,7 +439,7 @@ Backpropagating through $f_{k}$: set gradient to $0$ for $b_{i}=0$ entries and k
 
   
 
-![[Screenshot 2025-08-19 at 12.26.42 PM.png]]
+![](</images/Screenshot 2025-08-19 at 12.26.42 PM.png>)
 
   
 
@@ -847,7 +847,7 @@ $$p_{\theta}=\int_{z}p_{\theta}(x,z)dz$$
 
   
 
-![[Screenshot 2025-08-19 at 5.46.15 AM.png]]VAE is ***generative AI models*** as it learns the ***latent distribution***
+![](</images/Screenshot 2025-08-19 at 5.46.15 AM.png>)VAE is ***generative AI models*** as it learns the ***latent distribution***
 
   
 
@@ -863,7 +863,7 @@ Application include: image generation and synthesis; Representation learning›
 
   
 
-![[Screenshot 2025-08-19 at 5.48.00 AM.png]]
+![](</images/Screenshot 2025-08-19 at 5.48.00 AM.png>)
 
   
 

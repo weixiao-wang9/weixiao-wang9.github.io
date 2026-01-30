@@ -105,7 +105,7 @@ This is why different atoms emit specific colors of light; those colors correspo
 - **Manipulation**: Single-qubit gates (like $Z$ or $H$) applied to one half of an entangled pair can move the system between different Bell states
     
 All entangled states involve superposition, but not all superpositions are entangled.
-![[Screenshot 2026-01-18 at 1.55.26 AM.png]]
+![](</images/Screenshot 2026-01-18 at 1.55.26 AM.png>)
 - **Z-Gate on a Bell State:** Applying a $Z$ gate (a phase flip) to one qubit of the $\frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)$ state changes it to $\frac{1}{\sqrt{2}}(|00\rangle - |11\rangle)$.
 - **Hadamard on both:** Following that with Hadamard gates on both qubits moves the system into the $\frac{1}{\sqrt{2}}(|01\rangle + |10\rangle)$ state.
 

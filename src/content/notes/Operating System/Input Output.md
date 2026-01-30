@@ -148,7 +148,7 @@ Caveats:
 Pinning is important: you can’t swap out a page from under an ongoing DMA transfer.
 
 ### OS Bypass: user-level access to devices
-![[Screenshot 2025-12-04 at 6.12.11 PM.png]]**User process → system call → kernel → driver → device**(normal process)
+![](</images/Screenshot 2025-12-04 at 6.12.11 PM.png>)**User process → system call → kernel → driver → device**(normal process)
 **OS bypass** 
 lets a user process talk **directly** (almost) to the device:
 - Certain device registers and buffers are **mapped into the process’s address space**.
@@ -194,7 +194,7 @@ Layers:
     - Talks the specific protocol of that device type and model.
 5. **Block device (disk/SSD)**
 ### Virtual File System (VFS): multiple filesystems as one tree
-![[Screenshot 2025-12-04 at 7.20.39 PM.png]]
+![](</images/Screenshot 2025-12-04 at 7.20.39 PM.png>)
 Problems VFS solves:
 - Single unified tree (/) even if data lives:
     - on different disks,
@@ -233,7 +233,7 @@ Mapping:
 - **In memory**: VFS structures (superblock, inodes, dentries, file objects).
 ### EXT2 on-disk layout
 A disk partition formatted as ext2:
-![[Screenshot 2025-12-04 at 7.59.49 PM.png]]
+![](</images/Screenshot 2025-12-04 at 7.59.49 PM.png>)
 1. **Boot block** (first block)
     - Often used for bootloader.
     - Linux ext2 itself doesn’t use it directly for files.   
