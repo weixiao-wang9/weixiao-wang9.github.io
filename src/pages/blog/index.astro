@@ -2,10 +2,11 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
-// 获取所有 blog 并按日期倒序排列
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-);
+// 获取所有 blog，pinned 置顶，其余按日期倒序
+const posts = (await getCollection('blog')).sort((a, b) => {
+	if (a.data.pinned !== b.data.pinned) return a.data.pinned ? -1 : 1;
+	return b.data.date.valueOf() - a.data.date.valueOf();
+});
 ---
 
 <Layout title="Blog">
@@ -40,7 +41,7 @@ const posts = (await getCollection('blog')).sort(
                                         })}
                                     </time>
                                     <span class="w-8 h-[1px] bg-terracotta opacity-50"></span>
-                                    <span class="font-sans text-xs font-bold text-stone-400 uppercase tracking-widest">ESSAY</span>
+                                    <span class={`font-sans text-xs font-bold uppercase tracking-widest ${post.data.pinned ? 'text-terracotta' : 'text-stone-400'}`}>{post.data.pinned ? 'PINNED' : 'ESSAY'}</span>
                                 </div>
 
                                 <h2 class="font-serif text-4xl md:text-5xl leading-[1.1] text-charcoal group-hover:text-terracotta transition-colors duration-300 mb-6">

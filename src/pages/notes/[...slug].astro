@@ -5,10 +5,25 @@ import TableOfContents from '../../components/TableOfContents.astro';
 
 export async function getStaticPaths() {
   const notes = await getCollection('notes');
-  return notes.map(entry => ({
-    params: { slug: entry.slug },
-    props: { entry },
-  }));
+  const paths = [];
+
+  for (const entry of notes) {
+    // Primary route: full slug (e.g. operating-system/fcfs-first-come-first-serve)
+    paths.push({ params: { slug: entry.slug }, props: { entry } });
+
+    // Alias route: filename only (e.g. fcfs-first-come-first-serve)
+    // This makes wiki links like [[FCFS (First Come First Serve)]] work
+    // because remark-wiki-link generates /notes/fcfs-(first-come-first-serve)
+    const filename = entry.slug.split('/').pop();
+    if (filename && filename !== entry.slug) {
+      // Only add if no other note already claims this short slug
+      if (!notes.some(n => n.slug === filename)) {
+        paths.push({ params: { slug: filename }, props: { entry } });
+      }
+    }
+  }
+
+  return paths;
 }
 
 const { entry } = Astro.props;

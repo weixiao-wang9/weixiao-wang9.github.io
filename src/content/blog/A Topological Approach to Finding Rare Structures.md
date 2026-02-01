@@ -2,6 +2,7 @@
 title: 'Finding the "Invisible": A Topological Approach'
 description: Building intuition for measuring topological impact
 date: 2025-12-20
+pinned: "true"
 ---
 ## The Intuition: What Makes a Data Point "Important"
 

@@ -1,3 +1,9 @@
+---
+type: source
+course: "[[Operating System]]"
+---
+
+
 The OS has to manage physical memory(DRAM) for many processes at once.
 
 Two main goals:

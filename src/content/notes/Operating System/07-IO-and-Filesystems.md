@@ -1,3 +1,7 @@
+---
+type: source
+course: "[[Operating System]]"
+---
 ### Why I/O stuff matters
 A real program doesn’t just talk to the CPU and RAM. It needs:
 - storage (disks / SSDs),

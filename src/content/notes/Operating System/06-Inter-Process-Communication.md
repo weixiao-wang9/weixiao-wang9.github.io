@@ -1,3 +1,8 @@
+---
+type: source
+course: "[[Operating System]]"
+---
+
 A ***process*** has its own virtual address space. 
 >Can't see each other's memory
 >Can't directly call each other's functions

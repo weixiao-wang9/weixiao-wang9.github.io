@@ -13,24 +13,28 @@ export async function getStaticPaths() {
 const { entry: course } = Astro.props;
 const allNotes = await getCollection('notes');
 
-// 1. 标题清理逻辑
+// 1. 标题清理逻辑：去掉数字前缀如 "01-", "02-"
 const cleanTitle = (note) => {
     if (note.data.title) return note.data.title;
-    const filename = note.slug.split('/').pop(); 
-    const cleanRaw = filename.replace(/source-|concept-|atom-|lecture-/g, "");
+    const filename = note.slug.split('/').pop();
+    const cleanRaw = filename.replace(/^\d+-/, '').replace(/source-|concept-|atom-|lecture-/g, "");
     return cleanRaw.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 };
 
 const cleanName = (str) => str?.replace(/\[\[|\]\]|"/g, "").trim() || "";
 
-// 2. 笔记过滤逻辑：确保匹配当前课程且类型为 source
+// 2. 笔记过滤逻辑：匹配当前课程（所有类型，包括 source, meta, reference）
 const lectures = allNotes.filter(note => {
     const noteCourse = cleanName(note.data.course);
-    return (noteCourse === course.data.title || noteCourse === course.data.code) && note.data.type === 'source';
+    return noteCourse === course.data.title || noteCourse === course.data.code;
 });
 
-// 3. 排序逻辑：按创建日期从新到旧排列
-const sortedLectures = lectures.sort((a, b) => new Date(b.data.created || 0).getTime() - new Date(a.data.created || 0).getTime());
+// 3. 排序逻辑：按文件名自然顺序（数字前缀 00, 01, 02...）
+const sortedLectures = lectures.sort((a, b) => {
+    const nameA = a.slug.split('/').pop() || '';
+    const nameB = b.slug.split('/').pop() || '';
+    return nameA.localeCompare(nameB, undefined, { numeric: true });
+});
 
 // 4. 定义资源数据 (你可以后续改为从 content collection 自动获取)
 const resources = [
@@ -54,7 +58,7 @@ const resources = [
           <span class="text-xs font-mono text-stone-300">{course.data.code}</span>
         </div>
         <h1 class="font-serif text-5xl text-stone-900 mb-6 leading-tight">{course.data.title}</h1>
-        <p class="text-sm text-stone-400 font-mono tracking-widest uppercase">{sortedLectures.length} Total Lectures</p>
+        <p class="text-sm text-stone-400 font-mono tracking-widest uppercase">{sortedLectures.length} Notes</p>
     </header>
 
     {/* Section 1: Lectures 列表 */}

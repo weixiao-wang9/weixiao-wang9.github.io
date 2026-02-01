@@ -33,25 +33,17 @@ export default defineConfig({
           // 这能完美匹配你之前批量重命名后的文件格式
           const slug = permalink.toLowerCase()
             .trim()
-            .replace(/[\s_-]+/g, '-'); 
+            .replace(/[()]/g, '')       // remove parentheses to match Astro slugs
+            .replace(/[\s_-]+/g, '-')
+            .replace(/^-+|-+$/g, '');   // trim leading/trailing hyphens
 
-          // 2. 动态路由映射
-          
-          // 情况 A: 这是一个 Concept (原子笔记)
-          // 假设它们统一存放在 src/content/notes/concepts/ 下
+          // Concepts live under notes/concepts/
           if (slug.startsWith('concept')) {
              return `/notes/concepts/${slug}`;
           }
-          
-          // 情况 B: 这是一个 Source (课程大课笔记)
-          // 为了解决不可扩展问题，我们不再硬编码文件夹名
-          // 而是生成一个虚拟路径 "/notes/find/source-xxx"
-          // 我们将在 src/pages/notes/[...slug].astro 中捕获并处理这个路径
-          if (slug.startsWith('source')) {
-             return `/notes/find/${slug}`;
-          }
 
-          // 情况 C: 兜底路径（针对普通笔记或其他分类）
+          // Everything else uses the short alias route
+          // (resolved by [...slug].astro's alias paths)
           return `/notes/${slug}`;
         }
       }],

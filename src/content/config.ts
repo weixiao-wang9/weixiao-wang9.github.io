@@ -17,7 +17,8 @@ const blog = defineCollection({
     schema: z.object({
         title: z.string(),
         description: z.string(),
-        date: z.coerce.date(), 
+        date: z.coerce.date(),
+        pinned: z.preprocess((val) => val === 'true' || val === true, z.boolean()).default(false),
     }),
 });
 
