@@ -100,7 +100,7 @@ $x \in \mathbb{R}^{input\_{size}\times 1}$ (one hot encoding).
 
 The hidden state is updated using a $tanh$ activation function, which squashes the activations to the range $[-1, 1]$:
 
-$$h_t = \tanh(W_{hh} h_{t-1} + W_{xh} x_t)$$
+$$h_t = \tanh(W_{hh} h_{t-1} + W_{xh} x_{t)}+ b_{h}$$
 
 In practice, we often have a bias vector.
 
@@ -109,7 +109,10 @@ $$y_{t} = W_{hy}h_{t} + b_{y}$$
 
 Wrap up in softmax( cross-entropy loss)
 $$p_{t} = softmax(y_{t})$$
+
+
 In code:
+
 ```
 class VanillaRNN:
 	# skip weight initializations.
