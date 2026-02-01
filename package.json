@@ -2,7 +2,7 @@
   "name": "my-portfolio",
   "type": "module",
   "version": "0.0.1",
-"scripts": {
+  "scripts": {
     "dev": "npm run prepare-content && astro dev",
     "start": "astro dev",
     "build": "npm run prepare-content && astro build",
@@ -11,7 +11,7 @@
     "prepare-content": "npm run sync && npm run fix-images",
     "sync": "bash sync.sh",
     "fix-images": "node fix-images.mjs",
-    "publish": "npm run prepare-content && astro build && git add . && git commit -m \"Update content and fix image paths\" && git push"
+    "publish": "npm run prepare-content && astro build && git add -A && git commit -m \"Update site\" && git push"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",

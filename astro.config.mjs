@@ -2,8 +2,10 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import wikiLinkPlugin from 'remark-wiki-link';
+import remarkCallout from './remark-callout.mjs';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import remarkCite from './remark-cite.mjs';
 
 export default defineConfig({
   site: 'https://weixiao-wang9.github.io',
@@ -21,8 +23,9 @@ export default defineConfig({
     },
     
     remarkPlugins: [
-
+      remarkCallout,
       remarkMath,
+      remarkCite,
       [wikiLinkPlugin, {
         aliasDivider: '|',
         hrefTemplate: (permalink) => {
@@ -53,6 +56,8 @@ export default defineConfig({
         }
       }],
     ],
-    rehypePlugins: [rehypeKatex],
+    rehypePlugins: [
+    rehypeKatex,
+    ],
   },
 });

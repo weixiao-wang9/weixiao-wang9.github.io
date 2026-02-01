@@ -1,0 +1,67 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
+
+export async function getStaticPaths() {
+	const papers = await getCollection('research');
+	return papers.map((paper) => ({
+		params: { slug: paper.slug },
+		props: paper,
+	}));
+}
+
+const paper = Astro.props;
+const { Content, headings } = await paper.render();
+---
+
+<Layout title={paper.data.title}>
+	<main class="max-w-4xl mx-auto px-6 py-20">
+		<a href="/research" class="inline-flex items-center gap-2 mb-12 text-xs font-bold text-stone-400 uppercase tracking-widest hover:text-terracotta transition-colors">
+			<span class="text-lg">&larr;</span> Research
+		</a>
+
+		<header class="mb-12 text-center">
+			{paper.data.date && (
+				<time class="font-sans text-sm text-stone-400 uppercase tracking-widest">
+					{paper.data.date.toLocaleDateString('en-us', {
+						year: 'numeric',
+						month: 'long',
+					})}
+				</time>
+			)}
+			<h1 class="font-serif text-5xl mt-4 mb-6 leading-tight text-charcoal">
+				{paper.data.title}
+			</h1>
+			{paper.data.description && (
+				<p class="font-sans text-xl text-stone-500 max-w-3xl mx-auto">
+					{paper.data.description}
+				</p>
+			)}
+			{(paper.data.github || paper.data.demo) && (
+				<div class="flex justify-center gap-4 mt-6">
+					{paper.data.github && (
+						<a href={paper.data.github} target="_blank" rel="noreferrer"
+							class="px-4 py-2 border border-stone-300 rounded-md font-sans text-sm hover:border-terracotta hover:text-terracotta transition-colors">
+							GitHub
+						</a>
+					)}
+					{paper.data.demo && (
+						<a href={paper.data.demo} target="_blank" rel="noreferrer"
+							class="px-4 py-2 border border-stone-300 rounded-md font-sans text-sm hover:border-terracotta hover:text-terracotta transition-colors">
+							Demo
+						</a>
+					)}
+				</div>
+			)}
+		</header>
+
+		<hr class="border-stone-200 mb-12 w-24 mx-auto" />
+
+		<article class="prose prose-stone prose-lg max-w-none font-serif hover:prose-a:text-terracotta prose-img:rounded-lg">
+			<Content />
+		</article>
+
+		<TableOfContents headings={headings} />
+	</main>
+</Layout>

@@ -1,24 +1,38 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
 @theme {
-  /* 定义 Anthropic 风格的字体 */
+  /* 1级（最深）：用于 Homepage。保持品牌色感 */
+  --color-cream-brand: #F3F1E7;
+  /* 2级（中等）：用于 Notes, Research, Project。平衡思考与阅读 */
+  --color-cream-mid: #F7F5EE;
+  /* 3级（最亮）：用于 Blog, French。极致对比度，对齐技术报告风格 */
+  --color-cream-blog: #FAF9F7;
+
+  --color-charcoal: #111111;
+  --color-terracotta: #D97757;
+
   --font-serif: "Newsreader", serif;
   --font-sans: "Inter", sans-serif;
-
-  /* 定义颜色变量 - v4 会自动生成 bg-cream, text-terracotta 等类名 */
-  --color-cream: #F3F1E7;
-  --color-cream-dark: #E6E4D9;
-  --color-charcoal: #1C1C1C;
-  --color-stone-text: #5A5A5A;
-  --color-terracotta: #D97757;
 }
 
 /* 引入 Google Fonts */
 @layer base {
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
-  
   body {
-    @apply bg-cream text-charcoal antialiased;
+    @apply bg-cream-brand text-charcoal antialiased transition-colors duration-500;
+  }
+
+  /* 针对阅读页面的背景切换 */
+  body.is-blog, body.is-french { background-color: var(--color-cream-blog) !important; }
+  body.is-note, body.is-research, body.is-project { background-color: var(--color-cream-mid) !important; }
+
+  /* 强化正文文本 */
+  .prose {
+    @apply font-serif;
+    font-weight: 460;
+    font-variation-settings: 'opsz' 24;
+    letter-spacing: -0.01em;
+    line-height: 1.65;
   }
 }
 /* Obsidian Callout 风格模拟 */
@@ -26,6 +40,195 @@ blockquote {
     border-radius: 0 8px 8px 0;
     margin-left: 0;
     margin-right: 0;
+}
+
+/* ================================
+   Obsidian Callout Styling
+   (remark-obsidian-callout output)
+   ================================ */
+blockquote[data-callout] {
+    border-left: 4px solid;
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Title row */
+.callout-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.callout-title-icon {
+    display: flex;
+    align-items: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+}
+
+.callout-title-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.callout-content {
+    font-size: 0.95rem;
+}
+
+.callout-content > p:first-child {
+    margin-top: 0;
+}
+.callout-content > p:last-child {
+    margin-bottom: 0;
+}
+
+/* Per-type colors */
+blockquote[data-callout="note"] {
+    border-color: #6366f1;
+    background-color: rgba(99, 102, 241, 0.05);
+}
+blockquote[data-callout="note"] .callout-title { color: #6366f1; }
+
+blockquote[data-callout="info"],
+blockquote[data-callout="todo"] {
+    border-color: #3b82f6;
+    background-color: rgba(59, 130, 246, 0.05);
+}
+blockquote[data-callout="info"] .callout-title,
+blockquote[data-callout="todo"] .callout-title { color: #3b82f6; }
+
+blockquote[data-callout="tip"],
+blockquote[data-callout="hint"],
+blockquote[data-callout="important"] {
+    border-color: #06b6d4;
+    background-color: rgba(6, 182, 212, 0.05);
+}
+blockquote[data-callout="tip"] .callout-title,
+blockquote[data-callout="hint"] .callout-title,
+blockquote[data-callout="important"] .callout-title { color: #06b6d4; }
+
+blockquote[data-callout="warning"],
+blockquote[data-callout="caution"],
+blockquote[data-callout="attention"] {
+    border-color: #f59e0b;
+    background-color: rgba(245, 158, 11, 0.05);
+}
+blockquote[data-callout="warning"] .callout-title,
+blockquote[data-callout="caution"] .callout-title,
+blockquote[data-callout="attention"] .callout-title { color: #f59e0b; }
+
+blockquote[data-callout="danger"],
+blockquote[data-callout="error"],
+blockquote[data-callout="bug"],
+blockquote[data-callout="failure"],
+blockquote[data-callout="fail"],
+blockquote[data-callout="missing"] {
+    border-color: #ef4444;
+    background-color: rgba(239, 68, 68, 0.05);
+}
+blockquote[data-callout="danger"] .callout-title,
+blockquote[data-callout="error"] .callout-title,
+blockquote[data-callout="bug"] .callout-title,
+blockquote[data-callout="failure"] .callout-title,
+blockquote[data-callout="fail"] .callout-title,
+blockquote[data-callout="missing"] .callout-title { color: #ef4444; }
+
+blockquote[data-callout="success"],
+blockquote[data-callout="check"],
+blockquote[data-callout="done"] {
+    border-color: #22c55e;
+    background-color: rgba(34, 197, 94, 0.05);
+}
+blockquote[data-callout="success"] .callout-title,
+blockquote[data-callout="check"] .callout-title,
+blockquote[data-callout="done"] .callout-title { color: #22c55e; }
+
+blockquote[data-callout="abstract"],
+blockquote[data-callout="summary"],
+blockquote[data-callout="tldr"] {
+    border-color: #8b5cf6;
+    background-color: rgba(139, 92, 246, 0.05);
+}
+blockquote[data-callout="abstract"] .callout-title,
+blockquote[data-callout="summary"] .callout-title,
+blockquote[data-callout="tldr"] .callout-title { color: #8b5cf6; }
+
+blockquote[data-callout="question"],
+blockquote[data-callout="help"],
+blockquote[data-callout="faq"] {
+    border-color: #f97316;
+    background-color: rgba(249, 115, 22, 0.05);
+}
+blockquote[data-callout="question"] .callout-title,
+blockquote[data-callout="help"] .callout-title,
+blockquote[data-callout="faq"] .callout-title { color: #f97316; }
+
+blockquote[data-callout="example"] {
+    border-color: #a855f7;
+    background-color: rgba(168, 85, 247, 0.05);
+}
+blockquote[data-callout="example"] .callout-title { color: #a855f7; }
+
+blockquote[data-callout="quote"],
+blockquote[data-callout="cite"] {
+    border-color: #78716c;
+    background-color: rgba(120, 113, 108, 0.05);
+}
+blockquote[data-callout="quote"] .callout-title,
+blockquote[data-callout="cite"] .callout-title { color: #78716c; }
+
+/* ================================
+   KaTeX Display Math — 居中 + 溢出处理
+   ================================ */
+
+/* True display math ($$\n...\n$$ multiline format) */
+.katex-display {
+    display: flex !important;
+    justify-content: center;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.katex-display > .katex {
+    text-align: center;
+}
+
+/*
+ * Single-line $$...$$ renders as inlineMath inside a <p>.
+ * When a <p> contains ONLY a .katex span (no other text),
+ * treat it as display math: centered, larger, with spacing.
+ */
+.prose p:has(> .katex:first-child:last-child) {
+    text-align: center;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+}
+
+.prose p > .katex:first-child:last-child {
+    font-size: 1.15em;
+}
+
+/* Ensure KaTeX renders properly inside callouts */
+blockquote[data-callout] .katex-display {
+    margin: 1rem 0;
+}
+
+blockquote[data-callout] .callout-content .katex {
+    font-size: 1em;
+}
+
+/* Callout内的独行公式也居中 */
+blockquote[data-callout] p:has(> .katex:first-child:last-child) {
+    text-align: center;
+    margin: 1rem 0;
 }
 
 /* 让列表稍微宽松一点，更像笔记 */
@@ -45,7 +248,7 @@ img {
 .prose a[href^="/notes/"], 
 .prose a[href^="/courses/"],
 .prose a.new {
-  color: #44403c !important; /* Stone 800，看起来像普通文字但稍深 */
+  color: var(--color-charcoal) !important;; 
   text-decoration: none;
   font-weight: 500;
   border-bottom: 1px dashed #d6d3d1; /* 淡淡的虚线暗示这是个链接 */
@@ -59,4 +262,42 @@ img {
   color: #D97757 !important; /* 你的品牌陶土色 */
   border-bottom: 1px solid #D97757;
   background-color: rgba(217, 119, 87, 0.05); /* 淡淡的橙色背景提示 */
+}
+
+/* ================================
+   Typography 可读性强化（必加）
+   解决正文“偏浅”的根本问题
+   ================================ */
+
+.prose {
+  /* 正文 & 结构色，统一用 charcoal */
+  --tw-prose-body: var(--color-charcoal);
+  --tw-prose-headings: var(--color-charcoal);
+  --tw-prose-lead: var(--color-charcoal);
+  --tw-prose-bold: var(--color-charcoal);
+  --tw-prose-counters: var(--color-charcoal);
+  --tw-prose-bullets: var(--color-charcoal);
+  --tw-prose-quotes: var(--color-charcoal);
+  --tw-prose-links: var(--color-charcoal);
+
+  /* 次要文本（caption / 注释）稍微浅一点，但仍然清晰 */
+  --tw-prose-captions: #3a3a3a;
+  --tw-prose-quote-borders: #d6d3d1;
+
+  /* Serif 正文在米白背景下需要更实一点 */
+  font-weight: 460; /* 补偿衬线体的单薄感 */
+}
+
+/* 行距：避免“灰感”，但不显拥挤 */
+.prose p,
+.prose li {
+  line-height: 1.65;
+}
+
+/* ================================
+   兜底：防止被 typography 内部选择器覆盖
+   （100% 生效，安心版）
+   ================================ */
+.prose :where(p, li, blockquote, td) {
+  color: var(--color-charcoal);
 }

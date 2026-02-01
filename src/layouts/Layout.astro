@@ -10,6 +10,16 @@ interface Props {
 }
 
 const { title } = Astro.props;
+
+const { pathname } = Astro.url;
+const getPageClass = (path: string) => {
+	if (path === "/" || path === "") return "is-home";
+	if (path.includes("/blog")) return "is-blog";
+	if (path.includes("/notes")) return "is-note";
+	if (path.includes("/french")) return "is-french";
+	if (path.includes("/research")) return "is-research";
+	return "is-project";
+};
 ---
 
 <!doctype html>
@@ -22,7 +32,7 @@ const { title } = Astro.props;
 		<title>{title}</title>
         <link rel="icon" type="image/png" href="/image.png">
 	</head>
-	<body>
+	<body class={getPageClass(pathname)}>
 		<nav class="max-w-6xl mx-auto px-6 py-8 flex justify-between items-center">
             <a href="/" class="font-sans font-bold tracking-tight text-lg uppercase hover:text-terracotta transition-colors">
                 {personalInfo.name}
@@ -31,7 +41,7 @@ const { title } = Astro.props;
             <div class="flex gap-8 text-sm font-sans text-stone-text">
                 <a href="/research" class="hover:text-charcoal transition-colors">Research</a>
                 <a href="/project" class="hover:text-charcoal transition-colors">Project</a>
-                <a href="/french" class="text-stone-600 hover:text-charcoal transition-colors">French</a>
+                <a href="/french" class="hover:text-charcoal transition-colors">French</a>
                 <a href="/notes" class="hover:text-charcoal transition-colors">Notes</a>
                 <a href="/blog" class="hover:text-charcoal transition-colors">Blog</a>
             </div>

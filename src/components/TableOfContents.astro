@@ -1,0 +1,186 @@
+---
+interface Props {
+  headings: Array<{ depth: number; slug: string; text: string }>;
+}
+
+const { headings } = Astro.props;
+
+// Filter to only h2 and h3
+const tocHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
+
+// Normalize: if all headings are the same depth, treat them as top-level
+const minDepth = tocHeadings.length > 0 ? Math.min(...tocHeadings.map(h => h.depth)) : 2;
+
+// Clean LaTeX from heading text: "$W_{hh}$" → "W_hh"
+const cleanText = (text: string) =>
+  text.replace(/\$([^$]*)\$/g, (_, inner) => inner.replace(/[{}\\]/g, ''));
+---
+
+{tocHeadings.length > 0 && (
+  <nav
+    id="toc"
+    class="hidden xl:block fixed top-24 w-56 max-h-[calc(100vh-8rem)] overflow-y-auto"
+    aria-label="Table of Contents"
+  >
+    <div>
+      <p class="font-sans text-[11px] font-bold uppercase tracking-widest text-stone-400 mb-4">
+        On this page
+      </p>
+      <ul class="space-y-1 border-l border-stone-200">
+        {tocHeadings.map((heading) => (
+          <li>
+            <a
+              href={`#${heading.slug}`}
+              data-toc-link
+              data-heading-slug={heading.slug}
+              class:list={[
+                'toc-link block py-1 text-[13px] font-sans leading-snug transition-colors duration-200 border-l-2 -ml-px',
+                heading.depth > minDepth ? 'pl-6' : 'pl-4',
+                'text-stone-400 border-transparent hover:text-stone-600 hover:border-stone-300'
+              ]}
+            >
+              {cleanText(heading.text)}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </nav>
+)}
+
+<script>
+  function initTOC() {
+    const toc = document.getElementById('toc');
+    const tocLinks = document.querySelectorAll('[data-toc-link]');
+    if (!toc || tocLinks.length === 0) return;
+
+    // Position the fixed TOC to the right of <main>
+    function positionTOC() {
+      const main = toc!.closest('main') || document.querySelector('main');
+      if (!main) return;
+      const rect = main.getBoundingClientRect();
+      const left = rect.right + 32; // 32px = ml-8 gap
+      toc!.style.left = `${left}px`;
+    }
+    positionTOC();
+    window.addEventListener('resize', positionTOC);
+
+    const headingSlugs = Array.from(tocLinks).map(
+      (link) => (link as HTMLElement).dataset.headingSlug!
+    );
+    const headingElements = headingSlugs
+      .map((slug) => document.getElementById(slug))
+      .filter(Boolean) as HTMLElement[];
+
+    if (headingElements.length === 0) return;
+
+    // Fix TOC text: read clean visible text from actual headings (fixes KaTeX garble)
+    function getCleanHeadingText(el: HTMLElement): string {
+      const clone = el.cloneNode(true) as HTMLElement;
+      // Remove KaTeX MathML (screen-reader/copy text) to avoid duplication
+      clone.querySelectorAll('.katex-mathml').forEach(m => m.remove());
+      return clone.textContent?.trim() || '';
+    }
+    tocLinks.forEach((link) => {
+      const slug = (link as HTMLElement).dataset.headingSlug!;
+      const heading = document.getElementById(slug);
+      if (heading) {
+        const clean = getCleanHeadingText(heading);
+        if (clean) link.textContent = clean;
+      }
+    });
+
+    let activeSlug: string | null = null;
+
+    function setActive(slug: string | null) {
+      if (slug === activeSlug) return;
+      activeSlug = slug;
+
+      tocLinks.forEach((link) => {
+        const el = link as HTMLElement;
+        const isActive = el.dataset.headingSlug === slug;
+
+        el.classList.toggle('text-terracotta', isActive);
+        el.classList.toggle('border-terracotta', isActive);
+        el.classList.toggle('font-medium', isActive);
+        el.classList.toggle('text-stone-400', !isActive);
+        el.classList.toggle('border-transparent', !isActive);
+      });
+
+      // Auto-scroll TOC panel if active item is out of view
+      if (slug && toc) {
+        const activeLink = document.querySelector(`[data-heading-slug="${slug}"]`) as HTMLElement | null;
+        if (activeLink) {
+          const linkTop = activeLink.offsetTop - toc.offsetTop;
+          const linkBottom = linkTop + activeLink.offsetHeight;
+          const scrollTop = toc.scrollTop;
+          const scrollBottom = scrollTop + toc.clientHeight;
+          if (linkTop < scrollTop || linkBottom > scrollBottom) {
+            toc.scrollTo({ top: linkTop - 40, behavior: 'smooth' });
+          }
+        }
+      }
+    }
+
+    // Find which heading the user is currently reading
+    function findCurrentHeading(): string | null {
+      const scrollY = window.scrollY + 100;
+      let current: string | null = null;
+      for (const el of headingElements) {
+        if (el.offsetTop <= scrollY) {
+          current = el.id;
+        }
+      }
+      return current;
+    }
+
+    // IntersectionObserver: track headings entering the top 30% of viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntries = entries.filter((e) => e.isIntersecting);
+        if (visibleEntries.length > 0) {
+          const topmost = visibleEntries.reduce((prev, curr) =>
+            prev.boundingClientRect.top < curr.boundingClientRect.top ? prev : curr
+          );
+          setActive(topmost.target.id);
+        } else {
+          // Fallback: find the section we're currently in
+          const current = findCurrentHeading();
+          if (current) setActive(current);
+        }
+      },
+      {
+        rootMargin: '-80px 0px -70% 0px',
+        threshold: 0,
+      }
+    );
+
+    headingElements.forEach((el) => observer.observe(el));
+
+    // Smooth scroll on click
+    tocLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const slug = (link as HTMLElement).dataset.headingSlug!;
+        const target = document.getElementById(slug);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.pushState(null, '', `#${slug}`);
+          setActive(slug);
+        }
+      });
+    });
+
+    // Set initial active heading on load
+    const hash = window.location.hash.slice(1);
+    if (hash && headingSlugs.includes(hash)) {
+      setActive(hash);
+    } else {
+      const current = findCurrentHeading();
+      setActive(current || headingSlugs[0]);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initTOC);
+  document.addEventListener('astro:page-load', initTOC);
+</script>

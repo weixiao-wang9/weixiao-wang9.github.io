@@ -15,14 +15,14 @@ const { Content } = await post.render();
 ---
 
 <Layout title={post.data.title}>
-	<main class="max-w-4xl mx-auto px-6 py-20"> 
+	<main class="max-w-5xl mx-auto px-6 py-20">
 		
 		<a href="/french" class="inline-flex items-center gap-2 mb-12 text-xs font-bold text-stone-400 uppercase tracking-widest hover:text-terracotta transition-colors">
 			<span class="text-lg">←</span> Index
 		</a>
 
 		{/* 🛠️ 修改重点：移除了 bg-white, shadow-sm, rounded-xl 和 border-stone-100 */}
-		<article class="max-w-3xl">
+		<article class="max-w-none">
 			
 			<div class="flex items-center gap-3 mb-8">
 				{post.data.level && (

@@ -15,9 +15,10 @@ SOURCE_COURSES="$PUBLIC_DIR/courses"
 # 其他内容
 SOURCE_FRENCH="$PUBLIC_DIR/French"
 SOURCE_BLOG="$VAULT/Blog"
+SOURCE_RESEARCH="$PUBLIC_DIR/research"
 
-# [关键修复]: 图片存放路径 (请确保这是你 Obsidian 存放附件的真实文件夹)
-SOURCE_PIC="$VAULT/images" 
+# 图片存放路径
+SOURCE_PIC="$VAULT/images"
 
 # ================= 2. 脚本逻辑 (Do not edit) =================
 
@@ -37,9 +38,12 @@ sync_content() {
         echo "👉 Syncing Content: $dest_name..."
         rm -rf "$dest_path"
         cp -R "$src" "$dest_path"
+        # 清理非 .md 文件（Obsidian 可能复制空目录或 .DS_Store）
+        find "$dest_path" -name '.DS_Store' -delete 2>/dev/null
+        find "$dest_path" -type d -empty -delete 2>/dev/null
         echo "   ✅ Success!"
     else
-        echo "⚠️  Skipped $dest_name: Source not found"
+        echo "⚠️  Skipped $dest_name: Source not found at $src"
     fi
 }
 
@@ -67,6 +71,7 @@ sync_content "$SOURCE_NOTES"   "notes"
 sync_content "$SOURCE_COURSES" "courses"
 sync_content "$SOURCE_FRENCH"  "french"
 sync_content "$SOURCE_BLOG"    "blog"
+sync_content "$SOURCE_RESEARCH" "research"
 
 # 2. 执行资源文件同步
 sync_assets "$SOURCE_PIC"
