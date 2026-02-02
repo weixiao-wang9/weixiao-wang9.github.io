@@ -14,36 +14,31 @@ import ProjectsSection from '../components/ProjectsSection.astro';
 
 <Layout title={personalInfo.name}>
 	<main class="max-w-6xl mx-auto px-6 pb-24">
-		
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-12 py-20 items-center border-b border-stone-300">
-            
-            <div class="space-y-8">
-                <h2 class="font-serif text-5xl md:text-7xl font-medium leading-[1.1] tracking-tight text-charcoal">
-                    Exploring the <span class="underline decoration-1 underline-offset-4 decoration-terracotta">geometry</span> of deep learning.
-                </h2>
-                
-                <p class="font-sans text-xl text-stone-text leading-relaxed max-w-lg">
-                    {personalInfo.intro}
-                </p>
 
-                <div class="flex gap-4 pt-2">
-                    <a href={personalInfo.cv} target="_blank" class="px-5 py-2 bg-charcoal text-cream rounded-md font-sans text-sm hover:bg-terracotta transition-colors">CV</a>
-                    <a href={personalInfo.github} target="_blank" class="px-5 py-2 border border-stone-300 rounded-md font-sans text-sm hover:border-terracotta hover:text-terracotta transition-colors">GitHub</a>
-                    <a href={personalInfo.linkedin} target="_blank" class="px-5 py-2 border border-stone-300 rounded-md font-sans text-sm hover:border-terracotta hover:text-terracotta transition-colors">LinkedIn</a>
-                </div>
-            </div>
-            
-            <ManifoldAnimation />
-            
-        </section>
+		<section class="grid grid-cols-1 md:grid-cols-2 gap-12 py-20 items-center border-b border-stone-300">
+			<div class="space-y-8">
+				<h2 class="font-serif text-5xl md:text-7xl font-medium leading-[1.1] tracking-tight text-charcoal">
+					Exploring the <span class="underline decoration-1 underline-offset-4 decoration-terracotta">geometry</span> of deep learning.
+				</h2>
 
-        <EducationSection />
-        
-        <TeachingSection />
-        
-        <ResearchSection />
-        
-        <ProjectsSection />
+				<p class="font-sans text-xl text-stone-text leading-relaxed max-w-lg">
+					{personalInfo.intro}
+				</p>
+
+				<div class="flex gap-4 pt-2">
+					<a href={personalInfo.cv} target="_blank" class="px-5 py-2 bg-charcoal text-cream rounded-md font-sans text-sm hover:bg-terracotta transition-colors">CV</a>
+					<a href={personalInfo.github} target="_blank" class="px-5 py-2 border border-stone-300 rounded-md font-sans text-sm hover:border-terracotta hover:text-terracotta transition-colors">GitHub</a>
+					<a href={personalInfo.linkedin} target="_blank" class="px-5 py-2 border border-stone-300 rounded-md font-sans text-sm hover:border-terracotta hover:text-terracotta transition-colors">LinkedIn</a>
+				</div>
+			</div>
+
+			<ManifoldAnimation />
+		</section>
+
+		<EducationSection />
+		<TeachingSection />
+		<ResearchSection />
+		<ProjectsSection />
 
 	</main>
 </Layout>

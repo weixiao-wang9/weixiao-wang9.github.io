@@ -20,12 +20,8 @@
 /* 引入 Google Fonts */
 @layer base {
   body {
-    @apply bg-cream-brand text-charcoal antialiased transition-colors duration-500;
+    @apply bg-cream-brand text-charcoal antialiased;
   }
-
-  /* 针对阅读页面的背景切换 */
-  body.is-blog, body.is-french { background-color: var(--color-cream-blog) !important; }
-  body.is-note, body.is-research, body.is-project { background-color: var(--color-cream-mid) !important; }
 
   /* 强化正文文本 */
   .prose {
