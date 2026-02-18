@@ -223,30 +223,38 @@ Consider a simple visual analogy problem: A is to B as C is to D
 
 **Image A:**
 ```
-  Circle
-    ↓
-  Diamond (inside)
+Diamond  ──inside──▶  Circle
+
+Diamond  ──size=small
 ```
 
 **Semantic Network for A:**
 ```
-     X (Circle)
-      ↓ inside
-     Y (Diamond)
+        inside
+
+Diamond ───────▶ Circle
+
+   │
+
+ size=small
 ```
 
 **Image B:**
 ```
-  Circle
-    ↑
-  Diamond (outside, larger)
+Diamond  ──outside──▶  Circle
+
+Diamond  ──size=large
 ```
 
 **Semantic Network for B:**
 ```
-     X (Circle)
-      ↑ above
-     Y (Diamond, expanded)
+        outside
+
+Diamond ───────▶ Circle
+
+   │
+
+ size=large
 ```
 
 **Transformation A → B:**
@@ -255,6 +263,11 @@ Consider a simple visual analogy problem: A is to B as C is to D
 - Relationship changed: inside → above
 - Property changed: expanded
 
+```
+inside  →  outside
+
+small   →  large
+```
 ### Characteristics of Good Representations
 
 A good knowledge representation exhibits these properties:
@@ -262,7 +275,7 @@ A good knowledge representation exhibits these properties:
 **1. Makes Relationships Explicit**
 - All objects, properties, and relationships are clearly visible
 - No hidden or implicit information
-- Example: Semantic networks show "inside" and "above" relationships explicitly
+- Example: Semantic networks show "inside" and "outside" relationships explicitly
 
 **2. Exposes Natural Constraints**
 - Problem constraints become visible in the representation

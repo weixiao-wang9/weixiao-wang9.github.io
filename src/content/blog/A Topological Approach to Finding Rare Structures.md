@@ -62,8 +62,6 @@ Think of a simplicial complex as a "scaffolding" or a Lego model of the manifold
 
 ### The Nerve Theorem: The Bridge
 
-Once a metric is defined, we can "grow" metric balls of radius $r$ around each point. Crucially, the topological information is not contained in the balls themselves, but in the **pattern of their overlaps**. These intersection relationships induce a **simplicial complex**—most notably the **Čech complex**, which serves as the **nerve** of this ball covering
-
 Once a metric is defined, we can grow metric balls around each point. Crucially, it is not the balls themselves that matter, but the _pattern of their overlaps_. These intersection relationships induce a **simplicial complex** — specifically, the Čech complex, which is the **nerve** of this ball covering.
 
 > [!definition] Definition Nerve
@@ -96,7 +94,7 @@ Which it states that if the sampling is sufficiently dense and the radius $r$ is
 
 ### The Pragmatic Choice: Čech–Rips Interleaving
 
-While the **Nerve Theorem** guarantees that the Čech complex is homotopy equivalent to the underlying manifold, calculating multi-way intersections of balls in high-dimensional space is computationally expensive. In practical, we use the **Vietoris-Rips complex** as a more efficient alternative.
+While the **Nerve Theorem** guarantees that the Čech complex is homotopy equivalent to the underlying manifold, calculating multi-way intersections of balls in high-dimensional space is computationally expensive. In practice, we use the **Vietoris-Rips complex** as a more efficient alternative.
 
 > [!definition]  Definition The Rips Complex
 > For a finite metric space $(P, d)$ and a radius $r > 0$, a simplex $\sigma$ belongs to the complex $\mathbb{V}\mathbb{R}^r(P)$ if and only if **$d(p, q) \le 2r$** for every pair of vertices in $\sigma$.
@@ -124,16 +122,13 @@ But what is the _right_ radius $r$?
 - Too small? Everything is disconnected dust.
 - Too large? Everything is one giant blob. TDA says: **"Don't choose one. Look at all of them."** We gradually increase the radius from 0 to $\infty$. This dynamic process of growing connections is called a **Filtration**.
 
-Mathematically, this movie is powered by a **Distance Function** $f$, which measures how far any point in space is from our data. At any specific radius $a$, we take a "slice" of this function called a **Sublevel Set** ($T_a = f^{-1}(-\infty, a]$).
+**Mathematically**, we can view this as looking at the **sublevel sets** of a distance function (the union of balls growing). However, effectively computing these continuous shapes is difficult.
 
-- Each **Sublevel Set** is simply the union of all metric balls with radius $a$ centered at our data point.
-- As we increase $r$, these sets grow and nest inside each other: $T_a \subseteq T_{b}$ for $a \leq b$.
+**Computationally**, we simulate this "Zoom Out" movie using the discrete **Rips Filtration**. We simply increase the threshold parameter $r$. As $r$ grows, more points fall within distance $2r$ of each other, creating new edges and triangles.
 
-**The Result: A Nested Sequence**
+This generates a nested sequence of complexes:
 
-By stacking these sublevel sets together, we obtain the **Filtration** ($\mathcal{F}_f$):
-
-$$\emptyset = T_0 \hookrightarrow T_1 \hookrightarrow T_2 \hookrightarrow \dots \hookrightarrow T_n$$
+$$\emptyset = K_0 \hookrightarrow K_1 \hookrightarrow K_2 \hookrightarrow \dots \hookrightarrow K_n$$
 ### Persistent Homology
 
 How do we actually track these shapes across our "Zoom Out Movie"? We use **Persistent Homology**.
