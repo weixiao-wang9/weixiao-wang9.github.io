@@ -2,24 +2,18 @@
 import { research } from '../data/research';
 
 ---
-<section class="bg-cream-dark rounded-xl p-8 md:p-12 mt-16">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-        <div class="md:col-span-1">
-            <h2 class="font-serif text-4xl mb-4">Research</h2>
-            <p class="font-sans text-stone-text">
-                Selected publications & working papers.
-            </p>
-        </div>
-        <div class="md:col-span-2 space-y-8">
-            {research.map(item => (
-                <a href={item.link} class="group block border-t border-stone-400 pt-6">
-                    <div class="flex justify-between items-baseline">
-                        <h3 class="font-serif text-2xl group-hover:text-terracotta transition-colors">{item.title}</h3>
-                        <span class="text-xl group-hover:translate-x-1 transition-transform">→</span>
-                    </div>
-                    <p class="font-sans text-stone-text mt-2">{item.summary}</p>
-                </a>
-            ))}
-        </div>
+<section class="py-16 border-b border-stone-300">
+    <h3 class="font-serif text-3xl mb-6 text-charcoal">Research</h3>
+    <div>
+        {research.map(item => (
+            <a href={item.link} class="group flex justify-between items-start gap-6 border-t border-stone-300 py-6">
+                <div>
+                    <h4 class="font-serif text-xl leading-snug group-hover:text-terracotta transition-colors">{item.title}</h4>
+                    <p class="font-sans text-sm text-stone-500 mt-1">{item.summary}</p>
+                </div>
+                <span class="text-xl shrink-0 group-hover:translate-x-1 transition-transform mt-0.5">→</span>
+            </a>
+        ))}
+        <div class="border-t border-stone-300"></div>
     </div>
 </section>

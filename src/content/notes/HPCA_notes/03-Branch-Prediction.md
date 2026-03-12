@@ -73,6 +73,8 @@ The BHT predicts **whether a branch is taken or not-taken**, separately from the
 
 ### 2-Bit Predictor (2BP / 2BC)
 
+It requires **two** consecutive wrong outcomes to change its prediction, which prevents a single anomaly from ruining future predictions.
+
 Uses 2 bits per entry:
 - **MSB** = prediction (taken or not-taken)
 - **LSB** = conviction (strong or weak)
@@ -151,24 +153,36 @@ Combines two predictors and a **meta-predictor** that chooses which predictor to
 - **Tournament**: combines two *good* predictors; both always updated
 - **Hierarchical**: combines one *good* + one *okay* predictor; the good predictor is only updated when the okay predictor is wrong → saves power
 
+>An "okay" predictor is typically a simple hardware structure that requires very little power and has low latency. e.g. a small **Branch History Table**
+>A "good" predictor is a more sophisticated structure designed to catch difficult or correlated patterns that simpler logic would miss. e.g. A **GShare** or **PShare**
+
 ---
 
 ## Return Address Stack (RAS)
 
 Different branch types need different prediction:
 
-| Branch Type | Best Predictor |
-|-------------|---------------|
-| Conditional | BTB |
-| Unconditional | BTB |
-| Function Return (RET) | RAS |
+| Branch Type           | Best Predictor |     |
+| --------------------- | -------------- | --- |
+| Conditional           | BTB            |     |
+| Unconditional         | BTB            |     |
+| Function Return (RET) | RAS            |     |
 
 **RAS**: A small hardware stack storing return addresses for function calls.
 - On CALL: push return address onto RAS
 - On RET: pop from RAS
-- When full: **wrap-around** replacement
+- When full: **wrap-around** replacement, meaning it overwrites the oldest entries.
 
-**Identifying RET early**: Use a predictor or **predecoding** from the prefetch stage.
+### Why RAS is Necessary
+
+While a **Branch Target Buffer (BTB)** is great for "normal" branches, it struggles with `RET` instructions.
+
+- **The Problem**: A single function (like `print()`) might be called from ten different places in your code.
+- **BTB Limitation**: A BTB usually only remembers the _last_ destination. If `print()` was called by Function A last time, the BTB will predict it returns to Function A, even if Function B is the one calling it now.
+- **The Solution**: The RAS uses a **Last-In, First-Out (LIFO)** stack to perfectly track these nested calls.
+
+
+**Identifying RET(return) early**: Use a predictor or **predecoding** from the prefetch stage.
 
 ---
 

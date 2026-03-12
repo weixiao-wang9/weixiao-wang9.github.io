@@ -1,9 +1,9 @@
 export const education = [
   {
     school: "University of Pennsylvania",
-    degree: "MSE in Data Science",
-    year: "2024 - Onleave",
-    desc: "Focus on Computer Systems & Big Data."
+    degree: "M.S.E. in Data Science",
+    year: "2024",
+    desc: "Transferred to pursue research focus in applied mathematics."
   },
   {
     school: "Georgia Institute of Technology",

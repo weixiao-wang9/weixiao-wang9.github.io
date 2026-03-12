@@ -1,0 +1,22 @@
+---
+import { publications } from '../data/publications';
+---
+<section class="py-16 border-b border-stone-300">
+    <h3 class="font-serif text-3xl mb-6 text-charcoal">Publications</h3>
+    <div>
+        {publications.map(pub => (
+            <a href={pub.link} target="_blank" rel="noopener noreferrer"
+               class="group flex justify-between items-start gap-6 border-t border-stone-300 py-6">
+                <div>
+                    <h4 class="font-serif text-xl leading-snug group-hover:text-terracotta transition-colors">
+                        {pub.title}
+                    </h4>
+                    <p class="font-sans text-sm text-stone-500 mt-1">{pub.authors}</p>
+                    <p class="font-sans text-sm text-stone-400 italic mt-0.5">{pub.venue}</p>
+                </div>
+                <span class="text-xl shrink-0 group-hover:translate-x-1 transition-transform mt-0.5">→</span>
+            </a>
+        ))}
+        <div class="border-t border-stone-300"></div>
+    </div>
+</section>
