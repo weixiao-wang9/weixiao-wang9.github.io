@@ -29,6 +29,7 @@ mkdir -p src/content
 mkdir -p public/images
 
 # --- 函数 A: 同步 Markdown 内容到 src/content ---
+# 用 rsync 替代 rm + cp：只覆盖 Obsidian 中有的文件，保留本地独有的文件
 sync_content() {
     src="$1"
     dest_name="$2"
@@ -36,9 +37,9 @@ sync_content() {
 
     if [ -d "$src" ]; then
         echo "👉 Syncing Content: $dest_name..."
-        rm -rf "$dest_path"
-        cp -R "$src" "$dest_path"
-        # 清理非 .md 文件（Obsidian 可能复制空目录或 .DS_Store）
+        mkdir -p "$dest_path"
+        rsync -a --update "$src/" "$dest_path/"
+        # 清理 .DS_Store 和空目录
         find "$dest_path" -name '.DS_Store' -delete 2>/dev/null
         find "$dest_path" -type d -empty -delete 2>/dev/null
         echo "   ✅ Success!"
