@@ -37,14 +37,60 @@ const { title } = Astro.props;
             </button>
 
             <!-- Desktop nav -->
-            <div class="hidden md:flex gap-8 text-sm font-sans text-stone-text">
+            <div class="hidden md:flex gap-8 text-sm font-sans text-stone-text items-center">
                 <a href="/research" class="hover:text-charcoal transition-colors">Research</a>
                 <a href="/project" class="hover:text-charcoal transition-colors">Project</a>
                 <a href="/french" class="hover:text-charcoal transition-colors">French</a>
                 <a href="/notes" class="hover:text-charcoal transition-colors">Notes</a>
                 <a href="/blog" class="hover:text-charcoal transition-colors">Blog</a>
+                <button id="search-open" aria-label="Search" class="flex items-center gap-2 border border-stone-200 rounded-md px-3 py-1.5 text-xs text-stone-400 hover:border-stone-400 hover:text-charcoal transition-colors">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                    Search <kbd class="font-mono text-[10px] border border-stone-200 rounded px-1">/</kbd>
+                </button>
             </div>
         </nav>
+
+        <!-- Search modal (Pagefind) -->
+        <div id="search-modal" class="hidden fixed inset-0 z-50 bg-stone-900/40 backdrop-blur-sm p-4 md:p-16" role="dialog" aria-modal="true">
+            <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-2xl p-6 max-h-[70vh] overflow-y-auto">
+                <div id="pagefind-search"></div>
+                <p class="mt-4 text-[10px] font-mono text-stone-300">ESC to close</p>
+            </div>
+        </div>
+        <script is:inline>
+            (() => {
+                const modal = document.getElementById('search-modal');
+                let loaded = false;
+                async function openSearch() {
+                    modal.classList.remove('hidden');
+                    if (!loaded) {
+                        loaded = true;
+                        const css = document.createElement('link');
+                        css.rel = 'stylesheet'; css.href = '/pagefind/pagefind-ui.css';
+                        document.head.appendChild(css);
+                        await new Promise((res) => {
+                            const s = document.createElement('script');
+                            s.src = '/pagefind/pagefind-ui.js'; s.onload = res; s.onerror = res;
+                            document.body.appendChild(s);
+                        });
+                        if (window.PagefindUI) {
+                            new window.PagefindUI({ element: '#pagefind-search', showSubResults: true, showImages: false });
+                        } else {
+                            document.getElementById('pagefind-search').innerHTML =
+                                '<p class="text-sm text-stone-400 font-mono">Search index not built yet — run <code>npm run build</code>. (Search works on the deployed site.)</p>';
+                        }
+                    }
+                    setTimeout(() => modal.querySelector('input')?.focus(), 60);
+                }
+                document.getElementById('search-open')?.addEventListener('click', openSearch);
+                document.getElementById('search-open-mobile')?.addEventListener('click', openSearch);
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === '/' && !/input|textarea/i.test(document.activeElement?.tagName || '')) { e.preventDefault(); openSearch(); }
+                    if (e.key === 'Escape') modal.classList.add('hidden');
+                });
+                modal?.addEventListener('click', (e) => { if (e.target === modal) modal.classList.add('hidden'); });
+            })();
+        </script>
 
         <!-- Mobile nav -->
         <div id="mobile-menu" class="hidden md:hidden px-6 pb-6 text-sm font-sans text-stone-text">
@@ -54,6 +100,7 @@ const { title } = Astro.props;
                 <a href="/french" class="hover:text-charcoal transition-colors">French</a>
                 <a href="/notes" class="hover:text-charcoal transition-colors">Notes</a>
                 <a href="/blog" class="hover:text-charcoal transition-colors">Blog</a>
+                <button id="search-open-mobile" class="text-left hover:text-charcoal transition-colors">Search</button>
             </div>
         </div>
 

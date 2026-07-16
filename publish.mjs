@@ -84,7 +84,7 @@ function titleFromContent(body, filename) {
 
 function slugify(s) {
   return s.toLowerCase().trim()
-    .replace(/[()]/g, '')
+    .replace(/[()'’"]/g, '')
     .replace(/[\s_-]+/g, '-')
     .replace(/^-+|-+$/g, '');
 }
@@ -274,6 +274,75 @@ function generateIndexes() {
   }
 }
 
+// ================= 5b. KNOWLEDGE GRAPH =================
+// Emits src/data/graph.json: every note is a node, wikilinks are edges,
+// topic folders are hub nodes so the graph forms constellations.
+function generateGraph() {
+  const nodes = [];
+  const links = [];
+  const bySlug = new Map(); // short slug -> node id
+  const notesRoot = path.join(REPO, 'src/content/notes');
+
+  const astroSlug = (rel) => rel.replace(/\.md$/, '').split('/').map(slugify).join('/');
+
+  // note nodes
+  const noteFiles = walkMd(notesRoot);
+  for (const p of noteFiles) {
+    const rel = path.relative(notesRoot, p);
+    const { fm, body } = parseFrontmatter(fs.readFileSync(p, 'utf8'));
+    const topic = rel.includes('/') ? rel.split('/')[0] : 'Unsorted';
+    const short = slugify(path.basename(p, '.md'));
+    const id = astroSlug(rel);
+    nodes.push({
+      id,
+      label: fm.title || titleFromContent(body, p),
+      group: topic,
+      url: `/notes/${id}`,
+      kind: 'note',
+    });
+    if (!bySlug.has(short)) bySlug.set(short, id);
+  }
+
+  // topic hub nodes + membership edges
+  const topics = [...new Set(nodes.map((n) => n.group))];
+  for (const t of topics) {
+    nodes.push({ id: `topic:${t}`, label: t, group: t, url: null, kind: 'topic' });
+  }
+  for (const n of nodes) {
+    if (n.kind === 'note') links.push({ source: n.id, target: `topic:${n.group}`, kind: 'member' });
+  }
+
+  // wikilink edges
+  for (const p of noteFiles) {
+    const rel = path.relative(notesRoot, p);
+    const from = astroSlug(rel);
+    const { body } = parseFrontmatter(fs.readFileSync(p, 'utf8'));
+    for (const m of body.matchAll(/(?<!!)\[\[([^\]|#]+)(?:#[^\]|]*)?(?:\|[^\]]*)?\]\]/g)) {
+      const to = bySlug.get(slugify(m[1].trim()));
+      if (to && to !== from) links.push({ source: from, target: to, kind: 'link' });
+    }
+  }
+
+  // degree (for node sizing), dedupe links
+  const seen = new Set();
+  const deduped = links.filter((l) => {
+    const k = `${l.source}→${l.target}`;
+    if (seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  });
+  const deg = {};
+  for (const l of deduped) { deg[l.source] = (deg[l.source] || 0) + 1; deg[l.target] = (deg[l.target] || 0) + 1; }
+  for (const n of nodes) n.deg = deg[n.id] || 0;
+
+  const out = JSON.stringify({ generated: new Date().toISOString().slice(0, 10), nodes, links: deduped });
+  const outPath = path.join(REPO, 'src/data/graph.json');
+  if (!fs.existsSync(outPath) || fs.readFileSync(outPath, 'utf8') !== out) {
+    changes.push('graph.json');
+    if (!DRY) fs.writeFileSync(outPath, out);
+  }
+}
+
 // ================= 6. GIT =================
 function gitPublish() {
   const run = (cmd) => execSync(cmd, { cwd: REPO, stdio: 'pipe' }).toString().trim();
@@ -299,6 +368,7 @@ syncImages();
 fixImagePaths();
 fixDeadLinks();
 generateIndexes();
+generateGraph();
 log(`\n${changes.length} change(s)` + (changes.length ? ':\n  ' + changes.slice(0, 30).join('\n  ') + (changes.length > 30 ? `\n  … +${changes.length - 30} more` : '') : ''));
 if (!DRY && !NO_GIT) gitPublish();
 log('\n🏁 Done.');

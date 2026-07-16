@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import KnowledgeGraph from '../../components/KnowledgeGraph.astro';
 
 const allNotes = await getCollection('notes');
 const allCourses = await getCollection('courses');
@@ -25,9 +26,12 @@ allNotes.forEach(note => {
     <header class="mb-20 text-center">
       <h1 class="font-serif text-6xl text-stone-900 mb-4">Library</h1>
       {/* 👇 删掉了那行 Access restricted，改成了更正常的副标题 */}
-      <p class="text-stone-500 font-serif italic">My Knowledge Base & Course Notes</p>
+      <p class="text-stone-500 font-serif italic">My Second Brain — every note, every connection</p>
     </header>
 
+    <KnowledgeGraph />
+
+    <h2 class="text-[10px] font-mono text-stone-300 uppercase tracking-[0.2em] mb-10">Collections</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {allCourses.map(course => (
             // 👇 关键：这里的链接指向 /courses/[slug]
