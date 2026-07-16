@@ -17,11 +17,12 @@ const linkCount = graph.links.filter((l) => l.kind === 'link').length;
     </p>
   </div>
 
-  <div id="graph-wrap" class="relative bg-stone-50 rounded-xl border border-stone-100 overflow-hidden" style="height: 520px;">
+  <div id="graph-wrap" class="relative rounded-xl border border-stone-200/80 overflow-hidden shadow-inner"
+       style="height: 560px; background: radial-gradient(ellipse at 30% 20%, #fdfbf7 0%, #f7f3ec 55%, #f1ece2 100%);">
     <canvas id="kb-graph" class="w-full h-full cursor-grab"></canvas>
-    <div id="graph-tip" class="pointer-events-none absolute hidden px-3 py-1.5 bg-stone-900 text-stone-50 text-xs font-mono rounded shadow-lg z-10"></div>
-    <p class="absolute bottom-3 left-4 text-[10px] font-mono text-stone-300 select-none">
-      drag to explore · click a node to open the note
+    <div id="graph-tip" class="pointer-events-none absolute hidden px-3 py-1.5 bg-stone-900/90 text-stone-50 text-xs font-mono rounded-md shadow-lg z-10 whitespace-nowrap"></div>
+    <p class="absolute bottom-3 left-4 text-[10px] font-mono text-stone-400/70 select-none">
+      hover to trace connections · click a node to open · scroll to zoom
     </p>
   </div>
 </section>
@@ -29,135 +30,237 @@ const linkCount = graph.links.filter((l) => l.kind === 'link').length;
 <script is:inline define:vars={{ graphData: graph }}>
   (async () => {
     try {
-    const d3 = await import('https://cdn.jsdelivr.net/npm/d3-force@3/+esm');
+      const d3 = await import('https://cdn.jsdelivr.net/npm/d3-force@3/+esm');
 
-    const canvas = document.getElementById('kb-graph');
-    const wrap = document.getElementById('graph-wrap');
-    const tip = document.getElementById('graph-tip');
-    const dpr = window.devicePixelRatio || 1;
+      const canvas = document.getElementById('kb-graph');
+      const wrap = document.getElementById('graph-wrap');
+      const tip = document.getElementById('graph-tip');
+      const ctx = canvas.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
 
-    const PALETTE = ['#c05a3e', '#7c6f9f', '#5a8a6f', '#b58a3c', '#4f7f9f', '#a35a7f', '#6f6f5a', '#8a5a3c'];
-    const topics = [...new Set(graphData.nodes.map((n) => n.group))];
-    const color = (g) => PALETTE[topics.indexOf(g) % PALETTE.length];
+      const PALETTE = ['#c05a3e', '#7c6f9f', '#5a8a6f', '#b58a3c', '#4f7f9f', '#a35a7f', '#6f6f5a', '#8a5a3c'];
+      const topics = [...new Set(graphData.nodes.map((n) => n.group))];
+      const color = (g) => PALETTE[topics.indexOf(g) % PALETTE.length];
+      const withAlpha = (hex, a) => {
+        const n = parseInt(hex.slice(1), 16);
+        return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`;
+      };
 
-    const nodes = graphData.nodes.map((n) => ({ ...n }));
-    const links = graphData.links.map((l) => ({ ...l }));
+      const nodes = graphData.nodes.map((n) => ({ ...n }));
+      const links = graphData.links.map((l) => ({ ...l }));
 
-    let W = wrap.clientWidth, H = wrap.clientHeight;
-    let tx = 0, ty = 0, scale = 1;
+      // adjacency for hover highlighting
+      const neighbors = new Map(nodes.map((n) => [n.id, new Set([n.id])]));
 
-    function resize() {
-      W = wrap.clientWidth; H = wrap.clientHeight;
-      canvas.width = W * dpr; canvas.height = H * dpr;
-    }
-    resize();
-    window.addEventListener('resize', () => { resize(); tick(); });
+      let W = wrap.clientWidth, H = wrap.clientHeight;
+      let tx = 0, ty = 0, scale = 1;
+      let hovered = null, userMoved = false;
 
-    const r = (d) => (d.kind === 'topic' ? 11 + Math.min(d.deg, 25) * 0.35 : 3.5 + Math.min(d.deg, 15) * 0.6);
-    const ctx = canvas.getContext('2d');
+      function resize() {
+        W = wrap.clientWidth; H = wrap.clientHeight;
+        canvas.width = W * dpr; canvas.height = H * dpr;
+      }
+      resize();
+      window.addEventListener('resize', () => { resize(); draw(); });
 
-    const sim = d3.forceSimulation(nodes)
-      .force('link', d3.forceLink(links).id((d) => d.id)
-        .distance((l) => (l.kind === 'member' ? 60 : 45)).strength((l) => (l.kind === 'member' ? 0.25 : 0.5)))
-      .force('charge', d3.forceManyBody().strength(-90))
-      .force('center', d3.forceCenter(W / 2, H / 2))
-      .force('collide', d3.forceCollide().radius((d) => r(d) + 3))
-      .on('tick', tick);
+      const r = (d) => (d.kind === 'topic'
+        ? 13 + Math.min(d.deg, 30) * 0.3
+        : 4.5 + Math.min(d.deg, 14) * 0.8);
 
-    function tick() {
-      ctx.save();
-      ctx.scale(dpr, dpr);
-      ctx.clearRect(0, 0, W, H);
-      ctx.translate(tx, ty); ctx.scale(scale, scale);
+      // arrange topic clusters on a ring so the layout is balanced, not scattered
+      const R = Math.min(W, H) * 0.34;
+      const anchor = {};
+      topics.forEach((t, i) => {
+        const a = (i / topics.length) * Math.PI * 2 - Math.PI / 2;
+        anchor[t] = [W / 2 + Math.cos(a) * R, H / 2 + Math.sin(a) * R];
+      });
 
-      ctx.strokeStyle = 'rgba(120,113,108,0.18)';
-      ctx.lineWidth = 0.8;
+      const sim = d3.forceSimulation(nodes)
+        .force('link', d3.forceLink(links).id((d) => d.id)
+          .distance((l) => (l.kind === 'member' ? 46 : 38))
+          .strength((l) => (l.kind === 'member' ? 0.5 : 0.3)))
+        .force('charge', d3.forceManyBody().strength(-55))
+        .force('x', d3.forceX((d) => anchor[d.group][0]).strength((d) => (d.kind === 'topic' ? 0.5 : 0.08)))
+        .force('y', d3.forceY((d) => anchor[d.group][1]).strength((d) => (d.kind === 'topic' ? 0.5 : 0.08)))
+        .force('collide', d3.forceCollide().radius((d) => r(d) + 3.5))
+        .on('tick', onTick);
+
       for (const l of links) {
-        ctx.beginPath();
-        ctx.moveTo(l.source.x, l.source.y);
-        ctx.lineTo(l.target.x, l.target.y);
-        ctx.stroke();
+        neighbors.get(l.source.id)?.add(l.target.id);
+        neighbors.get(l.target.id)?.add(l.source.id);
       }
-      for (const n of nodes) {
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, r(n), 0, Math.PI * 2);
-        ctx.fillStyle = n.kind === 'topic' ? 'rgba(250,250,249,0.9)' : color(n.group);
-        ctx.fill();
-        ctx.strokeStyle = color(n.group);
-        ctx.lineWidth = n.kind === 'topic' ? 2 : 0.5;
-        ctx.stroke();
-        if (n.kind === 'topic' || scale > 1.6) {
-          ctx.fillStyle = '#44403c';
-          ctx.font = `${n.kind === 'topic' ? '10px' : '8px'} ui-monospace, monospace`;
-          ctx.textAlign = 'center';
-          ctx.fillText(n.label.slice(0, 28), n.x, n.y - r(n) - 4);
+
+      let tickN = 0;
+      function onTick() {
+        tickN++;
+        if (!userMoved && tickN % 20 === 0) fit();
+        draw();
+      }
+
+      // fit the whole graph into the viewport with padding
+      function fit() {
+        let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+        for (const n of nodes) {
+          if (n.x < x0) x0 = n.x; if (n.x > x1) x1 = n.x;
+          if (n.y < y0) y0 = n.y; if (n.y > y1) y1 = n.y;
         }
+        const pad = 70;
+        const s = Math.min((W - pad * 2) / Math.max(x1 - x0, 1), (H - pad * 2) / Math.max(y1 - y0, 1), 1.5);
+        scale = s;
+        tx = W / 2 - ((x0 + x1) / 2) * s;
+        ty = H / 2 - ((y0 + y1) / 2) * s;
       }
-      ctx.restore();
-    }
 
-    // interaction: hover, drag node, pan, zoom, click-to-open
-    const toWorld = (mx, my) => [(mx - tx) / scale, (my - ty) / scale];
-    function pick(mx, my) {
-      const [x, y] = toWorld(mx, my);
-      let best = null, bd = Infinity;
-      for (const n of nodes) {
-        const d = Math.hypot(n.x - x, n.y - y);
-        if (d < r(n) + 4 && d < bd) { best = n; bd = d; }
+      function draw() {
+        ctx.save();
+        ctx.scale(dpr, dpr);
+        ctx.clearRect(0, 0, W, H);
+
+        // dot-grid paper texture (screen space)
+        ctx.fillStyle = 'rgba(120,113,108,0.10)';
+        for (let gx = 12; gx < W; gx += 26)
+          for (let gy = 12; gy < H; gy += 26) {
+            ctx.beginPath(); ctx.arc(gx, gy, 0.9, 0, Math.PI * 2); ctx.fill();
+          }
+
+        ctx.translate(tx, ty); ctx.scale(scale, scale);
+
+        const dimmed = (id) => hovered && !neighbors.get(hovered.id)?.has(id);
+
+        // soft halo behind each cluster
+        for (const t of topics) {
+          const members = nodes.filter((n) => n.group === t);
+          if (!members.length) continue;
+          const cx = members.reduce((s, n) => s + n.x, 0) / members.length;
+          const cy = members.reduce((s, n) => s + n.y, 0) / members.length;
+          const rad = Math.max(...members.map((n) => Math.hypot(n.x - cx, n.y - cy))) + 34;
+          const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, rad);
+          grad.addColorStop(0, withAlpha(color(t), hovered ? 0.04 : 0.07));
+          grad.addColorStop(1, withAlpha(color(t), 0));
+          ctx.fillStyle = grad;
+          ctx.beginPath(); ctx.arc(cx, cy, rad, 0, Math.PI * 2); ctx.fill();
+        }
+
+        // links: gently curved, wikilinks stronger than membership spokes
+        for (const l of links) {
+          const faded = hovered && (dimmed(l.source.id) || dimmed(l.target.id));
+          const base = l.kind === 'member' ? 0.10 : 0.30;
+          const a = faded ? 0.03 : base;
+          ctx.strokeStyle = l.kind === 'member'
+            ? `rgba(120,113,108,${a})`
+            : withAlpha(color(l.source.group), a + 0.1);
+          ctx.lineWidth = l.kind === 'member' ? 0.7 : 1.1;
+          const mx = (l.source.x + l.target.x) / 2 - (l.target.y - l.source.y) * 0.08;
+          const my = (l.source.y + l.target.y) / 2 + (l.target.x - l.source.x) * 0.08;
+          ctx.beginPath();
+          ctx.moveTo(l.source.x, l.source.y);
+          ctx.quadraticCurveTo(mx, my, l.target.x, l.target.y);
+          ctx.stroke();
+        }
+
+        // nodes
+        for (const n of nodes) {
+          const c = color(n.group);
+          const off = dimmed(n.id);
+          ctx.globalAlpha = off ? 0.15 : 1;
+          if (n.kind === 'topic') {
+            ctx.beginPath(); ctx.arc(n.x, n.y, r(n), 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255,255,255,0.92)'; ctx.fill();
+            ctx.strokeStyle = c; ctx.lineWidth = 2.2; ctx.stroke();
+            ctx.beginPath(); ctx.arc(n.x, n.y, 3.2, 0, Math.PI * 2);
+            ctx.fillStyle = c; ctx.fill();
+          } else {
+            ctx.beginPath(); ctx.arc(n.x, n.y, r(n), 0, Math.PI * 2);
+            ctx.fillStyle = (hovered && hovered.id === n.id) ? c : withAlpha(c, 0.85);
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(255,255,255,0.9)'; ctx.lineWidth = 1.2; ctx.stroke();
+          }
+          ctx.globalAlpha = 1;
+        }
+
+        // labels: topics always; notes when zoomed or in the hovered neighborhood
+        ctx.textAlign = 'center';
+        for (const n of nodes) {
+          const showNote = n.kind === 'note' && (scale > 1.5 || (hovered && neighbors.get(hovered.id)?.has(n.id)));
+          if (n.kind !== 'topic' && !showNote) continue;
+          if (dimmed(n.id)) continue;
+          const label = n.kind === 'topic' ? n.label.toUpperCase() : n.label.slice(0, 30);
+          ctx.font = n.kind === 'topic'
+            ? `600 ${11 / Math.sqrt(scale)}px ui-monospace, monospace`
+            : `${9 / Math.sqrt(scale)}px ui-monospace, monospace`;
+          ctx.lineWidth = 3.5; ctx.strokeStyle = 'rgba(250,248,243,0.9)';
+          ctx.strokeText(label, n.x, n.y - r(n) - 6);
+          ctx.fillStyle = n.kind === 'topic' ? color(n.group) : '#57534e';
+          ctx.fillText(label, n.x, n.y - r(n) - 6);
+        }
+        ctx.restore();
       }
-      return best;
-    }
 
-    let dragNode = null, panning = false, px = 0, py = 0, moved = false;
-
-    canvas.addEventListener('pointerdown', (e) => {
-      const rect = canvas.getBoundingClientRect();
-      const mx = e.clientX - rect.left, my = e.clientY - rect.top;
-      moved = false;
-      dragNode = pick(mx, my);
-      if (dragNode) { sim.alphaTarget(0.25).restart(); dragNode.fx = dragNode.x; dragNode.fy = dragNode.y; }
-      else { panning = true; px = mx; py = my; }
-      canvas.setPointerCapture(e.pointerId);
-    });
-    canvas.addEventListener('pointermove', (e) => {
-      const rect = canvas.getBoundingClientRect();
-      const mx = e.clientX - rect.left, my = e.clientY - rect.top;
-      if (dragNode) {
-        moved = true;
+      // ---------- interaction ----------
+      const toWorld = (mx, my) => [(mx - tx) / scale, (my - ty) / scale];
+      function pick(mx, my) {
         const [x, y] = toWorld(mx, my);
-        dragNode.fx = x; dragNode.fy = y;
-      } else if (panning) {
-        moved = true;
-        tx += mx - px; ty += my - py; px = mx; py = my; tick();
-      } else {
-        const n = pick(mx, my);
-        canvas.style.cursor = n ? 'pointer' : 'grab';
-        if (n) {
-          tip.textContent = n.label;
-          tip.style.left = `${mx + 12}px`; tip.style.top = `${my - 8}px`;
-          tip.classList.remove('hidden');
-        } else tip.classList.add('hidden');
+        let best = null, bd = Infinity;
+        for (const n of nodes) {
+          const d = Math.hypot(n.x - x, n.y - y);
+          if (d < r(n) + 5 && d < bd) { best = n; bd = d; }
+        }
+        return best;
       }
-    });
-    canvas.addEventListener('pointerup', (e) => {
-      if (dragNode) { sim.alphaTarget(0); dragNode.fx = null; dragNode.fy = null; }
-      if (!moved) {
+
+      let dragNode = null, panning = false, px = 0, py = 0, moved = false;
+
+      canvas.addEventListener('pointerdown', (e) => {
         const rect = canvas.getBoundingClientRect();
-        const n = pick(e.clientX - rect.left, e.clientY - rect.top);
-        if (n && n.url) window.location.href = n.url;
-      }
-      dragNode = null; panning = false;
-    });
-    canvas.addEventListener('wheel', (e) => {
-      e.preventDefault();
-      const rect = canvas.getBoundingClientRect();
-      const mx = e.clientX - rect.left, my = e.clientY - rect.top;
-      const k = e.deltaY < 0 ? 1.12 : 0.9;
-      const ns = Math.min(4, Math.max(0.3, scale * k));
-      tx = mx - ((mx - tx) / scale) * ns;
-      ty = my - ((my - ty) / scale) * ns;
-      scale = ns; tick();
-    }, { passive: false });
+        const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+        moved = false;
+        dragNode = pick(mx, my);
+        if (dragNode) { userMoved = true; sim.alphaTarget(0.25).restart(); dragNode.fx = dragNode.x; dragNode.fy = dragNode.y; }
+        else { panning = true; px = mx; py = my; }
+        canvas.setPointerCapture(e.pointerId);
+      });
+      canvas.addEventListener('pointermove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+        if (dragNode) {
+          moved = true;
+          const [x, y] = toWorld(mx, my);
+          dragNode.fx = x; dragNode.fy = y;
+        } else if (panning) {
+          moved = true; userMoved = true;
+          tx += mx - px; ty += my - py; px = mx; py = my; draw();
+        } else {
+          const n = pick(mx, my);
+          if (n !== hovered) { hovered = n; draw(); }
+          canvas.style.cursor = n ? 'pointer' : 'grab';
+          if (n) {
+            tip.textContent = n.kind === 'topic' ? `${n.label} — ${n.deg} notes` : n.label;
+            tip.style.left = `${mx + 14}px`; tip.style.top = `${my - 10}px`;
+            tip.classList.remove('hidden');
+          } else tip.classList.add('hidden');
+        }
+      });
+      canvas.addEventListener('pointerleave', () => { hovered = null; tip.classList.add('hidden'); draw(); });
+      canvas.addEventListener('pointerup', (e) => {
+        if (dragNode) { sim.alphaTarget(0); dragNode.fx = null; dragNode.fy = null; }
+        if (!moved) {
+          const rect = canvas.getBoundingClientRect();
+          const n = pick(e.clientX - rect.left, e.clientY - rect.top);
+          if (n && n.url) window.location.href = n.url;
+        }
+        dragNode = null; panning = false;
+      });
+      canvas.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        userMoved = true;
+        const rect = canvas.getBoundingClientRect();
+        const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+        const k = e.deltaY < 0 ? 1.12 : 0.9;
+        const ns = Math.min(4, Math.max(0.3, scale * k));
+        tx = mx - ((mx - tx) / scale) * ns;
+        ty = my - ((my - ty) / scale) * ns;
+        scale = ns; draw();
+      }, { passive: false });
     } catch (err) {
       console.error('[knowledge-graph]', err);
       const wrapEl = document.getElementById('graph-wrap');
