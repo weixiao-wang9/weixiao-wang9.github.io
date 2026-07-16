@@ -897,7 +897,7 @@ Each concept builds on previous ones, creating a complete cognitive system capab
 - [[01-Fundamentals-KBAI|Fundamentals]] - Knowledge representations underlying these strategies
 - [[03-Learning-Methods|Learning Methods]] - More sophisticated learning mechanisms
 - [[04-Logic-and-Planning|Logic and Planning]] - Formal approaches to problem-solving
-- [[00-README|Course Overview]] - Navigate the full course structure
+- Course Overview - Navigate the full course structure
 
 ---
 

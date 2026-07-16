@@ -1225,7 +1225,7 @@ All learning methods share common theme: **Using knowledge to acquire more knowl
 - [[02-Core-Reasoning-Strategies|Core Reasoning]] - Chunking as learning mechanism
 - [[06-Advanced-Reasoning|Advanced Reasoning]] - Analogical reasoning and explanation-based learning
 - [[08-Metacognition-and-Advanced|Metacognition]] - Learning about learning
-- [[00-README|Course Overview]] - Navigate the full course structure
+- Course Overview - Navigate the full course structure
 
 ---
 

@@ -893,7 +893,7 @@ Symptoms + Causal models → Propagate → Likely causes
 - [[02-Core-Reasoning-Strategies|Core Reasoning]] - Problem-solving methods underlying these tasks
 - [[04-Logic-and-Planning|Logic & Planning]] - Planning connections to configuration
 - [[03-Learning-Methods|Learning Methods]] - Classification underlying diagnosis
-- [[00-README|Course Overview]] - Navigate the full course structure
+- Course Overview - Navigate the full course structure
 
 ---
 

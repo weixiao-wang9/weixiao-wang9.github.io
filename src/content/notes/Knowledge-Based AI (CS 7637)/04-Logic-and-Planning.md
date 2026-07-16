@@ -825,7 +825,7 @@ NewState = (OldState - DeleteList) ∪ AddList
 - [[02-Core-Reasoning-Strategies|Core Reasoning]] - Means-ends analysis and problem reduction
 - [[05-Language-and-Commonsense|Language & Common Sense]] - Frames as knowledge structures
 - [[07-Applied-Problem-Solving|Applied Problem Solving]] - Configuration and diagnosis
-- [[00-README|Course Overview]] - Navigate the full course structure
+- Course Overview - Navigate the full course structure
 
 ---
 

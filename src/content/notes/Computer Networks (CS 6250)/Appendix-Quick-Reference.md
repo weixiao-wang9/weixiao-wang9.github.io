@@ -299,7 +299,7 @@ R = Token rate (bytes/second)
 
 ## See Also
 
-- [[00-README]] - Main study guide and learning path
+- 00-README - Main study guide and learning path
 - [[01-Fundamentals-and-Architecture]] - Foundation concepts
 - [[02-Network-Layer-and-Routing]] - Routing details
 - [[03-Transport-Layer]] - TCP/UDP mechanisms

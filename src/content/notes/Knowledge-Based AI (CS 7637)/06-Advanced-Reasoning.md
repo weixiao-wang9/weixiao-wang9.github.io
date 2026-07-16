@@ -708,7 +708,7 @@ Solution: Simulation, execution, expert judgment
 - [[03-Learning-Methods|Learning Methods]] - Case-based reasoning foundation
 - [[05-Language-and-Commonsense|Language & Common Sense]] - Scripts and frames as analogical sources
 - [[08-Metacognition-and-Advanced|Metacognition]] - Reasoning about analogical reasoning
-- [[00-README|Course Overview]] - Navigate the full course structure
+- Course Overview - Navigate the full course structure
 
 ---
 

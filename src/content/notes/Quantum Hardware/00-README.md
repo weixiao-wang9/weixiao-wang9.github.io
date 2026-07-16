@@ -8,6 +8,6 @@ type: index
 
 3 notes in this topic:
 
-- [[Introduction to Quantum Mechanics|Quantum Mechanics]]
-- [[Quantum Gates|Quantum Gates]]
-- [[Superconducting Qubit Technology|Superconducting Qubit Technology]]
+- [[Quantum Hardware/Introduction to Quantum Mechanics|Quantum Mechanics]]
+- [[Quantum Hardware/Quantum Gates|Quantum Gates]]
+- [[Quantum Hardware/Superconducting Qubit Technology|Superconducting Qubit Technology]]

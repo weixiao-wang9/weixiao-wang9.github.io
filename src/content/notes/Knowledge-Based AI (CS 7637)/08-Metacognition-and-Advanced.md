@@ -885,7 +885,7 @@ Create AI systems that don't just recognize patterns or optimize objectives, but
 ## See Also
 
 - [[01-Fundamentals-KBAI|Fundamentals]] - Where it all began
-- [[00-README|Course Overview]] - Review the complete learning path
+- Course Overview - Review the complete learning path
 - All previous modules - Everything connects!
 
 ---

@@ -520,7 +520,7 @@ This explains how humans draw inferences from incomplete information - concepts 
 
 - [[02-Core-Reasoning-Strategies|Core Reasoning Strategies]] - Learn problem-solving methods like Generate & Test
 - [[05-Language-and-Commonsense|Language and Common Sense]] - Explore frames, another knowledge representation
-- [[00-README|Course Overview]] - Navigate the full course structure
+- Course Overview - Navigate the full course structure
 
 ---
 

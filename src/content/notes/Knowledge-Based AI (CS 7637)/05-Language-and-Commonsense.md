@@ -822,7 +822,7 @@ Each level adds structure and organization, enabling more sophisticated reasonin
 - [[01-Fundamentals-KBAI|Fundamentals]] - Semantic networks as related representations
 - [[02-Core-Reasoning-Strategies|Core Reasoning]] - Production systems and working memory
 - [[06-Advanced-Reasoning|Advanced Reasoning]] - Explanation-based learning using scripts
-- [[00-README|Course Overview]] - Navigate the full course structure
+- Course Overview - Navigate the full course structure
 
 ---
 

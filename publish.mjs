@@ -198,12 +198,16 @@ function fixImagePaths() {
 
 // ================= 4. DEAD WIKILINKS =================
 function fixDeadLinks() {
-  const slugs = new Set();
+  // A short slug is only routable when exactly one note owns it
+  // (matches the alias logic in src/pages/notes/[...slug].astro)
+  const counts = new Map();
   for (const dest of Object.keys(CONTENT_MAP)) {
     for (const p of walkMd(path.join(REPO, 'src/content', dest))) {
-      slugs.add(slugify(path.basename(p, '.md')));
+      const s = slugify(path.basename(p, '.md'));
+      counts.set(s, (counts.get(s) || 0) + 1);
     }
   }
+  const slugs = new Set([...counts.entries()].filter(([, c]) => c === 1).map(([s]) => s));
   for (const dest of Object.keys(CONTENT_MAP)) {
     for (const p of walkMd(path.join(REPO, 'src/content', dest))) {
       let text = fs.readFileSync(p, 'utf8');
@@ -257,7 +261,7 @@ function generateIndexes() {
       '',
       `${entries.length} notes in this topic:`,
       '',
-      ...entries.map((n) => `- [[${path.basename(n.file, '.md')}|${n.title}]]`),
+      ...entries.map((n) => `- [[${e.name}/${n.file.replace(/\.md$/, '')}|${n.title}]]`),
       '',
     ];
     const content = lines.join('\n');
