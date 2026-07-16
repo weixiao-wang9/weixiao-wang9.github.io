@@ -2,6 +2,7 @@
 type: note
 course: "[[Recommendation Systems]]"
 date: 2026-02-18
+title: "Lecture 02 -- Hash Embeddings in X's Recommendation Algorithm"
 ---
 
 # Lecture 02 -- Hash Embeddings in X's Recommendation Algorithm

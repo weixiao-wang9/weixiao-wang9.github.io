@@ -1,6 +1,8 @@
 ---
 type: source
 course: "[[Operating System]]"
+title: "Memory Management"
+created: 2026-02-02
 ---
 
 

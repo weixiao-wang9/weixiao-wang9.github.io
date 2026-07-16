@@ -8,6 +8,7 @@ tags:
   - architecture
 related_topics: "[[Concept - Data Encapsulation]]"
 created: 2025/12/17 00:25:15
+title: "Internet Protocol Stack (5-Layer Model)"
 ---
 
 # Internet Protocol Stack (5-Layer Model)
@@ -31,5 +32,5 @@ Unlike the theoretical 7-layer OSI model, the practical Internet architecture co
 5.  **Physical Layer:** Transfers raw bits over the physical medium (copper, fiber, radio).
 
 ## 🔗 Connections
-- **Source:** [[Source - Intro to Internet Architecture]]
+- **Source:** Source - Intro to Internet Architecture
 - **Relates to:** [[Concept - End-to-End Principle]] (Intelligence is at the top layer)

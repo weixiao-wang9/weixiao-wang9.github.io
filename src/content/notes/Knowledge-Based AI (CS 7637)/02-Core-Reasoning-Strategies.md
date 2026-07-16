@@ -8,6 +8,7 @@ prerequisites:
   - "[[01-Fundamentals-KBAI|Fundamentals of KBAI]]"
   - Understanding of semantic networks
   - State space concepts
+title: "Core Reasoning Strategies"
 ---
 
 # Core Reasoning Strategies

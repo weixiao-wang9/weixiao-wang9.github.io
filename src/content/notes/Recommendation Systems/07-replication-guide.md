@@ -2,6 +2,7 @@
 type: note
 course: "[[Recommendation Systems]]"
 date: 2026-02-18
+title: "Lecture 7: Replication Guide"
 ---
 
 # Lecture 7: Replication Guide

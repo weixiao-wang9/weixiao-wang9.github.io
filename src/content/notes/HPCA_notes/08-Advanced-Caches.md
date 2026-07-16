@@ -3,6 +3,8 @@ type: source
 course: "[[HPCA (High Performance Computer Architecture)]]"
 lessons: LessonAdvancedCaches
 prerequisites: "[[01-Introduction-and-Metrics]]"
+title: "Advanced Caches"
+created: 2026-02-18
 ---
 
 # Advanced Caches

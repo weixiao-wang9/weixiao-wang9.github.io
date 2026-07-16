@@ -8,6 +8,7 @@ tags:
   - algorithm
 related_topics: "[[Concept - Trie-Based Lookups]]"
 created: 2025-12-17
+title: "Longest Prefix Match (LPM)"
 ---
 
 # Longest Prefix Match (LPM)
@@ -25,4 +26,4 @@ With **CIDR** (Classless Inter-Domain Routing), multiple entries might match a s
 * **Memory:** High-speed memory (SRAM) is expensive; low-speed memory (DRAM) is too slow for inefficient algorithms.
 
 ## 🔗 Connections
-- **Source:** [[Source - Router Architecture and Lookups]]
+- **Source:** Source - Router Architecture and Lookups

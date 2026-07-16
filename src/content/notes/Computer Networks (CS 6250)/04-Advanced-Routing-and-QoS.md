@@ -3,6 +3,7 @@ type: source
 course: "[[Computer Networks (CS 6250)]]"
 created: 2026-02-01
 prerequisites: "[[02-Network-Layer-and-Routing]]"
+title: "Advanced Routing and Quality of Service"
 ---
 
 # Advanced Routing and Quality of Service

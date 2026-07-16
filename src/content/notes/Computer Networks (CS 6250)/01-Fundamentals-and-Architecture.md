@@ -3,6 +3,7 @@ type: source
 course: "[[Computer Networks (CS 6250)]]"
 created: 2026-02-01
 prerequisites: None
+title: "Fundamentals and Architecture"
 ---
 
 # Fundamentals and Architecture

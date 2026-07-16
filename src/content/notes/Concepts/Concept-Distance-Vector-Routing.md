@@ -8,6 +8,7 @@ tags:
   - algorithm
 related_topics: "[[Concept - Count to Infinity Problem]]"
 created: 2025-12-17
+title: "Distance Vector Routing (Bellman-Ford)"
 ---
 
 # Distance Vector Routing (Bellman-Ford)
@@ -27,5 +28,5 @@ $$D_x(y) = min_v \{c(x,v) + D_v(y)\}$$
 3.  **Notify:** If the least-cost path changes, send the new distance vector to neighbors.
 
 ## 🔗 Connections
-- **Source:** [[Source - Intradomain Routing]]
-- **Protocol Implementation:** [[Concept - RIP Protocol]] (Not explicitly extracted but mentioned in source as RIP)
+- **Source:** Source - Intradomain Routing
+- **Protocol Implementation:** Concept - RIP Protocol (Not explicitly extracted but mentioned in source as RIP)

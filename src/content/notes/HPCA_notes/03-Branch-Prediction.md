@@ -3,6 +3,8 @@ type: source
 course: "[[HPCA (High Performance Computer Architecture)]]"
 lessons: Lesson 4, Lesson 5
 prerequisites: "[[02-Pipelining-and-Hazards]]"
+title: "Branch Prediction and Predication"
+created: 2026-02-19
 ---
 
 # Branch Prediction and Predication

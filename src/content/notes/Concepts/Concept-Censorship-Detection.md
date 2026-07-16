@@ -9,6 +9,7 @@ tags:
   - tcp
 related_topics: []
 created: 2025-12-17
+title: "Augur: Detecting Filtering via Side Channels"
 ---
 
 # Augur: Detecting Filtering via Side Channels
@@ -27,4 +28,4 @@ It leverages the global **IP ID counter** in IP headers.
     * **Not Incremented?** The packets were blocked (Filtering detected).
 
 ## 🔗 Connections
-- **Source:** [[Source - Internet Surveillance and Censorship]]
+- **Source:** Source - Internet Surveillance and Censorship

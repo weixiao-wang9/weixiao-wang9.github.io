@@ -9,6 +9,7 @@ tags:
   - programming
 related_topics: []
 created: 2025-12-17
+title: "P4 (Programming Protocol-independent Packet Processors)"
 ---
 
 # P4 (Programming Protocol-independent Packet Processors)
@@ -28,4 +29,4 @@ P4 is a language that allows the controller to redefine **how** a switch parses 
 * **Populate:** Add entries to the Match+Action tables to define policies.
 
 ## 🔗 Connections
-- **Source:** [[Source - SDN Part 2 and Applications]]
+- **Source:** Source - SDN Part 2 and Applications

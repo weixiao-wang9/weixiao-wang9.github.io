@@ -8,6 +8,7 @@ tags:
   - technique
 related_topics: "[[Concept - Internet Exchange Points (IXPs)]]"
 created: 2025-12-17
+title: "Remote Peering"
 ---
 
 # Remote Peering
@@ -20,4 +21,4 @@ Remote Peering allows an AS to connect to an IXP without having a physical route
 * **Detection:** Hard to detect. Researchers use RTT (Round Trip Time) measurements to infer if a "local" peer is actually distant, but this is prone to errors.
 
 ## 🔗 Connections
-- **Source:** [[Source - Autonomous Systems and Internet Interconnection]]
+- **Source:** Source - Autonomous Systems and Internet Interconnection

@@ -3,6 +3,7 @@ type: source
 course: "[[Computer Networks (CS 6250)]]"
 created: 2026-02-01
 prerequisites: "[[01-Fundamentals-and-Architecture]]"
+title: "Network Layer and Routing"
 ---
 
 # Network Layer and Routing

@@ -9,6 +9,7 @@ tags:
   - attack
 related_topics: []
 created: 2025-12-17
+title: "DDoS Reflection and Amplification"
 ---
 
 # DDoS Reflection and Amplification
@@ -24,4 +25,4 @@ A technique to increase the volume of a Denial of Service attack by tricking thi
 3.  **Amplification:** The attacker chooses protocols where the **response is much larger than the request** (e.g., a 60-byte DNS query triggers a 3000-byte response). This multiplies the bandwidth hitting the victim.
 
 ## 🔗 Connections
-- **Source:** [[Source - Internet Security]]
+- **Source:** Source - Internet Security

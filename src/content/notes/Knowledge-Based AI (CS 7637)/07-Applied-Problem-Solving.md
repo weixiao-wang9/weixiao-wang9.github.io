@@ -8,6 +8,7 @@ prerequisites:
   - "[[01-Fundamentals-KBAI|Fundamentals of KBAI]]"
   - "[[02-Core-Reasoning-Strategies|Core Reasoning Strategies]]"
   - "[[04-Logic-and-Planning|Logic and Planning]]"
+title: "Applied Problem Solving: Constraint Propagation, Configuration, and Diagnosis"
 ---
 
 # Applied Problem Solving: Constraint Propagation, Configuration, and Diagnosis

@@ -3,6 +3,8 @@ type: source
 course: "[[HPCA (High Performance Computer Architecture)]]"
 lessons: Lesson 1, Lesson 2
 prerequisites: none
+title: "Introduction and Metrics"
+created: 2026-02-18
 ---
 
 # Introduction and Metrics

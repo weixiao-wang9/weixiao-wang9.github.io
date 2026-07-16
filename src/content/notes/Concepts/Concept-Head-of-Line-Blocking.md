@@ -8,6 +8,7 @@ tags:
   - failure-mode
 related_topics: []
 created: 2025-12-17
+title: "Head-of-Line (HOL) Blocking"
 ---
 
 # Head-of-Line (HOL) Blocking
@@ -32,4 +33,4 @@ In a crossbar switch with input queuing, a packet at the front of the queue can 
     3.  **Accept:** Inputs accept one grant.
 
 ## 🔗 Connections
-- **Source:** [[Source - Packet Classification and QoS]]
+- **Source:** Source - Packet Classification and QoS

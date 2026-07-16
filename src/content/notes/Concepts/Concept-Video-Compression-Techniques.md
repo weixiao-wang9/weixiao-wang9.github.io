@@ -5,6 +5,7 @@ course: "[[Computer Networks (CS 6250)]]"
 tags: [concept, compression, video]
 related_topics: []
 created: 2025-12-17
+title: "Video Compression (Spatial & Temporal)"
 ---
 
 # Video Compression (Spatial & Temporal)
@@ -31,4 +32,4 @@ Instead of sending every full image, send differences.
 
 
 ## 🔗 Connections
-- **Source:** [[Source - Multimedia Applications]]
+- **Source:** Source - Multimedia Applications

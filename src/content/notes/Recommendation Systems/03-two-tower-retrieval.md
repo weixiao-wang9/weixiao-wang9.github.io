@@ -2,6 +2,7 @@
 type: note
 course: "[[Recommendation Systems]]"
 date: 2026-02-18
+title: "Lecture 3: The Two-Tower Retrieval Model"
 ---
 
 # Lecture 3: The Two-Tower Retrieval Model

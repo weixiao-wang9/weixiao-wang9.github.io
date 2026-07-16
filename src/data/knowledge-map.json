@@ -1,0 +1,508 @@
+{
+  "Computer Networks (CS 6250)": [
+    {
+      "file": "01-Fundamentals-and-Architecture.md",
+      "title": "Fundamentals and Architecture",
+      "type": "source",
+      "slug": "01-fundamentals-and-architecture"
+    },
+    {
+      "file": "02-Network-Layer-and-Routing.md",
+      "title": "Network Layer and Routing",
+      "type": "source",
+      "slug": "02-network-layer-and-routing"
+    },
+    {
+      "file": "03-Transport-Layer.md",
+      "title": "Transport Layer",
+      "type": "source",
+      "slug": "03-transport-layer"
+    },
+    {
+      "file": "04-Advanced-Routing-and-QoS.md",
+      "title": "Advanced Routing and Quality of Service",
+      "type": "source",
+      "slug": "04-advanced-routing-and-qos"
+    },
+    {
+      "file": "05-Modern-Architectures.md",
+      "title": "Modern Architectures: Software Defined Networking",
+      "type": "source",
+      "slug": "05-modern-architectures"
+    },
+    {
+      "file": "06-Application-Layer-Services.md",
+      "title": "Application Layer Services: CDNs and Multimedia",
+      "type": "source",
+      "slug": "06-application-layer-services"
+    },
+    {
+      "file": "07-Security-and-Governance.md",
+      "title": "Security and Governance",
+      "type": "source",
+      "slug": "07-security-and-governance"
+    },
+    {
+      "file": "Appendix-Quick-Reference.md",
+      "title": "Quick Reference Guide",
+      "type": "reference",
+      "slug": "appendix-quick-reference"
+    }
+  ],
+  "Concepts": [
+    {
+      "file": "Concept-Autonomous-Systems.md",
+      "title": "Autonomous Systems (AS)",
+      "type": "atom",
+      "slug": "concept-autonomous-systems"
+    },
+    {
+      "file": "Concept-Bitrate-Adaptation-Algorithms.md",
+      "title": "Bitrate Adaptation Algorithms (Rate vs. Buffer)",
+      "type": "atom",
+      "slug": "concept-bitrate-adaptation-algorithms"
+    },
+    {
+      "file": "Concept-Censorship-Detection-Iris.md",
+      "title": "Iris: Detecting DNS Manipulation",
+      "type": "atom",
+      "slug": "concept-censorship-detection-iris"
+    },
+    {
+      "file": "Concept-Censorship-Detection.md",
+      "title": "Augur: Detecting Filtering via Side Channels",
+      "type": "atom",
+      "slug": "concept-censorship-detection"
+    },
+    {
+      "file": "Concept-Censorship-Techniques.md",
+      "title": "Common Censorship Techniques",
+      "type": "atom",
+      "slug": "concept-censorship-techniques"
+    },
+    {
+      "file": "Concept-Connectivity-Disruption.md",
+      "title": "Connectivity Disruption via BGP (Egypt Case Study)",
+      "type": "atom",
+      "slug": "concept-connectivity-disruption"
+    },
+    {
+      "file": "Concept-Consistent-Hashing.md",
+      "title": "Consistent Hashing",
+      "type": "atom",
+      "slug": "concept-consistent-hashing"
+    },
+    {
+      "file": "Concept-Control-Plane-vs-Data-Plane.md",
+      "title": "Control Plane vs. Data Plane Separation",
+      "type": "atom",
+      "slug": "concept-control-plane-vs-data-plane"
+    },
+    {
+      "file": "Concept-Count-to-Infinity-Problem.md",
+      "title": "Count-to-Infinity Problem & Poison Reverse",
+      "type": "atom",
+      "slug": "concept-count-to-infinity-problem"
+    },
+    {
+      "file": "Concept-DDoS-Reflection-and-Amplification.md",
+      "title": "DDoS Reflection and Amplification",
+      "type": "atom",
+      "slug": "concept-ddos-reflection-and-amplification"
+    },
+    {
+      "file": "Concept-Data-Encapsulation.md",
+      "title": "Data Encapsulation and De-encapsulation",
+      "type": "atom",
+      "slug": "concept-data-encapsulation"
+    },
+    {
+      "file": "Concept-Deficit-Round-Robin.md",
+      "title": "Deficit Round Robin (DRR)",
+      "type": "atom",
+      "slug": "concept-deficit-round-robin"
+    },
+    {
+      "file": "Concept-Dijkstra's-Algorithm.md",
+      "title": "Dijkstra's Algorithm (Link State)",
+      "type": "atom",
+      "slug": "concept-dijkstra's-algorithm"
+    },
+    {
+      "file": "Concept-Distance-Vector-Routing.md",
+      "title": "Distance Vector Routing (Bellman-Ford)",
+      "type": "atom",
+      "slug": "concept-distance-vector-routing"
+    },
+    {
+      "file": "Concept-End-to-End-Principle.md",
+      "title": "The End-to-End (E2E) Principle",
+      "type": "atom",
+      "slug": "concept-end-to-end-principle"
+    },
+    {
+      "file": "Concept-Evolutionary-Architecture-Model.md",
+      "title": "Evolutionary Architecture (EvoArch) & The Hourglass",
+      "type": "atom",
+      "slug": "concept-evolutionary-architecture-model"
+    },
+    {
+      "file": "Concept-Head-of-Line-Blocking.md",
+      "title": "Head-of-Line (HOL) Blocking",
+      "type": "atom",
+      "slug": "concept-head-of-line-blocking"
+    },
+    {
+      "file": "Concept-Hot-Potato-Routing.md",
+      "title": "Hot Potato Routing",
+      "type": "atom",
+      "slug": "concept-hot-potato-routing"
+    },
+    {
+      "file": "Concept-IP-Anycast-vs-HTTP-Redirection.md",
+      "title": "Alternative Selection Protocols: Anycast & HTTP",
+      "type": "atom",
+      "slug": "concept-ip-anycast-vs-http-redirection"
+    },
+    {
+      "file": "Concept-Internet-Ecosystem-Hierarchy.md",
+      "title": "Internet Ecosystem Hierarchy",
+      "type": "atom",
+      "slug": "concept-internet-ecosystem-hierarchy"
+    },
+    {
+      "file": "Concept-Internet-Exchange-Points.md",
+      "title": "Internet Exchange Points (IXPs)",
+      "type": "atom",
+      "slug": "concept-internet-exchange-points"
+    },
+    {
+      "file": "Concept-Internet-Protocol-Stack.md",
+      "title": "Internet Protocol Stack (5-Layer Model)",
+      "type": "atom",
+      "slug": "concept-internet-protocol-stack"
+    },
+    {
+      "file": "Concept-Link-State-vs-Distance-Vector.md",
+      "title": "Link State vs. Distance Vector Routing",
+      "type": "atom",
+      "slug": "concept-link-state-vs-distance-vector"
+    },
+    {
+      "file": "Concept-Longest-Prefix-Match.md",
+      "title": "Longest Prefix Match (LPM)",
+      "type": "atom",
+      "slug": "concept-longest-prefix-match"
+    },
+    {
+      "file": "Concept-Multimedia-Application-Types.md",
+      "title": "Types of Multimedia Applications",
+      "type": "atom",
+      "slug": "concept-multimedia-application-types"
+    },
+    {
+      "file": "Concept-Network-Address-Translation.md",
+      "title": "Network Address Translation",
+      "type": "note",
+      "slug": "concept-network-address-translation"
+    },
+    {
+      "file": "Concept-OpenDayLight-Architecture.md",
+      "title": "OpenDayLight (ODL) Architecture",
+      "type": "atom",
+      "slug": "concept-opendaylight-architecture"
+    },
+    {
+      "file": "Concept-P4-Programming-Language.md",
+      "title": "P4 (Programming Protocol-independent Packet Processors)",
+      "type": "atom",
+      "slug": "concept-p4-programming-language"
+    },
+    {
+      "file": "Concept-Packet-Classification-Algorithms.md",
+      "title": "Packet Classification Algorithms (2D)",
+      "type": "atom",
+      "slug": "concept-packet-classification-algorithms"
+    },
+    {
+      "file": "Concept-Remote-Peering.md",
+      "title": "Remote Peering",
+      "type": "atom",
+      "slug": "concept-remote-peering"
+    },
+    {
+      "file": "Concept-Security-Fundamentals.md",
+      "title": "Properties of Secure Communication",
+      "type": "atom",
+      "slug": "concept-security-fundamentals"
+    },
+    {
+      "file": "Concept-Server-Selection-Strategies.md",
+      "title": "CDN Server Selection Policies",
+      "type": "atom",
+      "slug": "concept-server-selection-strategies"
+    },
+    {
+      "file": "Concept-Software-Defined-Internet-Exchange.md",
+      "title": "Software Defined Internet Exchange (SDX)",
+      "type": "atom",
+      "slug": "concept-software-defined-internet-exchange"
+    },
+    {
+      "file": "Concept-Spanning-Tree-Protocol.md",
+      "title": "Spanning Tree Protocol (STP)",
+      "type": "atom",
+      "slug": "concept-spanning-tree-protocol"
+    },
+    {
+      "file": "Concept-Switching-Fabrics.md",
+      "title": "Switching Fabrics",
+      "type": "atom",
+      "slug": "concept-switching-fabrics"
+    },
+    {
+      "file": "Concept-Token-vs-Leaky-Bucket.md",
+      "title": "Traffic Shaping: Token Bucket vs. Leaky Bucket",
+      "type": "atom",
+      "slug": "concept-token-vs-leaky-bucket"
+    },
+    {
+      "file": "Concept-Transport-Layer-Multiplexing.md",
+      "title": "Transport Layer Multiplexing & Demultiplexing",
+      "type": "atom",
+      "slug": "concept-transport-layer-multiplexing"
+    },
+    {
+      "file": "Concept-Trie-Based-Lookups.md",
+      "title": "Trie-Based Lookups (Unibit & Multibit)",
+      "type": "atom",
+      "slug": "concept-trie-based-lookups"
+    },
+    {
+      "file": "Concept-Video-Compression-Techniques.md",
+      "title": "Video Compression (Spatial & Temporal)",
+      "type": "atom",
+      "slug": "concept-video-compression-techniques"
+    }
+  ],
+  "HPCA_notes": [
+    {
+      "file": "01-Introduction-and-Metrics.md",
+      "title": "Introduction and Metrics",
+      "type": "source",
+      "slug": "01-introduction-and-metrics"
+    },
+    {
+      "file": "02-Pipelining-and-Hazards.md",
+      "title": "Pipelining and Hazards",
+      "type": "source",
+      "slug": "02-pipelining-and-hazards"
+    },
+    {
+      "file": "03-Branch-Prediction.md",
+      "title": "Branch Prediction and Predication",
+      "type": "source",
+      "slug": "03-branch-prediction"
+    },
+    {
+      "file": "04-ILP-and-Register-Renaming.md",
+      "title": "ILP and Register Renaming",
+      "type": "source",
+      "slug": "04-ilp-and-register-renaming"
+    },
+    {
+      "file": "05-Tomasulo-and-OOO-Execution.md",
+      "title": "Tomasulo's Algorithm and OOO Execution",
+      "type": "source",
+      "slug": "05-tomasulo-and-ooo-execution"
+    },
+    {
+      "file": "06-ROB-and-Memory-Ordering.md",
+      "title": "ReOrder Buffer and Memory Ordering",
+      "type": "source",
+      "slug": "06-rob-and-memory-ordering"
+    },
+    {
+      "file": "07-Compiler-ILP-and-VLIW.md",
+      "title": "Compiler ILP and VLIW",
+      "type": "source",
+      "slug": "07-compiler-ilp-and-vliw"
+    },
+    {
+      "file": "08-Advanced-Caches.md",
+      "title": "Advanced Caches",
+      "type": "source",
+      "slug": "08-advanced-caches"
+    },
+    {
+      "file": "09-Cache-Coherence.md",
+      "title": "Cache Coherence",
+      "type": "source",
+      "slug": "09-cache-coherence"
+    },
+    {
+      "file": "10-Study-Guide.md",
+      "title": "HPCA Study Guide — CS 6290 Georgia Tech",
+      "type": "source",
+      "slug": "10-study-guide"
+    }
+  ],
+  "Knowledge-Based AI (CS 7637)": [
+    {
+      "file": "01-Fundamentals-KBAI.md",
+      "title": "Fundamentals of Knowledge-Based AI",
+      "type": "note",
+      "slug": "01-fundamentals-kbai"
+    },
+    {
+      "file": "02-Core-Reasoning-Strategies.md",
+      "title": "Core Reasoning Strategies",
+      "type": "note",
+      "slug": "02-core-reasoning-strategies"
+    },
+    {
+      "file": "03-Learning-Methods.md",
+      "title": "Learning Methods in Knowledge-Based AI",
+      "type": "note",
+      "slug": "03-learning-methods"
+    },
+    {
+      "file": "04-Logic-and-Planning.md",
+      "title": "Logic and Planning",
+      "type": "note",
+      "slug": "04-logic-and-planning"
+    },
+    {
+      "file": "05-Language-and-Commonsense.md",
+      "title": "Language Understanding and Common Sense Reasoning",
+      "type": "note",
+      "slug": "05-language-and-commonsense"
+    },
+    {
+      "file": "06-Advanced-Reasoning.md",
+      "title": "Advanced Reasoning: Explanation-Based Learning and Analogy",
+      "type": "note",
+      "slug": "06-advanced-reasoning"
+    },
+    {
+      "file": "07-Applied-Problem-Solving.md",
+      "title": "Applied Problem Solving: Constraint Propagation, Configuration, and Diagnosis",
+      "type": "note",
+      "slug": "07-applied-problem-solving"
+    },
+    {
+      "file": "08-Metacognition-and-Advanced.md",
+      "title": "Metacognition and Advanced Topics",
+      "type": "note",
+      "slug": "08-metacognition-and-advanced"
+    }
+  ],
+  "Operating System": [
+    {
+      "file": "01-Fundamentals.md",
+      "title": "Operating System Fundamentals",
+      "type": "source",
+      "slug": "01-fundamentals"
+    },
+    {
+      "file": "02-Processes-and-Threads.md",
+      "title": "Processes and Process Management",
+      "type": "source",
+      "slug": "02-processes-and-threads"
+    },
+    {
+      "file": "03-Synchronization.md",
+      "title": "Thread Synchronization",
+      "type": "source",
+      "slug": "03-synchronization"
+    },
+    {
+      "file": "04-CPU-Scheduling.md",
+      "title": "CPU Scheduling",
+      "type": "source",
+      "slug": "04-cpu-scheduling"
+    },
+    {
+      "file": "05-Memory-Management.md",
+      "title": "Memory Management",
+      "type": "source",
+      "slug": "05-memory-management"
+    },
+    {
+      "file": "06-Inter-Process-Communication.md",
+      "title": "Inter Process Communication",
+      "type": "source",
+      "slug": "06-inter-process-communication"
+    },
+    {
+      "file": "07-IO-and-Filesystems.md",
+      "title": "IO and Filesystems",
+      "type": "source",
+      "slug": "07-io-and-filesystems"
+    }
+  ],
+  "Quantum Hardware": [
+    {
+      "file": "Introduction to Quantum Mechanics.md",
+      "title": "Quantum Mechanics",
+      "type": "source",
+      "slug": "introduction-to-quantum-mechanics"
+    },
+    {
+      "file": "Quantum Gates.md",
+      "title": "Quantum Gates",
+      "type": "source",
+      "slug": "quantum-gates"
+    },
+    {
+      "file": "Superconducting Qubit Technology.md",
+      "title": "Superconducting Qubit Technology",
+      "type": "source",
+      "slug": "superconducting-qubit-technology"
+    }
+  ],
+  "Recommendation Systems": [
+    {
+      "file": "01-system-overview.md",
+      "title": "Lecture 1: System Overview",
+      "type": "note",
+      "slug": "01-system-overview"
+    },
+    {
+      "file": "02-hash-embeddings.md",
+      "title": "Lecture 02 -- Hash Embeddings in X's Recommendation Algorithm",
+      "type": "note",
+      "slug": "02-hash-embeddings"
+    },
+    {
+      "file": "03-two-tower-retrieval.md",
+      "title": "Lecture 3: The Two-Tower Retrieval Model",
+      "type": "note",
+      "slug": "03-two-tower-retrieval"
+    },
+    {
+      "file": "04-ranking-model.md",
+      "title": "Lecture 4: The Ranking Model -- PhoenixModel",
+      "type": "note",
+      "slug": "04-ranking-model"
+    },
+    {
+      "file": "05-grok-transformer.md",
+      "title": "Lecture 05 -- The Grok Transformer in X's Recommendation Algorithm",
+      "type": "note",
+      "slug": "05-grok-transformer"
+    },
+    {
+      "file": "06-scoring-pipeline.md",
+      "title": "Lecture 6: Scoring Pipeline",
+      "type": "note",
+      "slug": "06-scoring-pipeline"
+    },
+    {
+      "file": "07-replication-guide.md",
+      "title": "Lecture 7: Replication Guide",
+      "type": "note",
+      "slug": "07-replication-guide"
+    }
+  ]
+}

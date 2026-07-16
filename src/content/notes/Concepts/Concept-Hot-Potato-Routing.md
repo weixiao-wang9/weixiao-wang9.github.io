@@ -8,6 +8,7 @@ tags:
   - strategy
 related_topics: []
 created: 2025-12-17
+title: "Hot Potato Routing"
 ---
 
 # Hot Potato Routing
@@ -20,4 +21,4 @@ A routing strategy where a network tries to hand off traffic to another network 
 * **Resource Efficiency:** It reduces resource consumption within the local network by "getting rid" of the packet immediately.
 
 ## 🔗 Connections
-- **Source:** [[Source - Intradomain Routing]]
+- **Source:** Source - Intradomain Routing

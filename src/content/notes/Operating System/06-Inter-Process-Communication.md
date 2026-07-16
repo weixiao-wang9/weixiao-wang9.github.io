@@ -1,6 +1,8 @@
 ---
 type: source
 course: "[[Operating System]]"
+title: "Inter Process Communication"
+created: 2026-02-02
 ---
 
 A ***process*** has its own virtual address space. 

@@ -8,6 +8,7 @@ tags:
   - algorithms
 related_topics: "[[Concept - Distance Vector Routing]]"
 created: 2025-12-17
+title: "Link State vs. Distance Vector Routing"
 ---
 
 # Link State vs. Distance Vector Routing
@@ -29,4 +30,4 @@ There are two fundamental approaches to network routing:
 | **Convergence** | Fast, but computationally heavy ($O(n^2)$) | Slower, susceptible to routing loops (Count-to-Infinity) |
 
 ## 🔗 Connections
-- **Source:** [[Source - Intradomain Routing]]
+- **Source:** Source - Intradomain Routing

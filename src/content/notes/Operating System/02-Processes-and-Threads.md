@@ -1,6 +1,8 @@
 ---
 type: source
 course: "[[Operating System]]"
+title: "Processes and Process Management"
+created: 2026-02-02
 ---
 
 # Processes and Process Management

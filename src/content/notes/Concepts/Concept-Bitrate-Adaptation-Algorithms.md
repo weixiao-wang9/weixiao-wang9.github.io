@@ -8,6 +8,7 @@ tags:
   - algorithm
 related_topics: "[[Concept - DASH Architecture]]"
 created: 2025-12-17
+title: "Bitrate Adaptation Algorithms (Rate vs. Buffer)"
 ---
 
 # Bitrate Adaptation Algorithms (Rate vs. Buffer)
@@ -31,4 +32,4 @@ In DASH, the client must decide which bitrate to request for the next chunk ($R_
 * **Flaw:** Can oscillate unnecessarily between bitrates if the steps are too aggressive.
 
 ## 🔗 Connections
-- **Source:** [[Source - Multimedia Applications]]
+- **Source:** Source - Multimedia Applications

@@ -54,15 +54,13 @@ Note that $H_f(p_0)$ is symmetric, since $\dfrac{\partial^2 f}{\partial x \, \pa
 ## § 1.3 — The Morse Lemma
 
 > [!abstract] Morse Lemma
-> Let $p_0$ be a non-degenerate critical point of a function $f$ of two variables. Then we can choose appropriate local coordinates $(X, Y)$ such that $f$ takes one of the following three standard forms:
->
-> $$\begin{aligned}
-> \text{(i)} \quad & f = X^2 + Y^2 + C \\[4pt]
-> \text{(ii)} \quad & f = X^2 - Y^2 + C \\[4pt]
-> \text{(iii)} \quad & f = -X^2 - Y^2 + C
-> \end{aligned}$$
->
-> where $C$ is a constant and $p_0$ is the origin.
+> Let $p_0$ be a non-degenerate critical point of a function $f$ of two variables. Then we can choose appropriate local coordinates $(X, Y)$ such that $f$ takes one of the following three standard forms, where $C$ is a constant and $p_0$ is the origin:
+
+$$\text{(i)} \quad f = X^2 + Y^2 + C$$
+
+$$\text{(ii)} \quad f = X^2 - Y^2 + C$$
+
+$$\text{(iii)} \quad f = -X^2 - Y^2 + C$$
 
 The theorem states that a function looks extremely simple near a non-degenerate critical point — up to a coordinate change, it is purely quadratic.
 
@@ -94,11 +92,11 @@ The theorem states that a function looks extremely simple near a non-degenerate 
 ## § 1.4 — Index of a Non-Degenerate Critical Point
 
 > [!note] Definition
-> Let $p_0$ be a non-degenerate critical point of $f$. Using the coordinate system given by the Morse Lemma, we define the **index** of $p_0$ as:
+> Let $p_0$ be a non-degenerate critical point of $f$. Using the coordinate system given by the Morse Lemma, the **index** of $p_0$ is the number of minus signs in the standard form:
 >
-> $$\operatorname{index}(p_0) = \begin{cases} 0 & \text{if } f = x^2 + y^2 + C \quad \text{(local minimum)} \\ 1 & \text{if } f = x^2 - y^2 + C \quad \text{(saddle point)} \\ 2 & \text{if } f = -x^2 - y^2 + C \quad \text{(local maximum)} \end{cases}$$
->
-> In other words, the index is the number of minus signs in the standard form.
+> - **Index 0** — $f = x^2 + y^2 + C$ (local minimum)
+> - **Index 1** — $f = x^2 - y^2 + C$ (saddle point)
+> - **Index 2** — $f = -x^2 - y^2 + C$ (local maximum)
 
 The index of a non-degenerate critical point $p_0$ is determined by the *behaviour of $f$ near $p_0$*.
 

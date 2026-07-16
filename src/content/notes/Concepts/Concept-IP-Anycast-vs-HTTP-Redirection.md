@@ -8,6 +8,7 @@ tags:
   - routing
 related_topics: "[[Concept - Server Selection Strategies]]"
 created: 2025-12-17
+title: "Alternative Selection Protocols: Anycast & HTTP"
 ---
 
 # Alternative Selection Protocols: Anycast & HTTP
@@ -28,4 +29,4 @@ Aside from DNS, CDNs can use network-layer or application-layer protocols to rou
 * **Cons:** Slow. Requires an initial TCP connection and HTTP exchange just to be told to go elsewhere (extra RTT).
 
 ## 🔗 Connections
-- **Source:** [[Source - CDNs and Overlay Networks]]
+- **Source:** Source - CDNs and Overlay Networks

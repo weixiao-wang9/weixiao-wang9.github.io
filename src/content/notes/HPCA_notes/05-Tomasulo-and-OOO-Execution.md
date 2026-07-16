@@ -3,6 +3,8 @@ type: source
 course: "[[HPCA (High Performance Computer Architecture)]]"
 lessons: Lesson 7 (Instruction Scheduling)
 prerequisites: "[[04-ILP-and-Register-Renaming]]"
+title: "Tomasulo's Algorithm and OOO Execution"
+created: 2026-02-18
 ---
 
 # Tomasulo's Algorithm and OOO Execution

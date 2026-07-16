@@ -5,6 +5,7 @@ status: permanent
 tags: [concept, networks, theory]
 related_topics: []
 created: 2025-12-17
+title: "Evolutionary Architecture (EvoArch) & The Hourglass"
 ---
 
 # Evolutionary Architecture (EvoArch) & The Hourglass
@@ -21,4 +22,4 @@ Why is it hard to replace TCP/IP?
 * **Clean-Slate Design:** Researchers (like the 4D group) propose rebuilding the internet from scratch to solve security and mobility issues, as the current "narrow waist" limits radical innovation in the core.
 
 ## 🔗 Connections
-- **Source:** [[Source - Intro to Internet Architecture]]
+- **Source:** Source - Intro to Internet Architecture

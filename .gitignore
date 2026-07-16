@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # debug files
 test-math-debug.md
+
+.claude/
+.DS_Store

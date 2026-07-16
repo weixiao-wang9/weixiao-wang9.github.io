@@ -8,6 +8,7 @@ tags:
   - failure-mode
 related_topics: "[[Concept - Distance Vector Routing]]"
 created: 2025-12-17
+title: "Count-to-Infinity Problem & Poison Reverse"
 ---
 
 # Count-to-Infinity Problem & Poison Reverse
@@ -27,4 +28,4 @@ If node $Z$ routes through $Y$ to get to destination $X$, $Z$ will lie to $Y$ an
 * *Limitation:* Does not solve loops involving 3+ nodes.
 
 ## 🔗 Connections
-- **Source:** [[Source - Intradomain Routing]]
+- **Source:** Source - Intradomain Routing

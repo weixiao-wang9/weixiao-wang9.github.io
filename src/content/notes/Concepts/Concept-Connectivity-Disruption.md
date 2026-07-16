@@ -9,6 +9,7 @@ tags:
   - history
 related_topics: []
 created: 2025-12-17
+title: "Connectivity Disruption via BGP (Egypt Case Study)"
 ---
 
 # Connectivity Disruption via BGP (Egypt Case Study)
@@ -22,4 +23,4 @@ The most blunt form of censorship is "pulling the plug" by withdrawing BGP prefi
 * **Detection:** Observed via global BGP monitors (Route Views) and a sudden drop in darknet traffic.
 
 ## 🔗 Connections
-- **Source:** [[Source - Internet Surveillance and Censorship]]
+- **Source:** Source - Internet Surveillance and Censorship

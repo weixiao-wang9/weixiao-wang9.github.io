@@ -3,6 +3,8 @@ type: source
 course: "[[HPCA (High Performance Computer Architecture)]]"
 lessons: Lesson 10 (Compiler ILP), Lesson 11 (VLIW)
 prerequisites: "[[04-ILP-and-Register-Renaming]]"
+title: "Compiler ILP and VLIW"
+created: 2026-02-18
 ---
 
 # Compiler ILP and VLIW

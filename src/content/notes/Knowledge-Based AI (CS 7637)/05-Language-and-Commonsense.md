@@ -8,6 +8,7 @@ prerequisites:
   - "[[01-Fundamentals-KBAI|Fundamentals of KBAI]]"
   - "[[02-Core-Reasoning-Strategies|Core Reasoning Strategies]]"
   - Understanding of semantic networks and frames
+title: "Language Understanding and Common Sense Reasoning"
 ---
 
 # Language Understanding and Common Sense Reasoning

@@ -8,6 +8,7 @@ tags:
   - mechanism
 related_topics: "[[Concept - Router Architecture Planes]]"
 created: 2025-12-17
+title: "Switching Fabrics"
 ---
 
 # Switching Fabrics
@@ -32,4 +33,4 @@ The switching fabric is the hardware interconnect that moves data from the input
 
 
 ## 🔗 Connections
-- **Source:** [[Source - Router Architecture and Lookups]]
+- **Source:** Source - Router Architecture and Lookups

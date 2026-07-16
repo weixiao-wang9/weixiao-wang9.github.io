@@ -1,43 +1,45 @@
-# Astro Starter Kit: Minimal
+# Wei's Knowledge Base & Portfolio
 
-```sh
-npm create astro@latest -- --template minimal
+Astro site published to GitHub Pages, fed automatically from my Obsidian vault.
+
+## The workflow
+
+```
+Obsidian vault                 this repo                        live site
+─────────────                  ─────────                        ─────────
+Public/notes    ──┐
+Public/courses    │  publish.mjs   src/content/*   git push    GitHub Actions
+Public/French   ──┼─────────────▶  public/images  ──────────▶  builds & deploys
+Blog              │  (daily via     src/data/                  to GitHub Pages
+images          ──┘   launchd)
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+**Input** — write notes in Obsidian. Anything under `Public/` (and `Blog/`) gets published. Add `publish: false` to a note's frontmatter to keep it private.
 
-## 🚀 Project Structure
+**Organize** — `publish.mjs` runs automatically every day at 22:00 (launchd) and:
 
-Inside of your Astro project, you'll see the following folders and files:
+1. Mirror-syncs markdown from the vault (stale files are deleted, `publish: false` respected)
+2. Repairs frontmatter — missing `title` (from H1/filename), `created`, blog `description`/`date`
+3. Syncs images and converts `![[image.png]]` embeds
+4. Converts wikilinks pointing at unpublished notes into plain text (no dead links)
+5. Auto-generates a `00-README.md` index (MOC) for topic folders that lack one, plus `src/data/knowledge-map.json`
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+**Output** — commits and pushes; GitHub Actions (`.github/workflows/deploy.yml`) builds and deploys.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Commands
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+| Command | Action |
+| :-- | :-- |
+| `npm run publish` | Sync + organize + commit + push (full pipeline) |
+| `npm run sync` | Sync + organize only, no git |
+| `node publish.mjs --dry-run` | Show what would change |
+| `npm run dev` | Preview at `localhost:4321` |
+| `npm run build` | Build to `./dist/` |
+| `zsh automation/install.sh` | Install the daily auto-publish job (one time) |
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Conventions
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- **Note frontmatter**: `title`, `type` (`source` / `atom` / `concept` / `index`), `course: "[[Course Name]]"`, `created`. The pipeline fills in missing `title`/`created`, but the `_templates/Source.md` template in the vault sets them up correctly from the start.
+- **Topic indexes**: a hand-written `00-README.md` in a topic folder is never touched; if a folder has none, the pipeline generates one (marked `AUTO-GENERATED`).
+- **Repo-only collections**: `research` and `projects` live only in this repo and are never deleted by the sync.
+- **Courses**: one file per course in `Public/courses/` (`title`, `code`, `instructor`) — the Library page groups notes by matching `course` frontmatter.

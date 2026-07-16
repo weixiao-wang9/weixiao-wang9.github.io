@@ -3,6 +3,8 @@ type: source
 course: "[[HPCA (High Performance Computer Architecture)]]"
 lessons: Lesson 7b (ReOrder Buffer), Lesson 8 (Memory Ordering)
 prerequisites: "[[05-Tomasulo-and-OOO-Execution]]"
+title: "ReOrder Buffer and Memory Ordering"
+created: 2026-02-18
 ---
 
 # ReOrder Buffer and Memory Ordering

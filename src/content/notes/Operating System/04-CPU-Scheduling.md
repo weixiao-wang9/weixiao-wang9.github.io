@@ -1,6 +1,8 @@
 ---
 type: source
 course: "[[Operating System]]"
+title: "CPU Scheduling"
+created: 2026-02-02
 ---
 
 # CPU Scheduling

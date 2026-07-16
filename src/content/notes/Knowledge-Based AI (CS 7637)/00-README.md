@@ -2,6 +2,7 @@
 type: index
 course: "[[Knowledge-Based AI (CS 7637)]]"
 date: 2026-02-02
+title: "Knowledge-Based AI (CS 7637) - Course Navigation"
 ---
 
 # Knowledge-Based AI (CS 7637) - Course Navigation

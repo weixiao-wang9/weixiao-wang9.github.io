@@ -7,6 +7,7 @@ lessons: 1-3
 prerequisites:
   - Basic understanding of AI concepts
   - Familiarity with problem-solving
+title: "Fundamentals of Knowledge-Based AI"
 ---
 
 # Fundamentals of Knowledge-Based AI

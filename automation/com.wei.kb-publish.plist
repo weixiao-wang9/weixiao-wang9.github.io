@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.wei.kb-publish</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/zsh</string>
+        <string>-lc</string>
+        <string>cd "$HOME/Desktop/my-portfolio" &amp;&amp; /usr/bin/env node publish.mjs >> "$HOME/Library/Logs/kb-publish.log" 2>&amp;1</string>
+    </array>
+
+    <!-- Run every day at 22:00. Edit Hour/Minute to change. -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>22</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <!-- Also run once at login/load, in case the Mac was asleep at 22:00 -->
+    <key>RunAtLoad</key>
+    <true/>
+</dict>
+</plist>

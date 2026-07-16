@@ -8,6 +8,7 @@ tags:
   - mechanism
 related_topics: "[[Concept - Internet Protocol Stack]]"
 created: 2025-12-17
+title: "Data Encapsulation and De-encapsulation"
 ---
 
 # Data Encapsulation and De-encapsulation
@@ -30,4 +31,4 @@ Encapsulation is the process where data moves down the protocol stack, with each
 * **End Hosts:** Implement all 5 layers.
 
 ## 🔗 Connections
-- **Source:** [[Source - Intro to Internet Architecture]]
+- **Source:** Source - Intro to Internet Architecture

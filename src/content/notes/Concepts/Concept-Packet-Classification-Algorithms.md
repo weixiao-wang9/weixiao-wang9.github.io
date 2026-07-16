@@ -5,6 +5,7 @@ course: "[[Computer Networks (CS401)]]"
 tags: [concept, algorithms, optimization]
 related_topics: [[Concept - Trie-Based Lookups]]
 created: 2025-12-17
+title: "Packet Classification Algorithms (2D)"
 ---
 
 # Packet Classification Algorithms (2D)
@@ -31,4 +32,4 @@ Packet classification requires matching packets against multiple fields (e.g., S
 * **Shortcut:** If a match fails in a source trie, the switch pointer jumps directly to the next relevant source trie, skipping the backtracking steps.
 
 ## 🔗 Connections
-- **Source:** [[Source - Packet Classification and QoS]]
+- **Source:** Source - Packet Classification and QoS

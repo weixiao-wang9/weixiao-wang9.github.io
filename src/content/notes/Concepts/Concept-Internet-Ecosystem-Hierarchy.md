@@ -8,6 +8,7 @@ tags:
   - infrastructure
 related_topics: "[[Concept - Autonomous Systems]]"
 created: 2025-12-17
+title: "Internet Ecosystem Hierarchy"
 ---
 
 # Internet Ecosystem Hierarchy
@@ -24,4 +25,4 @@ The Internet is not a single network but a **Network of Networks** organized int
 * **CDNs:** Content Delivery Networks (Google, Netflix) flatten this hierarchy by connecting directly to Access ISPs or IXPs to bypass the backbone.
 
 ## 🔗 Connections
-- **Source:** [[Source - Autonomous Systems and Internet Interconnection]]
+- **Source:** Source - Autonomous Systems and Internet Interconnection

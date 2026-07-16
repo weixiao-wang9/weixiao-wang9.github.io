@@ -8,6 +8,7 @@ tags:
   - mechanism
 related_topics: "[[Concept - Internet Protocol Stack]]"
 created: 2025-12-17
+title: "Transport Layer Multiplexing & Demultiplexing"
 ---
 
 # Transport Layer Multiplexing & Demultiplexing
@@ -26,4 +27,4 @@ Multiplexing allows a single host to run multiple network applications simultane
 * **TCP Sockets:** Identified by a **4-tuple** `(Source IP, Source Port, Dest IP, Dest Port)`. This allows a web server (Port 80) to distinguish between different clients simultaneously.
 
 ## 🔗 Connections
-- **Source:** [[Source - Transport and Application Layers]]
+- **Source:** Source - Transport and Application Layers

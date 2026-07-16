@@ -5,6 +5,7 @@ status: permanent
 tags: [concept, networks, philosophy]
 related_topics: [[Concept - Network Address Translation]]
 created: 2025-12-17
+title: "The End-to-End (E2E) Principle"
 ---
 
 # The End-to-End (E2E) Principle
@@ -27,5 +28,5 @@ Sometimes the principle is violated for practical reasons:
 
 
 ## 🔗 Connections
-- **Source:** [[Source - Intro to Internet Architecture]]
+- **Source:** Source - Intro to Internet Architecture
 - **Contradicted by:** [[Concept - Network Address Translation]]

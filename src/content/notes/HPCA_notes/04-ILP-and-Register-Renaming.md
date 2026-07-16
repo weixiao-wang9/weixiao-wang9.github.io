@@ -3,6 +3,8 @@ type: source
 course: "[[HPCA (High Performance Computer Architecture)]]"
 lessons: Lesson 6
 prerequisites: "[[02-Pipelining-and-Hazards]]"
+title: "ILP and Register Renaming"
+created: 2026-02-18
 ---
 
 # ILP and Register Renaming

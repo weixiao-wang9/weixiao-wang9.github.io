@@ -5,6 +5,7 @@ course: "[[Computer Networks (CS 6250)]]"
 tags: [concept, algorithm, distributed-systems]
 related_topics: []
 created: 2025-12-17
+title: "Consistent Hashing"
 ---
 
 # Consistent Hashing
@@ -23,4 +24,4 @@ In a distributed system (like a CDN cluster), we need to map content to specific
 * **Result:** Minimizes data movement, maintaining load balance.
 
 ## 🔗 Connections
-- **Source:** [[Source - CDNs and Overlay Networks]]
+- **Source:** Source - CDNs and Overlay Networks

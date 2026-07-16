@@ -2,6 +2,7 @@
 type: meta
 course: "[[Computer Networks (CS 6250)]]"
 date: 2026-02-01
+title: "Computer Networks Study Guide"
 ---
 
 # Computer Networks Study Guide

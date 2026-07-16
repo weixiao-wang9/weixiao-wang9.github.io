@@ -8,6 +8,7 @@ tags:
   - algorithm
 related_topics: "[[Concept - OSPF Protocol]]"
 created: 2025-12-17
+title: "Dijkstra's Algorithm (Link State)"
 ---
 
 # Dijkstra's Algorithm (Link State)
@@ -30,4 +31,4 @@ Dijkstra's algorithm calculates the least-cost path from a source node to *all* 
 The computational complexity is $O(n^2)$, where $n$ is the number of nodes.
 
 ## 🔗 Connections
-- **Source:** [[Source - Intradomain Routing]]
+- **Source:** Source - Intradomain Routing

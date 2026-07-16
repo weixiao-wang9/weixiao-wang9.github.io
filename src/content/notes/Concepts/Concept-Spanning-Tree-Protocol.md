@@ -5,6 +5,7 @@ status: permanent
 tags: [concept, networks, algorithm]
 related_topics: []
 created: 2025-12-17
+title: "Spanning Tree Protocol (STP)"
 ---
 
 # Spanning Tree Protocol (STP)
@@ -27,4 +28,4 @@ Bridges exchange configuration messages: `<My ID, Root ID, Distance to Root>`.
 * A bridge stops forwarding on a port if it receives a message indicating a better path to the root exists via a neighbor.
 
 ## 🔗 Connections
-- **Source:** [[Source - Intro to Internet Architecture]]
+- **Source:** Source - Intro to Internet Architecture

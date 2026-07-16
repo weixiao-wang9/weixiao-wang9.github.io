@@ -3,6 +3,8 @@ type: source
 course: "[[HPCA (High Performance Computer Architecture)]]"
 lessons: Lesson 3
 prerequisites: "[[01-Introduction-and-Metrics]]"
+title: "Pipelining and Hazards"
+created: 2026-02-18
 ---
 
 # Pipelining and Hazards

@@ -8,6 +8,7 @@ tags:
   - definition
 related_topics: []
 created: 2025-12-17
+title: "Properties of Secure Communication"
 ---
 
 # Properties of Secure Communication
@@ -22,4 +23,4 @@ For communication to be considered secure, it must satisfy four main properties:
 4.  **Availability:** Prevents Denial of Service. Ensures the system is functional and accessible when needed.
 
 ## 🔗 Connections
-- **Source:** [[Source - Internet Security]]
+- **Source:** Source - Internet Security

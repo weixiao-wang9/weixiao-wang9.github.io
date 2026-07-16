@@ -9,6 +9,7 @@ tags:
 related_topics:
   - - Concept - SDN Network Architecture
 created: 2025-12-17
+title: "Control Plane vs. Data Plane Separation"
 ---
 
 # Control Plane vs. Data Plane Separation
@@ -36,4 +37,4 @@ SDN decouples the system that decides *where* traffic goes (Control Plane) from 
 3.  **Innovation:** Enables new applications in Security (DDoS mitigation), Data Center management, and Traffic Engineering.
 
 ## 🔗 Connections
-- **Source:** [[Source - Software Defined Networking]]
+- **Source:** Source - Software Defined Networking

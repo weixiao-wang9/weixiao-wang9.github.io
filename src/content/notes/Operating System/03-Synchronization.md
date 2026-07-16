@@ -1,6 +1,8 @@
 ---
 type: source
 course: "[[Operating System]]"
+title: "Thread Synchronization"
+created: 2026-02-02
 ---
 
 # Thread Synchronization

@@ -1,6 +1,8 @@
 ---
 type: source
 course: "[[Operating System]]"
+title: "Operating System Fundamentals"
+created: 2026-02-02
 ---
 
 # Operating System Fundamentals

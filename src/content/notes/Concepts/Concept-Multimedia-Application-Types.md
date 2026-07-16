@@ -5,6 +5,7 @@ course: "[[Computer Networks (CS 6250)]]"
 tags: [concept, multimedia, classification]
 related_topics: []
 created: 2025-12-17
+title: "Types of Multimedia Applications"
 ---
 
 # Types of Multimedia Applications
@@ -21,4 +22,4 @@ Multimedia applications are categorized by their interactiveness and tolerance f
 | **Streaming Live** | Live Sports | Medium (Seconds) | Medium | Broadcast-like; many simultaneous users; no "fast-forward". |
 
 ## 🔗 Connections
-- **Source:** [[Source - Multimedia Applications]]
+- **Source:** Source - Multimedia Applications

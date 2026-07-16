@@ -7,6 +7,7 @@ lessons: 24-26
 prerequisites:
   - All previous modules
   - Complete understanding of reasoning, learning, and memory
+title: "Metacognition and Advanced Topics"
 ---
 
 # Metacognition and Advanced Topics

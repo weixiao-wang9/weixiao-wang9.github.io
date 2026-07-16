@@ -2,6 +2,7 @@
 type: meta
 course: "[[HPCA (High Performance Computer Architecture)]]"
 date: 2026-02-17
+title: "HPCA Study Guide"
 ---
 
 # HPCA Study Guide

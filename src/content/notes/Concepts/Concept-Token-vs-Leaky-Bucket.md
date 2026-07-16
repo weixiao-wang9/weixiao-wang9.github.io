@@ -8,6 +8,7 @@ tags:
   - mechanism
 related_topics: []
 created: 2025-12-17
+title: "Traffic Shaping: Token Bucket vs. Leaky Bucket"
 ---
 
 # Traffic Shaping: Token Bucket vs. Leaky Bucket
@@ -30,4 +31,4 @@ Mechanisms to limit the rate of traffic flow. They distinguish between **Policin
 * **Use Case:** Converting bursty traffic into a constant bit rate stream.
 
 ## 🔗 Connections
-- **Source:** [[Source - Packet Classification and QoS]]
+- **Source:** Source - Packet Classification and QoS

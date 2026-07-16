@@ -8,6 +8,7 @@ prerequisites:
   - "[[01-Fundamentals-KBAI|Fundamentals of KBAI]]"
   - "[[03-Learning-Methods|Learning Methods]]"
   - "[[05-Language-and-Commonsense|Language and Common Sense]]"
+title: "Advanced Reasoning: Explanation-Based Learning and Analogy"
 ---
 
 # Advanced Reasoning: Explanation-Based Learning and Analogy

@@ -9,6 +9,7 @@ tags:
   - dns
 related_topics: []
 created: 2025-12-17
+title: "Iris: Detecting DNS Manipulation"
 ---
 
 # Iris: Detecting DNS Manipulation
@@ -26,4 +27,4 @@ Iris is a system that uses thousands of **Open DNS Resolvers** worldwide to meas
     * **Independent Verifiability:** Does the returned IP present a valid HTTPS certificate for that domain?
 
 ## 🔗 Connections
-- **Source:** [[Source - Internet Surveillance and Censorship]]
+- **Source:** Source - Internet Surveillance and Censorship

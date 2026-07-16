@@ -1,6 +1,8 @@
 ---
 type: index
 course: "[[Operating System]]"
+title: "Operating System Study Guide"
+created: 2026-02-02
 ---
 
 # Operating System Study Guide

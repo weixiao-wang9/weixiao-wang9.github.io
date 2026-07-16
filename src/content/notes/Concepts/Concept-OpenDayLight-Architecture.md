@@ -9,6 +9,7 @@ tags:
 related_topics:
   - - Concept - SDN Controller Architecture
 created: 2025-12-17
+title: "OpenDayLight (ODL) Architecture"
 ---
 
 # OpenDayLight (ODL) Architecture
@@ -25,4 +26,4 @@ MD-SAL allows developers to write services that plug into the controller. It rel
 2.  **Operational Datastore:** Represents the *actual* state of the network received from devices. (What is happening right now).
 
 ## 🔗 Connections
-- **Source:** [[Source - Software Defined Networking]]
+- **Source:** Source - Software Defined Networking

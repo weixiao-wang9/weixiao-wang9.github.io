@@ -3,6 +3,8 @@ type: source
 course: "[[HPCA (High Performance Computer Architecture)]]"
 lessons: LessonCacheCoherence
 prerequisites: "[[08-Advanced-Caches]]"
+title: "Cache Coherence"
+created: 2026-02-18
 ---
 
 # Cache Coherence

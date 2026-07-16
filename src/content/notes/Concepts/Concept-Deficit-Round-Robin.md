@@ -8,6 +8,7 @@ tags:
   - algorithm
 related_topics: []
 created: 2025-12-17
+title: "Deficit Round Robin (DRR)"
 ---
 
 # Deficit Round Robin (DRR)
@@ -29,4 +30,4 @@ Each flow is assigned:
 * If the queue is empty, reset $D_i$ to 0.
 
 ## 🔗 Connections
-- **Source:** [[Source - Packet Classification and QoS]]
+- **Source:** Source - Packet Classification and QoS

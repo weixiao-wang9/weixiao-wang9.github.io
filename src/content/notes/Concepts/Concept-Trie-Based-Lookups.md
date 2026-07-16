@@ -8,6 +8,7 @@ tags:
   - data-structure
 related_topics: "[[Concept - Longest Prefix Match]]"
 created: 2025-12-17
+title: "Trie-Based Lookups (Unibit & Multibit)"
 ---
 
 # Trie-Based Lookups (Unibit & Multibit)
@@ -30,4 +31,4 @@ A **Trie** (Prefix Tree) is the data structure used to solve the Longest Prefix 
 * **Cons:** **Prefix Expansion**. To check 3 bits at a time, a 1-bit prefix (e.g., `1*`) must be expanded into multiple 3-bit entries (`100`, `101`, `110`, `111`). This trades **Memory** for **Speed**.
 
 ## 🔗 Connections
-- **Source:** [[Source - Router Architecture and Lookups]]
+- **Source:** Source - Router Architecture and Lookups

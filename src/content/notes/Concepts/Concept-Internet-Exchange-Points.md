@@ -8,6 +8,7 @@ tags:
   - infrastructure
 related_topics: "[[Concept - Internet Ecosystem Hierarchy]]"
 created: 2025-12-17
+title: "Internet Exchange Points (IXPs)"
 ---
 
 # Internet Exchange Points (IXPs)
@@ -27,4 +28,4 @@ An IXP is a physical infrastructure (often a switch in a data center) where mult
 * Can provide DDoS mitigation (Blackholing).
 
 ## 🔗 Connections
-- **Source:** [[Source - Autonomous Systems and Internet Interconnection]]
+- **Source:** Source - Autonomous Systems and Internet Interconnection

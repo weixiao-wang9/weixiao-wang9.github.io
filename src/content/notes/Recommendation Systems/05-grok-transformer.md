@@ -2,6 +2,7 @@
 type: note
 course: "[[Recommendation Systems]]"
 date: 2026-02-18
+title: "Lecture 05 -- The Grok Transformer in X's Recommendation Algorithm"
 ---
 
 # Lecture 05 -- The Grok Transformer in X's Recommendation Algorithm

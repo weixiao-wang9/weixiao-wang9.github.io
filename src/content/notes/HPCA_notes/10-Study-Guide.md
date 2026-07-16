@@ -3,6 +3,8 @@ type: source
 course: "[[HPCA (High Performance Computer Architecture)]]"
 lessons: Study Guide
 prerequisites: "All Modules"
+title: "HPCA Study Guide — CS 6290 Georgia Tech"
+created: 2026-02-19
 ---
 
 

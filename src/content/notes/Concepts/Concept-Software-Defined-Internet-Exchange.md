@@ -9,6 +9,7 @@ tags:
   - bgp
 related_topics: "[[Concept - Internet Exchange Points (IXPs)]]"
 created: 2025-12-17
+title: "Software Defined Internet Exchange (SDX)"
 ---
 
 # Software Defined Internet Exchange (SDX)
@@ -28,4 +29,4 @@ SDX applies SDN principles to Internet Exchange Points (IXPs) to fix the limitat
 3.  **Wide-Area Load Balancing:** Redirecting requests to different backend servers by modifying packet headers at the exchange.
 
 ## 🔗 Connections
-- **Source:** [[Source - SDN Part 2 and Applications]]
+- **Source:** Source - SDN Part 2 and Applications

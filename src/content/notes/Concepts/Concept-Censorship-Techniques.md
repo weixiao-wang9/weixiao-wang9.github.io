@@ -8,6 +8,7 @@ tags:
   - technique
 related_topics: []
 created: 2025-12-17
+title: "Common Censorship Techniques"
 ---
 
 # Common Censorship Techniques
@@ -33,4 +34,4 @@ Censors use a layered approach to blocking content, ranging from crude IP blocki
 * **Cons:** Extremely expensive and hard to scale.
 
 ## 🔗 Connections
-- **Source:** [[Source - Internet Surveillance and Censorship]]
+- **Source:** Source - Internet Surveillance and Censorship

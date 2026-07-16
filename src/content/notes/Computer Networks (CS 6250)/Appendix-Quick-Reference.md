@@ -2,6 +2,7 @@
 type: reference
 course: "[[Computer Networks (CS 6250)]]"
 created: 2026-02-01
+title: "Quick Reference Guide"
 ---
 
 # Quick Reference Guide

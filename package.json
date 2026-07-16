@@ -3,15 +3,13 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "npm run prepare-content && astro dev",
+    "dev": "astro dev",
     "start": "astro dev",
-    "build": "npm run prepare-content && astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "prepare-content": "npm run sync && npm run fix-images",
-    "sync": "bash sync.sh",
-    "fix-images": "node fix-images.mjs",
-    "publish": "npm run prepare-content && astro build && git add -A && git commit -m \"Update site\" && git push"
+    "sync": "node publish.mjs --no-git",
+    "publish": "node publish.mjs"
   },
   "dependencies": {
     "@citation-js/core": "^0.7.21",

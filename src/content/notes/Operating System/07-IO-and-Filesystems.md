@@ -1,6 +1,8 @@
 ---
 type: source
 course: "[[Operating System]]"
+title: "IO and Filesystems"
+created: 2026-02-02
 ---
 ### Why I/O stuff matters
 A real program doesn’t just talk to the CPU and RAM. It needs:

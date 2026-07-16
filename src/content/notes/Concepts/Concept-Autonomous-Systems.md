@@ -8,6 +8,7 @@ tags:
   - definition
 related_topics: "[[Concept - BGP Protocol Basics]]"
 created: 2025-12-17
+title: "Autonomous Systems (AS)"
 ---
 
 # Autonomous Systems (AS)
@@ -22,4 +23,4 @@ An **Autonomous System (AS)** is the fundamental unit of routing on the Internet
     * **EGP (Exterior Gateway Protocol):** Used *between* ASes for policy (e.g., BGP).
 
 ## 🔗 Connections
-- **Source:** [[Source - Autonomous Systems and Internet Interconnection]]
+- **Source:** Source - Autonomous Systems and Internet Interconnection

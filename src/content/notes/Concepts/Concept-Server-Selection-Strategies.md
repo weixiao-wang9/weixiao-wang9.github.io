@@ -8,6 +8,7 @@ tags:
   - optimization
 related_topics: "[[Concept - DNS Architecture]]"
 created: 2025-12-17
+title: "CDN Server Selection Policies"
 ---
 
 # CDN Server Selection Policies
@@ -28,4 +29,4 @@ Once inside the cluster, simple load balancing isn't enough because not all serv
 * **Content-Aware Hashing:** Requests for specific content are hashed to specific servers (via Consistent Hashing) to maximize cache hit rates.
 
 ## 🔗 Connections
-- **Source:** [[Source - CDNs and Overlay Networks]]
+- **Source:** Source - CDNs and Overlay Networks
