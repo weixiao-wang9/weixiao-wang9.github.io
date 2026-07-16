@@ -28,6 +28,7 @@ const linkCount = graph.links.filter((l) => l.kind === 'link').length;
 
 <script is:inline define:vars={{ graphData: graph }}>
   (async () => {
+    try {
     const d3 = await import('https://cdn.jsdelivr.net/npm/d3-force@3/+esm');
 
     const canvas = document.getElementById('kb-graph');
@@ -52,6 +53,9 @@ const linkCount = graph.links.filter((l) => l.kind === 'link').length;
     resize();
     window.addEventListener('resize', () => { resize(); tick(); });
 
+    const r = (d) => (d.kind === 'topic' ? 11 + Math.min(d.deg, 25) * 0.35 : 3.5 + Math.min(d.deg, 15) * 0.6);
+    const ctx = canvas.getContext('2d');
+
     const sim = d3.forceSimulation(nodes)
       .force('link', d3.forceLink(links).id((d) => d.id)
         .distance((l) => (l.kind === 'member' ? 60 : 45)).strength((l) => (l.kind === 'member' ? 0.25 : 0.5)))
@@ -59,9 +63,6 @@ const linkCount = graph.links.filter((l) => l.kind === 'link').length;
       .force('center', d3.forceCenter(W / 2, H / 2))
       .force('collide', d3.forceCollide().radius((d) => r(d) + 3))
       .on('tick', tick);
-
-    const r = (d) => (d.kind === 'topic' ? 11 + Math.min(d.deg, 25) * 0.35 : 3.5 + Math.min(d.deg, 15) * 0.6);
-    const ctx = canvas.getContext('2d');
 
     function tick() {
       ctx.save();
@@ -157,5 +158,11 @@ const linkCount = graph.links.filter((l) => l.kind === 'link').length;
       ty = my - ((my - ty) / scale) * ns;
       scale = ns; tick();
     }, { passive: false });
+    } catch (err) {
+      console.error('[knowledge-graph]', err);
+      const wrapEl = document.getElementById('graph-wrap');
+      if (wrapEl) wrapEl.insertAdjacentHTML('beforeend',
+        '<p class="absolute inset-0 flex items-center justify-center text-xs font-mono text-stone-400">graph failed to load — see console</p>');
+    }
   })();
 </script>
